@@ -1,4 +1,6 @@
 site_name: System Administration
+theme: null
+theme_dir: '2600Hz_theme'
 
 pages:
 - 'index.md'
