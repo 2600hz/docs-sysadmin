@@ -6,16 +6,16 @@ pages:
 - 'index.md'
 - 'Getting Started':
   - 'Introduction' :
-    - 'About' : 'intro/about.md'
-    - 'Getting Help': 'intro/get_help.md'
+    - 'About' : 'doc/intro/about.md'
+    - 'Getting Help': 'doc/intro/get_help.md'
   - 'Installation' :
-    - 'Installation Methods' : 'install/install_overview.md'
-    - 'Requirements' : 'install/minimum_requirements.md'
-    - 'Downloading' : 'install/downloading.md'
-    - 'Installing' : 'install/installing.md'
+    - 'Installation Methods' : 'doc/install/install_overview.md'
+    - 'Requirements' : 'doc/install/minimum_requirements.md'
+    - 'Downloading' : 'doc/install/downloading.md'
+    - 'Installing' : 'doc/install/installing.md'
 - 'Configuration':
   - 'General Concepts':
-    - 'Configuration Documents' : 'config/system_config.md'
+    - 'Configuration Documents' : 'doc/config/system_config.md'
 - 'Cluster Operation':
   - 'Monitoring' :
-    - 'Things to Monitor' : 'operation/monitoring.md'
+    - 'Things to Monitor' : 'doc/operation/monitoring.md'
