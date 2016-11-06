@@ -18,4 +18,4 @@ pages:
     - 'Configuration Documents' : 'config/system_config.md'
 - 'Cluster Operation':
   - 'Monitoring' :
-    - 'Things to Monitor' : 'monitor/monitoring.md'
+    - 'Things to Monitor' : 'operation/monitoring.md'
