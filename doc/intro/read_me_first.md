@@ -1,6 +1,6 @@
 Kazoo is a sophisticated piece of software that allows for large-scale clustering across a WAN. While it is intended to be simple, at times, it can have a high learning curve.
 
-# Required Skills
+## Required Skills
 
 You should seriously consider whether you're ready to undertake deploying and managing the entire infrastructure from the start. We now recommend starting with our hosted platform. You can always move to your own software and equipment at any time, without losing data or incurring downtime.
 
@@ -21,7 +21,7 @@ The Kazoo UI & APIs may take you a few weeks to become familiar with. The back-e
 
 We've structured things so you can start out on our hosted platform. It's inexpensive and it lets you get to know the system prior to diving into the deep end and trying to run it all yourself. There's enough to learn in the system as-is! You can customize the entire experience for your customers while using our hardened hosted system and you can move your customers seamlessly when you are ready to manage your own infrastructure.
 
-# Required Knowledge and Facilities
+## Required Knowledge and Facilities
 Consider Hosting With Us
 
 If you're truly ready to dive into running your own cluster, please be sure you understand what's involved. You must:
