@@ -6,6 +6,7 @@ pages:
 - 'index.md'
 - 'Getting Started':
   - 'Introduction' :
+    - 'Read First' : 'doc/intro/read_me_first.md'
     - 'About' : 'doc/intro/about.md'
     - 'Getting Help': 'doc/intro/get_help.md'
   - 'Installation' :
