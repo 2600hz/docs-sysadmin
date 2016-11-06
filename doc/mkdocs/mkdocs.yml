@@ -4,3 +4,11 @@ theme_dir: '2600Hz_theme'
 
 pages:
 - 'index.md'
+- 'Introduction':
+  - 'About' : 'intro/about.md'
+  - 'Getting Help': 'intro/get_help.md'
+- 'Getting Started':
+  - 'Installation Methods' : 'install/install_overview.md'
+  - 'Requirements' : 'install/minimum_requirements.md'
+  - 'Downloading' : 'install/downloading.md'
+  - 'Installing' : 'install/installing.md'
