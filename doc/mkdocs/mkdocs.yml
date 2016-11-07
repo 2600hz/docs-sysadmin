@@ -56,4 +56,8 @@ pages:
     - 'Kazoo-couch' : 'doc/intro/kazoo-couch.md'
     - 'Kazoo-media' : 'doc/intro/kazoo-media.md'
     - 'Kazoo-mediastream' : 'doc/intro/kazoo-mediastream.md'
-    
+    - 'Kazoo-number-manager' : 'doc/carrier-numbers/docs.md'
+    - 'Kazoo-carrier' : 'doc/carrier-numbers/kazoo-carrier.md'
+    - 'Kazoo-provider' : 'doc/carrier-numbers/kazoo-provider.md'
+    - 'Kazoo-numberdoc' : 'doc/carrier-numbers/kazoo-numberdoc.md'
+    - 'Kazoo-numberlifecycle' : 'doc/carrier-numbers/kazoo-numberlifecycle.md' 
