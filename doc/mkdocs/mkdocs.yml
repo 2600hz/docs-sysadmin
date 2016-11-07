@@ -25,6 +25,10 @@ pages:
 - 'Configuration':
   - 'General Concepts':
     - 'Configuration Documents' : 'doc/config/system_config.md'
+  - 'Account Management':
+    - 'Manual Creation' : 'doc/config/account_creation.md'
+  - 'DNS':
+    - 'Core Concepts' : 'doc/config/dns_concepts.md'
 - 'Cluster Operation':
   - 'Monitoring' :
     - 'Things to Monitor' : 'doc/operation/monitoring.md'
@@ -34,4 +38,3 @@ pages:
   - 'Manual Installation' :
     - 'Debian' : 'doc/install/install_manually_debian.md'
     - 'CentOS' : 'doc/install/install_manually_centos.md'
-
