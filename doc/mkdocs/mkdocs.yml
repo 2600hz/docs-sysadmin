@@ -21,10 +21,17 @@ pages:
     - 'via Cluster Manager' : 'doc/install/install_via_cluster_manager.md'
     - 'via RPM' : 'doc/install/install_via_rpm.md'
     - 'via Debian' : 'doc/install/install_via_debian.md'
+    - 'via ISO' : 'doc/install/install_via_iso.md'
 - 'Configuration':
   - 'General Concepts':
     - 'Configuration Documents' : 'doc/config/system_config.md'
 - 'Cluster Operation':
   - 'Monitoring' :
     - 'Things to Monitor' : 'doc/operation/monitoring.md'
-
+  - 'Security' :
+    - 'IPTables' : 'doc/security/iptables.md'
+- 'Appendix':
+  - 'Manual Installation' :
+    - 'Debian' : 'doc/install/install_manually_debian.md'
+    - 'CentOS' : 'doc/install/install_manually_centos.md'
+    
