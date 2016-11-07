@@ -61,3 +61,5 @@ pages:
     - 'Kazoo-provider' : 'doc/carrier-numbers/kazoo-provider.md'
     - 'Kazoo-numberdoc' : 'doc/carrier-numbers/kazoo-numberdoc.md'
     - 'Kazoo-numberlifecycle' : 'doc/carrier-numbers/kazoo-numberlifecycle.md' 
+    - 'Kazoo-WhApp' : 'doc/whapp/build.md'
+    - 'Kazoo-CrossbarAPI' : 'doc/whapp/crossbarapi.md'
