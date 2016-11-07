@@ -5,15 +5,22 @@ theme_dir: '2600Hz_theme'
 pages:
 - 'index.md'
 - 'Getting Started':
+  - 'READ FIRST!' : 'doc/intro/read_me_first.md'
   - 'Introduction' :
-    - 'Read First' : 'doc/intro/read_me_first.md'
     - 'About' : 'doc/intro/about.md'
+    - 'Resources' : 'doc/intro/resources.md'
+    - 'Build System' : 'doc/intro/build_system.md'
     - 'Getting Help': 'doc/intro/get_help.md'
-  - 'Installation' :
-    - 'Installation Methods' : 'doc/install/install_overview.md'
+    - 'Contributing': 'doc/intro/contributing.md'
+  - 'Preparation' :
     - 'Requirements' : 'doc/install/minimum_requirements.md'
+    - 'Installation Methods' : 'doc/install/install_overview.md'
+    - 'Zones' : 'doc/install/planning_zones.md'
+  - 'Installation' :
     - 'Downloading' : 'doc/install/downloading.md'
-    - 'Installing' : 'doc/install/installing.md'
+    - 'via Cluster Manager' : 'doc/install/install_via_cluster_manager.md'
+    - 'via RPM' : 'doc/install/install_via_rpm.md'
+    - 'via Debian' : 'doc/install/install_via_debian.md'
 - 'Configuration':
   - 'General Concepts':
     - 'Configuration Documents' : 'doc/config/system_config.md'
