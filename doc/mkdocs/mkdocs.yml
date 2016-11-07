@@ -38,4 +38,3 @@ pages:
   - 'Manual Installation' :
     - 'Debian' : 'doc/install/install_manually_debian.md'
     - 'CentOS' : 'doc/install/install_manually_centos.md'
-    
