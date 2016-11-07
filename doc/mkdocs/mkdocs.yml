@@ -29,11 +29,25 @@ pages:
     - 'Manual Creation' : 'doc/config/account_creation.md'
   - 'DNS':
     - 'Core Concepts' : 'doc/config/dns_concepts.md'
+  - 'SSL':
+    - 'Easy Setup' : 'doc/config/ssl/easy_setup.md'
+    - 'SSL for APIs' : 'doc/config/ssl/for_api.md'
+    - 'SSL for WSS' : 'doc/config/ssl/for_wss.md'
+    - 'SSL for TLS' : 'doc/config/ssl/for_tls.md'
+  - 'Limits':
+    - 'Concepts' : 'doc/config/limits/concepts.md'
+    - 'Configuration' : 'doc/config/limits/config.md'
+    - 'Commands' : 'doc/config/limits/commands.md'
 - 'Cluster Operation':
   - 'Monitoring' :
     - 'Things to Monitor' : 'doc/operation/monitoring.md'
   - 'Security' :
     - 'IPTables' : 'doc/security/iptables.md'
+- 'Advanced Concepts':
+  - 'API Control':
+    - 'Authentication' : 'doc/crossbar/authentication.md'
+  - 'Extending Kazoo':
+    - 'Authorization' : 'doc/extending/authz.md'
 - 'Appendix':
   - 'Manual Installation' :
     - 'Debian' : 'doc/install/install_manually_debian.md'
