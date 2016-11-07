@@ -55,4 +55,5 @@ pages:
     - 'Kazoo-config' : 'doc/config/kazoo-config.md'
     - 'Kazoo-couch' : 'doc/intro/kazoo-couch.md'
     - 'Kazoo-media' : 'doc/intro/kazoo-media.md'
+    - 'Kazoo-mediastream' : 'doc/intro/kazoo-meadiastream.md'
     
