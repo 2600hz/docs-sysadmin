@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Service Plans</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="15106056.html">Billing, Services and Limits</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Service Plans
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Karl Anderson</span>, last modified by <span class='editor'> Darren Schreiber</span> on Aug 20, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Service Plans define costs associated with various services in the system. Services figure out how many devices, trunks, users and similar features are in use for an account. Those totals are applied to one or more service plans on the account and then passed to a bookkeeper to handle the actual billing functionality.</p><p> </p><p>Use Cases:</p><ul><li>New guy just installed his cluster, wants to bill his clients</li></ul><p> </p><h2 id="ServicePlans-ConfiguringaServicePlan">Configuring a Service Plan</h2><p>A service plan document defines services, such as DIDs or SIP devices, which have a cost. It also defines the name of the corresponding element that will be used in your given bookkeeper (i.e. you may call &quot;DIDs&quot; in Quickbooks &quot;Phone Numbers&quot;, and therefore you need to map our name to your name). Together, these two concepts make up a service plan.</p><p>The service plan document(s) is located within a reseller's account. The master account on every system is automatically considered the default reseller.</p><h3 id="ServicePlans-Master/DefaultServicePlans">Master / Default Service Plans</h3><p>Standard accounts are accounts which live underneath a reseller. By default, the master account is the first reseller in the system. For the purposes of this example, we'll assume you're creating your first account beneath your master/reseller account.</p><ol><li><a class="createlink" href="/wiki/pages/createpage.action?spaceKey=docs&amp;title=Find+Your+Master+Account">Find Your Master Account</a>– you'll need the account-ID if you don't already know it.</li><li>Go into the master account's database via BigCouch's Futon interface</li><li>Create a new document</li><li>Add the field &quot;pvt_type&quot; with the value &quot;service_plan&quot;</li><li>Add a &quot;plan&quot; object</li></ol><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+   &quot;phone_numbers&quot;: {
+       &quot;did_us&quot;: {
+           &quot;name&quot;: &quot;US DID&quot;,
+           &quot;rate&quot;: 1,
+           &quot;discounts&quot;: {
+               &quot;cumulative&quot;: {
+                   &quot;maximum&quot;: 2,
+                   &quot;rate&quot;: 0.5
+               }
+           },
+           &quot;cascade&quot;: false
+       },
+       &quot;tollfree_us&quot;: {
+           &quot;name&quot;: &quot;US Tollfree&quot;,
+           &quot;rate&quot;: 5,
+           &quot;cascade&quot;: true,
+           &quot;minimum&quot;: 10
+       }
+   },
+   &quot;number_services&quot;: {
+       &quot;cnam&quot;: {
+           &quot;name&quot;: &quot;CNAM Update&quot;,
+           &quot;activation_charge&quot;: 2
+       },
+       &quot;port&quot;: {
+           &quot;name&quot;: &quot;Port Request&quot;,
+           &quot;activation_charge&quot;: 5
+       },
+       &quot;e911&quot;: {
+           &quot;name&quot;: &quot;E911 Service&quot;,
+           &quot;rate&quot;: 5,
+           &quot;discounts&quot;: {
+               &quot;single&quot;: {
+                   &quot;rate&quot;: 5
+               }
+           }
+       }
+   },
+   &quot;limits&quot;: {
+       &quot;twoway_trunks&quot;: {
+           &quot;name&quot;: &quot;Two-Way Trunk&quot;,
+           &quot;rate&quot;: 29.99
+       },
+       &quot;inbound_trunks&quot;: {
+           &quot;name&quot;: &quot;Inbound Trunk&quot;,
+           &quot;rate&quot;: 19.99
+       }
+   },
+   &quot;devices&quot;: {
+       &quot;_all&quot;: {
+           &quot;name&quot;: &quot;SIP Device&quot;,
+           &quot;as&quot;: &quot;sip_devices&quot;,
+           &quot;cascade&quot;: true,
+           &quot;rates&quot;: {
+               &quot;5&quot;: 0,
+               &quot;20&quot;: 24.95,
+               &quot;50&quot;: 49.95,
+               &quot;100&quot;: 149.95
+           }
+       }
+   }
+}</pre>
+</div></div><p> </p><p> </p><h3 id="ServicePlans-ResellerServicePlans">Reseller Service Plans</h3><p> </p><h3 id="ServicePlans-ServicePlanMinimums">Service Plan Minimums</h3><p> </p><h2 id="ServicePlans-AssigningServicePlans">Assigning Service Plans</h2><h3 id="ServicePlans-AssigningPlanstoCustomers">Assigning Plans to Customers</h3><p> </p><h3 id="ServicePlans-PromotingAccountstoResellerStatus">Promoting Accounts to Reseller Status</h3><p> </p><p> </p><p>Setting the default / global service plan</p><p>Checking if someone is properly setup as a reseller?</p><p>APIs for any of the above (now or future)</p><p>What does default_service_plan do?</p><p>How to check that a bookkeeper is loaded/running?</p><p>What happens if a bookkeeper is not working/loaded/running?</p><p> </p><h3 id="ServicePlans-AdvancedFeatures">Advanced Features</h3><p>It may be useful to have a reseller account with subaccounts, who in turn have their own subaccounts, all billing back to the reseller account. An account's reseller is determined by looking at each parent until the first account with a reseller flag is found. If no such account is found, the master account is used.</p><p>If an account is created</p><p> </p><p><strong>IMMEDIATE ACTION AFTER CHANGE:</strong></p><p>USER ADDS DEVICE ---&gt;  DEVICES ARE RE-COUNTED  ---&gt;  SERVICES DATABASE IS UPDATED WITH LATEST COUNT --&gt; ACCOUNT IS MARKED AS &quot;DIRTY&quot;</p><p> </p><p><strong>PERIODIC MAINTENANCE:</strong></p><p>SCAN FOR &quot;DIRTY&quot; ACCOUNTS --&gt; APPLY SERVICE PLAN TO ACCOUNT SERVICES  --&gt; PASS THE LIST OF BILLABLE ITEMS TO THE &quot;BOOKKEEPER&quot;  --&gt; IF CUSTOMER IS PART OF A RESELLER, &quot;DIRTY&quot; THE RESELLER'S ACCOUNT</p><p> </p><p><strong>BOOKKEEPER:</strong></p><p>TAKE NORMALIZED LIST OF ITEMS --&gt; PASS TO BOOKKEEPER SPECIFIC LOGIC (Could be WHMCS, Braintree, Stripe, etc.)  --&gt; RETURNS ACCOUNT STATUS (&quot;GOOD STANDING&quot; or &quot;ERROR&quot;)</p><p> </p><p> </p><p> </p><p>
+
+<map id="gliffy-map-14155781-2459" name="gliffy-map-14155781-2459"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 784px;" usemap="#gliffy-map-14155781-2459" src="attachments/13926531/14155782.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155783">dual_billing_support</a> (text/xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155784.png">dual_billing_support.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155785">dual_billing_support</a> (text/xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155786.png">dual_billing_support.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155781">dual_billing_support</a> (application/gliffy+xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13926531/14155782.png">dual_billing_support.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Stepswitch SUP Commands</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Kazoo-Apps_29786224.html">Kazoo Apps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Stepswitch_29786254.html">Stepswitch</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Stepswitch SUP Commands
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Karl Anderson</span>, last modified on Apr 12, 2013
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="StepswitchSUPCommands-SUPCommands">SUP Commands</h1><p> </p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><strong>sup stepswitch_maintenance flush</strong></td><td class="confluenceTd"><p>Stepswitch caches the properties of a number when it looks them up, including the account it belongs to. <br/>If the number is updated via the API it will be removed from the cache automatically. However, if a manual change is made you may want to flush the cache so it takes affect.</p><div id="expander-51607228" class="expand-container"><div id="expander-control-51607228" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Example</span></div><div id="expander-content-51607228" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">[root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance flush</pre>
+</div></div></div></div></td></tr><tr><td class="confluenceTd"><strong>sup stepswitch_maintenance refresh</strong></td><td class="confluenceTd"><p>Stepswitch uses the &quot;offnet&quot; database which must be set up properly so resources can be queried (see CouchDB views). <br/>This command will ensure the database is present, properly configured to the version of Stepswitch and clean up any depreciated documents that might be present.</p><div id="expander-920220129" class="expand-container"><div id="expander-control-920220129" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Example</span></div><div id="expander-content-920220129" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">[root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance refresh</pre>
+</div></div></div></div></td></tr><tr><td class="confluenceTd"><strong>sup stepswitch_maintenance reload_resources</strong></td><td class="confluenceTd"><p>Stepswitch monitors the &quot;offnet&quot; database for any changes (manual or API) and update the in-memory resource list. <br/>However, for older versions without this feature this command must be manually run on all servers with Stepswitch before new or updated resources are used.</p><div id="expander-1918580132" class="expand-container"><div id="expander-control-1918580132" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Example</span></div><div id="expander-content-1918580132" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">[root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance reload_resources</pre>
+</div></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><strong>sup stepswitch_maintenance lookup_number <em>NUMBER</em></strong></td><td colspan="1" class="confluenceTd"><p>When provided with a number Stepswitch will return the known parameters of that number. <br/>These are drawn from the local cache if present or looked up and cached if not. <br/>This provides insight into what account a number is associated with for inbound calls as well as if outbound calls to this number will stay on-net.</p><div id="expander-1672407876" class="expand-container"><div id="expander-control-1672407876" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Example</span></div><div id="expander-content-1672407876" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">[root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance lookup_number 4158867900
+{ok,&lt;&lt;&quot;43579fc0a3aa11e29e960800200c9a66&quot;&gt;&gt;,[{force_outbound,false},{pending_port,false},{local,false},{inbound_cnam,false}]}
+
+</pre>
+</div></div><p>The return is formated as: {ok, ACCOUNT ID, LIST OF PARAMETERS}</p><p>Parameters:</p><ul><li><span style="line-height: 1.4285715;">force_outbound - If this is false when an account in the system calls this number it will no leave the Kazoo platform (known as on-net calls)</span></li><li><span style="line-height: 1.4285715;">pending_port - If this is true then the number was created as a port request but no inbound request from the carrier has not </span>occurred<span style="line-height: 1.4285715;"> yet (port is not complete).</span></li><li><span style="line-height: 1.4285715;">inbound_cnam - If this is true when inbound calls are made to this number a CNAM lookup will take place to update the caller id name in the US.</span></li></ul></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><strong>sup stepswitch_maintenance reload_resources <em>NUMBER</em></strong></td><td colspan="1" class="confluenceTd"><p>This will return a ordered list of resource that would be attempted if the provided number was dialed.</p><div id="expander-939846453" class="expand-container"><div id="expander-control-939846453" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Example</span></div><div id="expander-content-939846453" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">[root@apps001-aa-ord example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance process_number 4158867998
+[{&lt;&lt;&quot;bae2f840a3d311e29e960800200c9a66&quot;&gt;&gt;,0,&lt;&lt;&quot;sip:+14158867998@192.168.4.15&quot;&gt;&gt;},{&lt;&lt;&quot;bae2f840a3d311e29e960800200c9a66&quot;&gt;&gt;,2,&lt;&lt;&quot;sip:+14158867998@192.168.4.16&quot;&gt;&gt;}]
+
+</pre>
+</div></div><p>The return is formatted as a list of: {RESOURCE ID, DELAY (in seconds), SIP URI}</p></div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

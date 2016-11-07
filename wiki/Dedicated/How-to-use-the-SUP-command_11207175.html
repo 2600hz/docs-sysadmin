@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : How to use the SUP command</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-and-Maintenance_4194538.html">Monitoring and Maintenance</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : How to use the SUP command
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Stephen Lum</span>, last modified by <span class='editor'> David Singer</span> on Oct 08, 2015
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<hr/><h2 id="HowtousetheSUPcommand-SUPCommand">SUP Command</h2><p>We created the sup command (previously the command_bridge) to make it easier to diagnose common configuration issues, as well as stop and start applications.</p><h5 id="HowtousetheSUPcommand-Gettheconfiguredwhappsforthisnode:">Get the configured whapps for this node:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_config get whapps_controller whapps
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Getthecurrentlyrunningwhapps:">Get the currently running whapps:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_controller running_apps
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Getlistoffreeswitchnodesthatecallmgrisconfiguredtoconnectto::"><span style="color: rgb(51,51,51);">Get list of freeswitch nodes that ecallmgr is configured to connect to:</span>:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr ecallmgr_config get fs_nodes
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Getlistoffreeswitchnodesthatecallmgrisconnectedto:"><span style="color: rgb(51,51,51);">Get list of freeswitch nodes that ecallmgr is connected to</span>:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr ecallmgr_maintenance list_fs_nodes</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Restartawhapponaremotehost:">Restart a whapp on a remote host:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -h apps002-dev-vb.2600hz.com -c change_me whapps_controller restart_app crossbar
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Checktherunningwhappsonaremotehost:">Check the running whapps on a remote host:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -h apps002-dev-vb.2600hz.com -c change_me whapps_controller running_apps
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Checkwhichamqphostthisserverisconnectedto:">Check which amqp host this server is connected to:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup amqp_mgr get_host
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushthewhapps_configcache:">Flush the whapps_config cache:</h5><p>(in case you modified some settings such as FS nodes)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_config flush
+</pre>
+</div></div><p>You can also use this command for any document in the system_config database, for example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"> /opt/kazoo/utils/sup/sup whapps_config flush number_manager</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushtheecallmgr_configcache:">Flush the ecallmgr_config cache:</h5><p>(in case you modified some settings such as FS nodes)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr ecallmgr_config flush</pre>
+</div></div><h5 id="HowtousetheSUPcommand-AddFSnodestoecallmgr:">Add FS nodes to ecallmgr:</h5><p>This command adds a FreeSWITCH node to the currently running ecallmgr, but it does not update the persistent configuration.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr ecallmgr_maintenance add_fs_node freeswitch@hostname.mydomain.com
+</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Migrate(update)databasedocuments:">Migrate (update) database documents:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -t 3600 whapps_maintenance migrate</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushwhistle_appscouchcache:">Flush whistle_apps couch cache:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whistle_couch_maintenance flush</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Restartconferencewhapp">Restart conference whapp</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_controller restart_app conference</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Stopthewhistle_appserlangVM">Stop the whistle_apps erlang VM</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup erlang halt
+or
+/opt/kazoo/utils/sup/sup -n whistle_apps erlang halt</pre>
+</div></div><h5 id="HowtousetheSUPcommand-StoptheecallmgrerlangVM">Stop the ecallmgr erlang VM</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr erlang halt</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Aliasthesupcommand:">Alias the sup command:</h5><p>(for the user you are logged as)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/add_alias.sh</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Lookupanaccountviatherealm:">Lookup an account via the realm:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_maintenance find_account_by_realm 83a99b.sip.mydomain.com</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Lookupanaccountviathephonenumber:">Lookup an account via the phone number:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_maintenance find_account_by_number 4158867900</pre>
+</div></div><h5 id="HowtousetheSUPcommand-FindoutwhichcarrierwillbeusedforaDID:">Find out which carrier will be used for a DID:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"> /opt/kazoo/utils/sup/sup stepswitch_maintenance process_number 4158867900  </pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushthewh_cache(torefreshtheschemasforexample)">Flush the wh_cache (to refresh the schemas for example)</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup wh_cache flush</pre>
+</div></div><h5 id="HowtousetheSUPcommand-ManuallycreatethefirstaccountonaKazoosystem:">Manually create the first account on a Kazoo system:</h5><p>( change the values for ACCOUNT_NAME, REALM, USERNAME, PASSWORD)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_maintenance create_account ACCOUNT_NAME REALM USERNAME PASSWORD</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Reloadstepswitchtoupdatecarriersmanually:">Reload stepswitch to update carriers manually:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup stepswitch_maintenance reload_resources</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Reloadamodule:">Reload a module:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_maintenance start_module cb_braintree</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Listallcrossbarrunningmodules:">List all crossbar running modules:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_maintenance running_modules</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Listcrossbarbindings:">List crossbar bindings:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup crossbar_bindings modules_loaded</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Refreshwhappsafterupdate:">Refresh whapps after update:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_maintenance refresh</pre>
+</div></div><p>(whapps_maintenance refresh can not be done in some circumstances from the foreground, it will try to output status info to a shell that has already closed and will error. The command is valid but not via sup if the command needs to output data. Use blocking_refresh)</p><h5 id="HowtousetheSUPcommand-BlockingRefreshwhapps:">Blocking Refresh whapps:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whapps_maintenance blocking_refresh</pre>
+</div></div><p><span style="color: rgb(61,61,61);"><br/></span></p><p><span style="color: rgb(61,61,61);">Increase the log level for whapps:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whistle_maintenance syslog_level debug</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Increasetheloglevelforecallmgr:">Increase the log level for ecallmgr:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr whistle_maintenance syslog_level debug</pre>
+</div></div><p>You can use any of the <a href="https://en.wikipedia.org/wiki/Syslog#Severity_levels" class="external-link" rel="nofollow">syslog severity levels</a> to change what is logged.</p><h5 id="HowtousetheSUPcommand-ShowthenodessharingthesameRabbitmq:">Show the nodes sharing the same Rabbitmq:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup whistle_maintenance nodes</pre>
+</div></div><p> </p><h5 id="HowtousetheSUPcommand-DisplayRegistrationsstatus:">Display Registrations status:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup -n ecallmgr ecallmgr_maintenance registrar_summary</pre>
+</div></div><p> </p><h5 id="HowtousetheSUPcommand-RabbitMQbrokerrelatedcommands:">RabbitMQ broker related commands:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup whistle_amqp_maintenance primary_broker
+sup whistle_amqp_maintenance broker_summary
+sup whistle_amqp_maintenance connection_summary</pre>
+</div></div><p> </p><h5 id="HowtousetheSUPcommand-ManipulatetheACLs">Manipulate the ACLs</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup -necallmgr ecallmgr_maintenance allow_carrier CarrierName CarrierIP
+sup -necallmgr ecallmgr_maintenance allow_carrier CarrierName CIDR
+sup -necallmgr ecallmgr_maintenance allow_sbc SBCName SBCIP 
+sup -necallmgr ecallmgr_maintenance deny_carrier CarrierName CarrierIP 
+sup -necallmgr ecallmgr_maintenance deny_sbc SBCName SBCIP 
+sup -necallmgr ecallmgr_maintenance remove_acl CarrierName|SBCName
+sup -necallmgr ecallmgr_maintenance carrier_acls list_acls
+sup -necallmgr ecallmgr_maintenance sbc_acls list_acls
+sup -necallmgr ecallmgr_maintenance reload_acls -&gt; issues a reloadacl on all FreeSWITCH servers 
+sup -necallmgr ecallmgr_maintenance flush_acls -&gt; just flushes the caches, not FreeSWITCH</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushallcacheddocsforallaccounts:">Flush all cached docs for all accounts:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup couch_mgr flush_cache_docs</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Flushallcacheddocsforaspecificaccount:">Flush all cached docs for a specific account:</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/kazoo/utils/sup/sup couch_mgr flush_cache_docs account%2Fab%2Fcd%2Fefghi
+/opt/kazoo/utils/sup/sup couch_mgr flush_cache_docs accounts</pre>
+</div></div><h5 id="HowtousetheSUPcommand-FORDEVELOPMENTTESTING:Hotload(norestartneeded)aminorcodechange.Exampleforachangetofile/opt/kazoo/applications/jonny5/src/j5_limits.erl">FOR DEVELOPMENT TESTING: Hot load (no restart needed) a minor code change. Example for a change to file /opt/kazoo/applications/jonny5/src/j5_limits.erl</h5><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">cd /opt/kazoo/applications/jonny5/
+make
+/opt/kazoo/utils/sup/sup whistle_maintenance hotload j5_limits # changed source file without path or extension</pre>
+</div></div><h5 id="HowtousetheSUPcommand-Makeanaccountareselleraccount.Becarefulwiththis.Itaffectsallit&#39;schildrenandgrandchildren,etc...">Make an account a reseller account. Be careful with this. It affects all it's children and grandchildren, etc...</h5><p>Expirement in a test account tree of accounts.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup whistle_services_maintenance make_reseller &lt;account_id&gt;</pre>
+</div></div></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1478561759210 {padding: 0px;}
+div.rbtoc1478561759210 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1478561759210 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1478561759210'>
+<ul class='toc-indentation'>
+<li><a href='#HowtousetheSUPcommand-Gettheconfiguredwhappsforthisnode:'>Get the configured whapps for this node:</a></li>
+<li><a href='#HowtousetheSUPcommand-Getthecurrentlyrunningwhapps:'>Get the currently running whapps:</a></li>
+<li><a href='#HowtousetheSUPcommand-Getlistoffreeswitchnodesthatecallmgrisconfiguredtoconnectto::'>Get list of freeswitch nodes that ecallmgr is configured to connect to::</a></li>
+<li><a href='#HowtousetheSUPcommand-Getlistoffreeswitchnodesthatecallmgrisconnectedto:'>Get list of freeswitch nodes that ecallmgr is connected to:</a></li>
+<li><a href='#HowtousetheSUPcommand-Restartawhapponaremotehost:'>Restart a whapp on a remote host:</a></li>
+<li><a href='#HowtousetheSUPcommand-Checktherunningwhappsonaremotehost:'>Check the running whapps on a remote host:</a></li>
+<li><a href='#HowtousetheSUPcommand-Checkwhichamqphostthisserverisconnectedto:'>Check which amqp host this server is connected to:</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushthewhapps_configcache:'>Flush the whapps_config cache:</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushtheecallmgr_configcache:'>Flush the ecallmgr_config cache:</a></li>
+<li><a href='#HowtousetheSUPcommand-AddFSnodestoecallmgr:'>Add FS nodes to ecallmgr:</a></li>
+<li><a href='#HowtousetheSUPcommand-Migrate(update)databasedocuments:'>Migrate (update) database documents:</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushwhistle_appscouchcache:'>Flush whistle_apps couch cache:</a></li>
+<li><a href='#HowtousetheSUPcommand-Restartconferencewhapp'>Restart conference whapp</a></li>
+<li><a href='#HowtousetheSUPcommand-Stopthewhistle_appserlangVM'>Stop the whistle_apps erlang VM</a></li>
+<li><a href='#HowtousetheSUPcommand-StoptheecallmgrerlangVM'>Stop the ecallmgr erlang VM</a></li>
+<li><a href='#HowtousetheSUPcommand-Aliasthesupcommand:'>Alias the sup command:</a></li>
+<li><a href='#HowtousetheSUPcommand-Lookupanaccountviatherealm:'>Lookup an account via the realm:</a></li>
+<li><a href='#HowtousetheSUPcommand-Lookupanaccountviathephonenumber:'>Lookup an account via the phone number:</a></li>
+<li><a href='#HowtousetheSUPcommand-FindoutwhichcarrierwillbeusedforaDID:'>Find out which carrier will be used for a DID:</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushthewh_cache(torefreshtheschemasforexample)'>Flush the wh_cache (to refresh the schemas for example)</a></li>
+<li><a href='#HowtousetheSUPcommand-ManuallycreatethefirstaccountonaKazoosystem:'>Manually create the first account on a Kazoo system:</a></li>
+<li><a href='#HowtousetheSUPcommand-Reloadstepswitchtoupdatecarriersmanually:'>Reload stepswitch to update carriers manually:</a></li>
+<li><a href='#HowtousetheSUPcommand-Reloadamodule:'>Reload a module:</a></li>
+<li><a href='#HowtousetheSUPcommand-Listallcrossbarrunningmodules:'>List all crossbar running modules:</a></li>
+<li><a href='#HowtousetheSUPcommand-Listcrossbarbindings:'>List crossbar bindings:</a></li>
+<li><a href='#HowtousetheSUPcommand-Refreshwhappsafterupdate:'>Refresh whapps after update:</a></li>
+<li><a href='#HowtousetheSUPcommand-BlockingRefreshwhapps:'>Blocking Refresh whapps:</a></li>
+<li><a href='#HowtousetheSUPcommand-Increasetheloglevelforecallmgr:'>Increase the log level for ecallmgr:</a></li>
+<li><a href='#HowtousetheSUPcommand-ShowthenodessharingthesameRabbitmq:'>Show the nodes sharing the same Rabbitmq:</a></li>
+<li><a href='#HowtousetheSUPcommand-DisplayRegistrationsstatus:'>Display Registrations status:</a></li>
+<li><a href='#HowtousetheSUPcommand-RabbitMQbrokerrelatedcommands:'>RabbitMQ broker related commands:</a></li>
+<li><a href='#HowtousetheSUPcommand-ManipulatetheACLs'>Manipulate the ACLs</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushallcacheddocsforallaccounts:'>Flush all cached docs for all accounts:</a></li>
+<li><a href='#HowtousetheSUPcommand-Flushallcacheddocsforaspecificaccount:'>Flush all cached docs for a specific account:</a></li>
+<li><a href='#HowtousetheSUPcommand-FORDEVELOPMENTTESTING:Hotload(norestartneeded)aminorcodechange.Exampleforachangetofile/opt/kazoo/applications/jonny5/src/j5_limits.erl'>FOR DEVELOPMENT TESTING: Hot load (no restart needed) a minor code change. Example for a change to file /opt/kazoo/applications/jonny5/src/j5_limits.erl</a></li>
+<li><a href='#HowtousetheSUPcommand-Makeanaccountareselleraccount.Becarefulwiththis.Itaffectsallit&#39;schildrenandgrandchildren,etc...'>Make an account a reseller account. Be careful with this. It affects all it&#39;s children and grandchildren, etc...</a></li>
+</ul>
+</div></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

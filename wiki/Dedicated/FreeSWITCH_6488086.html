@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : FreeSWITCH</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Load-and-Failure-Testing_7503975.html">Load and Failure Testing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Lineman-Test-Tool_6488074.html">Lineman Test Tool</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : FreeSWITCH
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Karl Anderson</span>, last modified on May 23, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="FreeSWITCH-LinemanFreeSWITCHSimulator">Lineman FreeSWITCH Simulator</h1><p>The FreeSWITCH tool of lineman is designed to allow full emulation of a (currently single) FreeSWITCH server.  This allows a workorder greater control to:</p><ol><li>Without requiring a running FreeSWITCH server and SIP endpoint/simulators</li><li>Complete control of all messages, including the creation of non-compliant or expected data</li><li>The dynamic generation of FreeSWITCH events with respect to data fixtures.</li></ol><p>Using the FreeSWITCH test tool requires a certain understanding of <a href="http://wiki.freeswitch.org/wiki/Event_list" class="external-link" rel="nofollow">FreeSWITCH events</a> as this is what the tool is mostly responsible for generating. </p><h2 id="FreeSWITCH-Toolbag">Toolbag</h2><p>Within the toolbag element a (currently single) &quot;freeswitch&quot; element can be define the following elements:</p><h4 id="FreeSWITCH-default-event-headers"><span>default-event-headers</span></h4><p><span> </span><span>The value of this element is a collection of &quot;event-header&quot; elements that are prepended to every freeswitch request made in a sequence.  See the event-header description bellow for more details.</span></p><p><span><br/></span></p><p><span>Example:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;toolbag&gt;
+    &lt;freeswitch&gt;
+      &lt;default-event-headers&gt;
+        &lt;event-header name=&quot;Core-UUID&quot;&gt;05cfa64d-fd57-478b-a34d-2877d1aaaeec&lt;/event-header&gt;
+        &lt;event-header name=&quot;FreeSWITCH-Hostname&quot;&gt;vagrant.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;FreeSWITCH-Switchname&quot;&gt;vagrant.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;FreeSWITCH-IPv4&quot;&gt;192.168.1.45&lt;/event-header&gt;
+        &lt;event-header name=&quot;FreeSWITCH-IPv6&quot;&gt;::1&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Date-Local&quot;&gt;2012-04-06 13:17:53&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Date-GMT&quot;&gt;Fri, 06 Apr 2012 20:17:53 GMT&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Date-Timestamp&quot;&gt;1333743473494547&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Calling-File&quot;&gt;sofia_reg.c&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Calling-Function&quot;&gt;sofia_reg_parse_auth&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Calling-Line-Number&quot;&gt;2379&lt;/event-header&gt;
+      &lt;/default-event-headers&gt;
+    &lt;/freeswitch&gt;
+  &lt;/toolbag&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><h4 id="FreeSWITCH-bind">bind</h4><p><span>Binds the static value of the element to a freeswitch event. When the binding is invoked, with the optional argument defined in the &quot;args&quot; attribute, the static value is delivered to the requester.</span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Attribute</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">binding</td><td colspan="1" class="confluenceTd">A freeswitch event binding</td></tr><tr><td colspan="1" class="confluenceTd">args</td><td colspan="1" class="confluenceTd">The argument requested when the binding is invoked</td></tr><tr><td colspan="1" class="confluenceTd">error</td><td colspan="1" class="confluenceTd">If this is set to &quot;true&quot; then the XML value is present to ecallmgr as an error response.</td></tr><tr><td colspan="1" class="confluenceTd">clean</td><td colspan="1" class="confluenceTd">If this is set to &quot;false&quot; then the XML value will not be &quot;cleaned up&quot;. See <a class="createlink" href="/wiki/pages/createpage.action?spaceKey=docs&amp;title=Lineman+Test+Tool">Lineman Test Tool</a> for details.</td></tr></tbody></table></div><p>A list of available binds is bellow.</p><p> </p><p>Example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;toolbag&gt;
+    &lt;freeswitch&gt;
+      &lt;bind binding=&quot;freeswitch.api.status&quot; args=&quot;&quot;&gt;
+        &lt;![CDATA[
+          UP 0 years, 18 days, 13 hours, 41 minutes, 1 second, 777 milliseconds, 964 microseconds
+          FreeSWITCH is ready
+          147 session(s) since startup
+          0 session(s) 0/200
+          5000 session(s) max
+          min idle cpu 0.00/43.00
+          
+        ]]&gt;
+      &lt;/bind&gt;
+      &lt;bind binding=&quot;freeswitch.api.load&quot; args=&quot;mod_sofia&quot;&gt;
+        &lt;![CDATA[
+          +OK Reloading XML
+          -ERR [Module already loaded]
+          
+        ]]&gt;
+      &lt;/bind&gt;
+    &lt;/freeswitch&gt;
+  &lt;/toolbag&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><h4 id="FreeSWITCH-connect">connect</h4><p><span>When this element is invoked the tool will connect to an ecallmgr node, and configure it for testing.</span></p><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p> This will remove the ability of that ecallmgr to connect to an actual FreeSWITCH server for the duration of the test.</p></div></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>Attribute</p></th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">node</td><td class="confluenceTd">The name of the ecallmgr node, typically &quot;ecallmgr&quot;</td></tr><tr><td colspan="1" class="confluenceTd">host</td><td colspan="1" class="confluenceTd">The FQDN of the server running ecallmgr, if not present the local hostname is used.</td></tr><tr><td colspan="1" class="confluenceTd">cookie</td><td colspan="1" class="confluenceTd">The erlang cookie of the ecallmgr virtual machine.</td></tr></tbody></table></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;toolbag&gt;
+    &lt;freeswitch&gt;
+      &lt;connect node=&quot;ecallmgr&quot;/&gt;
+    &lt;/freeswitch&gt;
+  &lt;/toolbag&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><p> </p><h2 id="FreeSWITCH-SequenceElements">Sequence Elements</h2><p>All sequence elements are in a &quot;freeswitch&quot; element and described by the &quot;action&quot; attribute.  This section will be broken down by the available actions.</p><h4 id="FreeSWITCH-freeswitch[@action=&#39;fetch&#39;]">freeswitch[@action='fetch']</h4><p>Used to preform a FreeSWITCH request for a binding such as a directory lookup. See <a href="http://wiki.freeswitch.org/wiki/Mod_xml_curl#Bindings" class="external-link" rel="nofollow">FreeSWITCH bindings</a> for more information.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>Attribute</p></th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">action</td><td colspan="1" class="confluenceTd">The value must be &quot;fetch&quot;</td></tr><tr><td class="confluenceTd">fetch-module</td><td class="confluenceTd">The binding config file, for example &quot;directory&quot;</td></tr><tr><td colspan="1" class="confluenceTd">fetch-key</td><td colspan="1" class="confluenceTd">The FreeSWITCH XML section to request</td></tr><tr><td colspan="1" class="confluenceTd">fetch-property</td><td colspan="1" class="confluenceTd">The fetch property name</td></tr><tr><td colspan="1" class="confluenceTd">fetch-value</td><td colspan="1" class="confluenceTd"><span>The fetch property value</span></td></tr><tr><td colspan="1" class="confluenceTd">fetch-id</td><td colspan="1" class="confluenceTd">The ID of the fetch request</td></tr></tbody></table></div><p> </p><p>Example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;sequences&gt;
+    &lt;sequence&gt;
+      &lt;freeswitch action=&quot;fetch&quot; fetch-module=&quot;directory&quot; fetch-key=&quot;domain&quot; fetch-property=&quot;name&quot; fetch-value=&quot;test.2600hz.com&quot; fetch-id=&quot;36889abf-8e1b-498e-9f68-d9ad6af3df48&quot;&gt;
+        &lt;event-header name=&quot;Event-Name&quot;&gt;REQUEST_PARAMS&lt;/event-header&gt;
+        &lt;event-header name=&quot;action&quot;&gt;sip_auth&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_profile&quot;&gt;sipinterface_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_user_agent&quot;&gt;PolycomSoundPointIP-SPIP_330-UA/3.3.2.0413&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_username&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_realm&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_nonce&quot;&gt;6acd9049-149e-4790-bb4c-1a6931b633ae&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_uri&quot;&gt;sip:test.2600hz.com:5060&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_contact_user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_contact_host&quot;&gt;192.168.1.181&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_to_user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_to_host&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_from_user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_from_host&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_request_host&quot;&gt;192.168.1.45&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_request_port&quot;&gt;5060&lt;/event-header&gt;
+        &lt;event-header name=&quot;X-AUTH-IP&quot;&gt;192.168.1.181&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_qop&quot;&gt;auth&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_cnonce&quot;&gt;n6XPbFowczF2OxQ&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_nc&quot;&gt;00000009&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_response&quot;&gt;3ad345827751258c993109c0ef4c297e&lt;/event-header&gt;
+        &lt;event-header name=&quot;sip_auth_method&quot;&gt;REGISTER&lt;/event-header&gt;
+        &lt;event-header name=&quot;key&quot;&gt;id&lt;/event-header&gt;
+        &lt;event-header name=&quot;user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;domain&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;ip&quot;&gt;192.168.1.41&lt;/event-header&gt;
+      &lt;/freeswitch&gt;
+    &lt;/sequence&gt;
+  &lt;/sequences&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><h4 id="FreeSWITCH-freeswitch[@action=&#39;publish&#39;]">freeswitch[@action='publish']</h4><p>Used to publish a FreeSWITCH event.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>Attribute</p></th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd"><span>action</span></td><td colspan="1" class="confluenceTd"><span>The value must be &quot;publish&quot;</span></td></tr><tr><td colspan="1" class="confluenceTd">call-id</td><td colspan="1" class="confluenceTd">The call id to report this event belongs to</td></tr></tbody></table></div><p> </p><p>Example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;sequences&gt;
+    &lt;sequence&gt;
+      &lt;freeswitch action=&quot;publish&quot; call-id=&quot;66d05b09-74b57bae-d67cf1f7@192.168.1.181&quot;&gt;
+        &lt;event-header name=&quot;Event-Name&quot;&gt;CUSTOM&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Subclass&quot;&gt;sofia::register&lt;/event-header&gt;
+        &lt;event-header name=&quot;profile-name&quot;&gt;sipinterface_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;from-user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;from-host&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;presence-hosts&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;contact&quot;&gt;&lt;![CDATA[&quot;user&quot; &lt;sip:device_1@192.168.1.181:5348;fs_path=&lt;sip:192.168.1.50;lr;received=sip:192.168.1.181:5348&gt;&gt;]]&gt;&lt;/event-header&gt;
+        &lt;event-header name=&quot;call-id&quot;&gt;66d05b09-74b57bae-d67cf1f7@192.168.1.181&lt;/event-header&gt;
+        &lt;event-header name=&quot;rpid&quot;&gt;unknown&lt;/event-header&gt;
+        &lt;event-header name=&quot;status&quot;&gt;Registered(UDP)&lt;/event-header&gt;
+        &lt;event-header name=&quot;expires&quot;&gt;60&lt;/event-header&gt;
+        &lt;event-header name=&quot;to-user&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;to-host&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;network-ip&quot;&gt;192.168.1.41&lt;/event-header&gt;
+        &lt;event-header name=&quot;network-port&quot;&gt;5060&lt;/event-header&gt;
+        &lt;event-header name=&quot;username&quot;&gt;device_1&lt;/event-header&gt;
+        &lt;event-header name=&quot;realm&quot;&gt;test.2600hz.com&lt;/event-header&gt;
+        &lt;event-header name=&quot;user-agent&quot;&gt;PolycomSoundPointIP-SPIP_330-UA/3.3.2.0413&lt;/event-header&gt;
+      &lt;/freeswitch&gt;
+    &lt;/sequence&gt;
+  &lt;/sequences&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><h2 id="FreeSWITCH-EventHeaders">Event Headers</h2><p>Event headers is an XML element used to represent a line of a FreeSWITCH event.  All events published to ecallmgr are a combination of all event-headers defined in the value of the element prepend with any defined in the toolbag section under the &quot;default-event-headers&quot; element.</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Attribute</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">The name (or key) of this even header, this is required on each and should be unique (duplicates will be delivered to ecallmgr)</td></tr><tr><td colspan="1" class="confluenceTd">clean</td><td colspan="1" class="confluenceTd"><p>If this is set to &quot;false&quot; then the XML value will not be &quot;cleaned up&quot;. See <a class="createlink" href="/wiki/pages/createpage.action?spaceKey=docs&amp;title=Lineman+Test+Tool">Lineman Test Tool</a> for details.</p></td></tr></tbody></table></div><h2 id="FreeSWITCH-ProvidedBindings">Provided Bindings</h2><p>This is a list of binding that are generated when ecallmgr makes requests to the FreeSWITCH tool.  The parts defined in braces vary depending on the request, for example &quot;freeswitch.fetch_reply.123546789&quot; would be the response for a fetch request with the attribute &quot;fetch-id=123456789&quot;.</p><ul><li>freeswitch.bind.{type}</li><li>freeswitch.register_event_handler</li><li>freeswitch.send</li><li>freeswitch.fetch_reply.{fetch-id}</li><li>freeswitch.api.{command}</li><li>freeswitch.bgapi.{command}</li><li>freeswitch.event</li><li>freeswitch.session_event</li><li>freeswitch.nixevent</li><li>freeswitch.session_nixevent</li><li>freeswitch.noevents</li><li>freeswitch.session_noevents</li><li>freeswitch.close.exit</li><li>freeswitch.sendevent.{event-name}</li><li>sendevent.custom.{sub-class-name}</li><li>freeswitch.sendmsg.{UUID}</li><li>freeswitch.getpid</li><li>freeswitch.handlecall.{UUID}</li><li>freeswitch.start_handler.{type}</li></ul>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

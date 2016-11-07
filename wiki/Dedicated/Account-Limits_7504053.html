@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Account Limits</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Kazoo-Apps_29786224.html">Kazoo Apps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Jonny5_29786244.html">Jonny5</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Account Limits
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Karl Anderson</span>, last modified by <span class='editor'> Darren Schreiber</span> on Jan 13, 2013
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>
+
+<map id="gliffy-map-7634947-1701" name="gliffy-map-7634947-1701"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 683px;" usemap="#gliffy-map-7634947-1701" src="attachments/7504053/7634948.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+   &quot;_id&quot;: &quot;limits&quot;,
+   &quot;twoway_trunks&quot;: 0, //two way flat rate trunks, can only be used if system_config.jonny5. flat_rate_whitelist regex matches AND system_config.jonny5.flat_rate_blacklist does not. This can also be specified as a pvt_twoway_trunks, the lower will be used.
+   &quot;inbound_trunks&quot;: 0, //exactly the same as two-way trunks but only used for inbound calls. If there are more inbound calls then trunks two-way trunks will be checked next.
+   &quot;resource_consuming_calls&quot;: -1, // hard limit on the number of calls that can consume one or more resources (IE: inbound to outbound forwarded number is one resource consuming call), can also be specified as pvt_resource_consuming_calls, the smallest of the two is used
+   &quot;calls&quot;: -1, // total number of calls (resource consuming OR NOT) that an account can have, can also be specified as pvt_calls, the smallest of the two is used
+   &quot;allow_prepay&quot;: true, // allows the customer to disable per_minute authorizations relying solely on trunks and/or allotments, this will be overridden by pvt_allow prepay
+   &quot;pvt_type&quot;: &quot;limits&quot;, 
+   &quot;pvt_vsn&quot;: &quot;1&quot;,
+   &quot;pvt_account_id&quot;: &quot;d75312345678901234567890&quot;,
+   &quot;pvt_account_db&quot;: &quot;account%2Fd7%2F53%12345678901234567890&quot;,
+   &quot;pvt_created&quot;: 63518278682,
+   &quot;pvt_modified&quot;: 63518278682,
+   &quot;pvt_soft_limit_outbound&quot;: false, // allows otherwise unauthorized outbound calls to continue
+   &quot;pvt_soft_limit_inbound&quot;: true, //allows otherwise unauthorized inbound calls to conitnue
+   &quot;pvt_allow_prepay&quot;: true,
+   &quot;pvt_allow_postpay&quot;: true, // whether or not to allow the account to go negative
+   &quot;pvt_max_postpay_amount&quot;: 100, // the maximum negative amount that is acceptable
+   &quot;pvt_allotments&quot;: {
+   &quot;did_us&quot;: { // then classification of a number as per system_config.number_manager.classifiers
+      &quot;amount&quot;: 120, // the allotment in seconds
+      &quot;cycle&quot;: &quot;hourly&quot; // the allotment reset period: yearly, monthly, weekly, daily, hourly, minutely
+      }
+   },
+   &quot;pvt_discounts&quot;: {
+      &quot;did_us&quot;: { // then classification of a number as per system_config.number_manager.classifiers
+      &quot;percentage&quot;: 10 // a percentage discount off the rate of EVERY per_minute call
+      }
+   },
+   &quot;pvt_enabeld&quot;: true // should limits be enforced for this account, IF FALSE THE ACCOUNT IS UNRESTRICTED
+}
+
+
+</pre>
+</div></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504053/7634949">Call Authorization Flow</a> (text/xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504053/7634950.png">Call Authorization Flow.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504053/7634947">Call Authorization Flow</a> (application/gliffy+xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504053/7634948.png">Call Authorization Flow.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

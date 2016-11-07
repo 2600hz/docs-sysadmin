@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Variables</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Load-and-Failure-Testing_7503975.html">Load and Failure Testing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Lineman-Test-Tool_6488074.html">Lineman Test Tool</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Variables
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Karl Anderson</span>, last modified on May 23, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="Variables-LinemanVariables">Lineman Variables</h1><p>This tool provides variable substitution in attributes and values.  It can also generate certain types of values dynamically.</p><h2 id="Variables-Toolbag">Toolbag</h2><p>This tool has no configuration parameters.</p><h2 id="Variables-SequenceElements">Sequence Elements</h2><p>This tool provides the &quot;variables&quot; element which is used to define &quot;variable&quot; elements. See bellow.</p><p><br/>Example:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;sequences&gt;
+    &lt;sequence&gt;
+      &lt;variables&gt;
+         &lt;variable name=&quot;fetch_uuid&quot; generate=&quot;uuid&quot;/&gt;
+         &lt;variable name=&quot;ip&quot; generate=&quot;ip_v4&quot;/&gt;
+         &lt;variable name=&quot;username&quot; generate=&quot;username&quot;/&gt;
+         &lt;variable name=&quot;password&quot; generate=&quot;password&quot;/&gt;
+         &lt;variable name=&quot;realm&quot;&gt;test.sip.2600hz.com&lt;/variable&gt;
+      &lt;/variables&gt;
+    &lt;/sequence&gt;
+  &lt;/sequences&gt;
+&lt;/workorder&gt;</pre>
+</div></div><p> </p><h2 id="Variables-Variable">Variable</h2><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>Attribute</p></th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">name</td><td colspan="1" class="confluenceTd">The variable name, if this is encountered inside two braces it will be replaced with the value</td></tr><tr><td colspan="1" class="confluenceTd">generate</td><td colspan="1" class="confluenceTd">Generate a dynamic value of the provided type, see bellow for a list of types</td></tr><tr><td colspan="1" class="confluenceTd">clean</td><td colspan="1" class="confluenceTd"><span>If this is set to &quot;false&quot; then the XML value will not be &quot;cleaned up&quot;. See </span><a class="createlink" href="/wiki/pages/createpage.action?spaceKey=docs&amp;title=Lineman+Test+Tool">Lineman Test Tool</a><span> for details.</span></td></tr></tbody></table></div><h4 id="Variables-GenerateTypes">Generate Types</h4><ul><li>uuid</li><li>username</li><li>password</li><li>ip_v4</li><li>word</li><li>domain</li><li>chars</li></ul><h2 id="Variables-ExampleUsage">Example Usage</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;workorder&gt;
+  &lt;sequences&gt;
+    &lt;sequence&gt;
+      &lt;variables&gt;
+         &lt;variable name=&quot;uuid&quot; generate=&quot;uuid&quot;/&gt;
+         &lt;variable name=&quot;username&quot; generate=&quot;username&quot;/&gt;
+         &lt;variable name=&quot;password&quot; generate=&quot;password&quot;/&gt;
+         &lt;variable name=&quot;ip&quot; generate=&quot;ip_v4&quot;/&gt;
+         &lt;variable name=&quot;realm&quot;&gt;test.sip.2600hz.com&lt;/variable&gt;
+      &lt;/variables&gt;
+      &lt;freeswitch action=&quot;publish&quot; call-id=&quot;{{uuid}}@{{ip}}&quot;&gt;
+        &lt;event-header name=&quot;Event-Name&quot;&gt;CUSTOM&lt;/event-header&gt;
+        &lt;event-header name=&quot;Event-Subclass&quot;&gt;sofia::register&lt;/event-header&gt;
+        &lt;event-header name=&quot;contact&quot;&gt;&lt;![CDATA[&quot;user&quot; &lt;sip:{{username}}@{{ip}}:5348;fs_path=&lt;sip:192.168.1.50;lr;received=sip:{{ip}}:5348&gt;&gt;]]&gt;&lt;/event-header&gt;
+        &lt;event-header name=&quot;username&quot;&gt;{{username}}&lt;/event-header&gt;
+        &lt;event-header name=&quot;realm&quot;&gt;{{realm}}&lt;/event-header&gt;
+      &lt;/freeswitch&gt;
+      &lt;os event=&quot;os_command.registrar.local_summary.{{uuid}}&quot;&gt;
+        &lt;![CDATA[
+          /opt/whistle/2600hz-platform/utils/command_bridge/command_bridge registrar_maintenance local_summary {{realm}} {{username}}
+        ]]&gt;
+      &lt;/os&gt;
+      &lt;expect binding=&quot;os_command.registrar.local_summary.{{uuid}}&quot;&gt;
+        &lt;![CDATA[
+          Realm: {{realm}}
+          Username: {{username}}
+          Contact: &quot;user&quot; sip:{{username}}@{{ip}}:5348;fs_path=sip:192.168.1.50;lr;received=sip:{{ip}}:5348
+        ]]&gt;
+      &lt;/expect&gt;
+    &lt;/sequence&gt;
+  &lt;/sequences&gt;
+&lt;/workorder&gt;</pre>
+</div></div>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

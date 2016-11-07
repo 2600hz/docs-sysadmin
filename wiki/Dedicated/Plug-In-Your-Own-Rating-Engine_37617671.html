@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Plug In Your Own Rating Engine</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="15106056.html">Billing, Services and Limits</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Call-Rating_15106063.html">Call Rating</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Plug In Your Own Rating Engine
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> James Aimonetti</span>, last modified on Aug 13, 2013
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h3 id="PlugInYourOwnRatingEngine-BuildYourOwnRatingEngine">Build Your Own Rating Engine</h3><p>Here are the steps to easily add your own rating engine to Kazoo (and bypass the HotOrNot whapp).</p><h4 id="PlugInYourOwnRatingEngine-HowcallsareratedinKazoo">How calls are rated in Kazoo</h4><p>When a new call is received in the ecallmgr application, a rating request is published onto the AMQP bus. Any application bound for those rate request events will receive the JSON payload and can optionally respond with a rate response. The first valid response received will be the rate applied to the call.</p><h4 id="PlugInYourOwnRatingEngine-RateRequestJSON">Rate Request JSON</h4><p>Kazoo generates a rate request payload published onto the <strong>callmgr</strong> exchange with a routing key of <strong>rate.req</strong>. The JSON payload will look something along the lines of:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Rate Request JSON</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence"> {&quot;To-DID&quot;:&quot;+14158867900&quot;
+  ,&quot;Call-ID&quot;:&quot;abc123def456ghi789&quot;
+  ,&quot;Event-Category&quot;:&quot;rate&quot;
+  ,&quot;Event-Name&quot;:&quot;req&quot;
+  ,&quot;Msg-ID&quot;:&quot;msg_id_9876&quot;
+  ,&quot;Server-ID&quot;:&quot;amqp_queue_name&quot;
+  ,&quot;App-Name&quot;:&quot;sending_app&quot;
+  ,&quot;App-Version&quot;:&quot;sending_app_ver&quot;
+  ,&quot;Node&quot;:&quot;ecallmgr@host.com&quot;
+  ,&quot;Account-ID&quot;:&quot;qwerty1234567890&quot;
+  ,&quot;From-DID&quot;:&quot;+14158867915&quot;
+  ,&quot;Options&quot;:[]
+  ,&quot;Direction&quot;:&quot;inbound&quot;
+}</pre>
+</div></div><h5 id="PlugInYourOwnRatingEngine-DescriptionoftheRateRequestJSONpayload">Description of the Rate Request JSON payload</h5><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Value</th><th class="confluenceTh">Required</th></tr><tr><td class="confluenceTd">To-DID</td><td class="confluenceTd">The dialed number</td><td class="confluenceTd">The dialed number off the INVITE</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Call-ID</td><td class="confluenceTd">The unique identifier for this channel</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Event-Category</td><td class="confluenceTd">The class of event</td><td class="confluenceTd">rate</td><td class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">Event-Name</td><td colspan="1" class="confluenceTd">The name of the event</td><td colspan="1" class="confluenceTd">req</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">Msg-ID</td><td colspan="1" class="confluenceTd">The ID of this rate request message</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">Server-ID</td><td colspan="1" class="confluenceTd">The name of the AMQP queue of the sender, empty if no response is needed</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">App-Name</td><td colspan="1" class="confluenceTd">The name of the application that published the request</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">App-Version</td><td colspan="1" class="confluenceTd">The version of the application that published the request</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">Node</td><td colspan="1" class="confluenceTd">The Erlang VM node name of the sender</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Options</td><td class="confluenceTd">Arbitrary list of strings set by sender, usually used by receiving to filter list of applicable rates</td><td class="confluenceTd">List of strings</td><td class="confluenceTd">No</td></tr><tr><td colspan="1" class="confluenceTd">Direction</td><td colspan="1" class="confluenceTd">The direction of the call, relative to Kazoo; &quot;outbound&quot; meaning from Kazoo to the endpoint and &quot;inbound&quot; meaning from the endpoint to Kazoo</td><td colspan="1" class="confluenceTd">&quot;inbound&quot; or &quot;outbound&quot;</td><td colspan="1" class="confluenceTd">No</td></tr><tr><td colspan="1" class="confluenceTd">Account-ID</td><td colspan="1" class="confluenceTd">The Kazoo account ID associated with this cal (if any)</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">No</td></tr><tr><td colspan="1" class="confluenceTd">From-DID</td><td colspan="1" class="confluenceTd">The Caller ID number, if available</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd">No</td></tr></tbody></table></div><h4 id="PlugInYourOwnRatingEngine-RouteResponseJSON"><span style="color: rgb(0,0,0);">Route Response JSON</span></h4><p><span style="color: rgb(0,0,0);"> </span>Any application which receives rate requests and wishes to respond will need to publish the response to the <strong>targeted</strong> exchange using the Server-ID from the rate request payload as the routing key. Assuming the request above, a potential response would be constructed thusly:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Rate Response JSON</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence"> {&quot;Rate&quot;:&quot;0.05&quot;
+  ,&quot;Call-ID&quot;:&quot;abc123def456ghi789&quot;
+  ,&quot;Rate-Increment&quot;:&quot;60&quot;
+  ,&quot;Rate-Minimum&quot;:&quot;60&quot;
+  ,&quot;Discount-Percentage&quot;:&quot;0&quot;
+  ,&quot;Surcharge&quot;:&quot;1.00&quot;
+  ,&quot;Rate-Name&quot;:&quot;expensive_rate&quot;
+  ,&quot;Base-Cost&quot;:&quot;1.05&quot;
+  ,&quot;Msg-ID&quot;:&quot;msg_id_9876&quot;
+  ,&quot;Update-Callee-ID&quot;:true
+  ,&quot;Event-Category&quot;:&quot;rate&quot;
+  ,&quot;Event-Name&quot;:&quot;resp&quot;
+  ,&quot;App-Name&quot;:&quot;hotornot&quot;
+  ,&quot;App-Version&quot;:&quot;1.0.0&quot;
+  ,&quot;Server-ID&quot;:&quot;&quot;
+  ,&quot;Node&quot;:&quot;whistle_apps@host.com&quot;
+}</pre>
+</div></div><h5 id="PlugInYourOwnRatingEngine-DescriptionoftheRateResponseJSONpayload"><span style="color: rgb(61,61,61);">Description of the Rate Response JSON payload</span></h5><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Description</th><th class="confluenceTh">Value</th><th class="confluenceTh">Required</th></tr><tr><td class="confluenceTd"><pre>Rate</pre></td><td class="confluenceTd">The cost of the rate</td><td class="confluenceTd">Float</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Call-ID</td><td class="confluenceTd">Identifier of the channel</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Event-Category</td><td class="confluenceTd">Class of message</td><td class="confluenceTd">rate</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Event-Name</td><td class="confluenceTd">Name of the message type</td><td class="confluenceTd">resp</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">App-Name</td><td class="confluenceTd">Name of the responding application</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">App-Version</td><td class="confluenceTd">Version of the responding application</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Msg-ID</td><td class="confluenceTd">The ID from the request payload that identifies the request message</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Node</td><td class="confluenceTd">The responder's node (useful mostly for debugging)</td><td class="confluenceTd">String</td><td class="confluenceTd">Yes</td></tr><tr><td colspan="1" class="confluenceTd">Server-ID</td><td colspan="1" class="confluenceTd">Empty, since no response to this message will be sent</td><td colspan="1" class="confluenceTd">&quot;&quot;</td><td colspan="1" class="confluenceTd">Yes</td></tr><tr><td class="confluenceTd">Rate-Increment</td><td class="confluenceTd">How many seconds before Rate is applied</td><td class="confluenceTd">Integer, defaults to 60</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Rate-Minimum</td><td class="confluenceTd">Minimum number of seconds to bill the call for, regardless of call duration</td><td class="confluenceTd">Integer, defaults to 60</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Discount-Percentage</td><td class="confluenceTd">Apply a discount to the cost of the call</td><td class="confluenceTd">Integer</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Surcharge</td><td class="confluenceTd">Flat amount to bill the call (in addition to per-minute charges)</td><td class="confluenceTd">Float</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Rate-Name</td><td class="confluenceTd">Arbitrary name for the rate</td><td class="confluenceTd">String</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Base-Cost</td><td class="confluenceTd">(Rate * (Rate-Minimum div 60)) + Rate-Surcharge</td><td class="confluenceTd">Float</td><td class="confluenceTd">No</td></tr><tr><td class="confluenceTd">Update-Callee-ID</td><td class="confluenceTd">If true, will prepend the Callee ID name with the rate of the call</td><td class="confluenceTd">Boolean, defaults to false</td><td class="confluenceTd">No</td></tr></tbody></table></div><p><span style="color: rgb(61,61,61);"><br/></span></p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The Rate* fields (Rate, Rate-Increment, etc) will be set on the channel and available in the &quot;Custom-Channel-Vars&quot; of the resulting CDR.</p></div></div><p><span style="color: rgb(61,61,61);"><br/></span></p><h5 id="PlugInYourOwnRatingEngine-CalculatingtheCostoftheCall"><span style="color: rgb(61,61,61);font-weight: bold;line-height: 23.0px;">Calculating the Cost of the Call</span></h5><p><span style="color: rgb(61,61,61);"><span style="line-height: 23.0px;"><strong>A simple formula is used to calculate the cost of the call:</strong></span></span></p><p> </p><p> </p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">R = Rate
+RI = Rate-Increment
+RM = Rate-Minimum
+Sur = Surcharge
+Secs = Billing Seconds
+ 
+When RM &lt; 60 =&gt; Sur + ((RM / 60) * R)
+When RM &gt;= 60 =&gt; Sur + ((RM / 60) * R) + ceiling((Secs - RM) / RI) * ((RI / 60) * R)))</pre>
+</div></div><p> </p><p> </p><p> </p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

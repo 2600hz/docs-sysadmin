@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Login Works but No Apps Appear</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="4194509.html">Kazooui: Our Pre-built GUI</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Troubleshooting-Winkstart_7504153.html">Troubleshooting Winkstart</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Login Works but No Apps Appear
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span>, last modified by <span class='editor'> Rachel Lee</span> on Aug 06, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>If you login to your Kazoo UI but no applications appear at the top of the page, your user or your config.js have mismatched API URLs. For security and validation, when you login the system checks to make sure the API you are logging into matches the API you are requesting apps from. If they don't, things won't work right (without special CORS headers - that's an advanced topic).</p><p>To fix this issue, follow these steps.</p><h2 id="LoginWorksbutNoAppsAppear-Step1:IdentifytheAuthenticationURL">Step 1: Identify the Authentication URL</h2><p>In your Kazoo UI's HTML folders there is a folder named config and a file named config.js. Inside that file is a configuration section which includes a default auth app which specifies the API you are authenticating against.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">    winkstart.apps = {
+        &#39;auth&#39; : {
+            api_url: &#39;http://YOUR.SERVER.NAME.COM:8000/v1&#39;
+        }
+    };
+
+</pre>
+</div></div><p>Note the api_url that is set.</p><p> </p><h2 id="LoginWorksbutNoAppsAppear-Step2:IdentifytheUser&#39;sApps">Step 2: Identify the User's Apps</h2><p>For each user that logs in they have a configured list of apps. These apps also utilize an API URL. If you are running Kazoo UI on your own server you'll want users to be utilizing the same API they authenticated with.</p><p>To find the user's app list, take the following steps:</p><ol><li>Login to Futon (your CouchDB's graphical user interface) on port 5984 on your server.   <a href="http://YOUR.SERVER.NAME.COM:5984/_utils/" class="external-link" rel="nofollow">http://YOUR.SERVER.NAME.COM:5984/_utills/</a><br/><br/></li><li>Click on the correct account ID to enter your account database. Accounts are formatted account/22/33/4567890456789045678904567890<br/><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/7504155/7634951.png" data-image-src="attachments/7504155/7634951.png" data-unresolved-comment-count="0" data-linked-resource-id="7634951" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen shot 2012-05-17 at 10.44.12 PM.png" data-base-url="https://2600hz.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="7504155" data-linked-resource-container-version="7"></span><br/><br/><br/></li><li>Once inside the account database, on the top right corner of the screen is a drop-down with all the available views. Click on the drop-down and select <strong>users</strong> / <strong>crossbar<br/><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/7504155/7634952.png" data-image-src="attachments/7504155/7634952.png" data-unresolved-comment-count="0" data-linked-resource-id="7634952" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen shot 2012-05-17 at 10.44.31 PM.png" data-base-url="https://2600hz.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="7504155" data-linked-resource-container-version="7"></span><br/><br/><br/></strong></li><li>Verify that the API URL for your App matches the API URL you logged in with (in Step 1) <br/><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/7504155/7634955.png" data-image-src="attachments/7504155/7634955.png" data-unresolved-comment-count="0" data-linked-resource-id="7634955" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen shot 2012-05-17 at 11.11.28 PM.png" data-base-url="https://2600hz.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="7504155" data-linked-resource-container-version="7"></span></li></ol><p> </p><p><strong>If you make a change, make sure you logout and log back in as the list of Apps is cached on your browser.</strong></p><p><strong><br/></strong></p><p> </p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can add the complete list of apps manually, like this:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+   &quot;voip&quot;: {
+       &quot;label&quot;: &quot;Hosted PBX&quot;,
+       &quot;icon&quot;: &quot;phone&quot;,
+       &quot;api_url&quot;: &quot;http://YOUR.SERVER.NAME.COM:8000/v1&quot;,
+       &quot;ui_flags&quot;: {
+           &quot;provision_admin&quot;: true,
+           &quot;super_duper_admin&quot;: true
+       },
+       &quot;default&quot;: false
+   },
+   &quot;pbxs&quot;: {
+       &quot;label&quot;: &quot;PBX Connector&quot;,
+       &quot;icon&quot;: &quot;pbx&quot;,
+       &quot;api_url&quot;: &quot;http://YOUR.SERVER.NAME.COM:8000/v1&quot;,
+       &quot;default&quot;: false
+   },
+   &quot;numbers&quot;: {
+       &quot;label&quot;: &quot;Number Manager&quot;,
+       &quot;icon&quot;: &quot;menu1&quot;,
+       &quot;api_url&quot;: &quot;http://YOUR.SERVER.NAME.COM:8000/v1&quot;,
+       &quot;default&quot;: false
+   },
+   &quot;accounts&quot;: {
+       &quot;label&quot;: &quot;Accounts&quot;,
+       &quot;icon&quot;: &quot;account&quot;,
+       &quot;api_url&quot;: &quot;http://YOUR.SERVER.NAME.COM:8000/v1&quot;,
+       &quot;default&quot;: true
+   },
+   &quot;developer&quot;: {
+       &quot;id&quot;: &quot;developer&quot;,
+       &quot;label&quot;: &quot;Developer&quot;,
+       &quot;icon&quot;: &quot;connectivity&quot;,
+       &quot;desc&quot;: &quot;API Developer Tool&quot;,
+       &quot;api_url&quot;: &quot;http://YOUR.SERVER.NAME.COM:8000/v1&quot;,
+       &quot;default&quot;: false
+   }
+}</pre>
+</div></div></div></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504155/7634951.png">Screen shot 2012-05-17 at 10.44.12 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504155/7634953.png">Screen shot 2012-05-17 at 10.44.31 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504155/7634952.png">Screen shot 2012-05-17 at 10.44.31 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504155/7634954.png">Screen shot 2012-05-17 at 10.45.30 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7504155/7634955.png">Screen shot 2012-05-17 at 11.11.28 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

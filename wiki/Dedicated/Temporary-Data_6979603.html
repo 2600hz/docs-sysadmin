@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Temporary Data</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="4194375.html">Learn More: Platform Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Temporary Data
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span>, last modified on May 13, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Some high-performance components in telephony require temporary storage. To scale, they require partitioning and clustering as well. And finally, the data must be consistent across the cluster.</p><p><strong>This document describes our research in selecting an in-memory data store for this purpose.<br/></strong></p><p><strong><br/></strong></p><p><strong>Use Cases:</strong></p><p>* Call Center</p><p>    - Keep track of who is logged in/out across the cluster</p><p>    - Keep track of what calls are in queue (not handled)</p><p>    - Keep track of last call time</p><p>    - Keep track of real-time incremental stats / trends</p><p>* Trunk Store</p><p>    - Current account balance (doing this on disk probably won't scale long-term)</p><p>    - # of in-use circuits</p><p>* Presence</p><p>    - bleh</p><p>* Troubleshooting</p><p>    - Last X registrations</p><p>    - Last Y calls</p><p>* System State</p><p>    - Number of calls up, per account</p><p>    - Number of calls up total</p><p>* Billing</p><p>    - $s made today</p><p>    - $s spent (hard costs) today</p><p> </p><p> </p><p> </p><p><strong>General Requirements:</strong></p><p>    - If a server crashes or DC goes down, state is retained</p><p>    - Quick read/writes for constant activity</p><p> </p><p> </p><p><strong>What the above have in common:</strong></p><p>    - Need to store replicas across different data centers</p><p>    - Data is transient (comes &amp; goes, often temporary / never stored)</p><p>    - Need to partition data</p><p>    - Needs to be as consistent as possible based on above</p><p>    - Needs to be fast</p><p>    - Automatic recovery abilities</p><p>    - Automatic partition</p><p>    - Still need this to fit on embedded hardware someday so small is the goal, or small memory footprints</p><p> </p><p> </p><p> </p><p><strong>Requirements:</strong></p><p>- Write-heavy</p><p>- Need to be able to search primary keys</p><p> </p><p> </p><h3 id="TemporaryData-Choices:"><strong>Choices:</strong></h3><p> </p><p><strong>Karl</strong></p><p>- CouchBase</p><p>    You must declare why your solution is better then James's.</p><p> </p><p>- Redis</p><p> </p><p><strong>James</strong></p><p>- Scalaris: James</p><p>    You must declare why your solution is better then Karl's.</p><p> </p><p>- Riak Database</p><p>    Pros: Erlang Natively, Handles the Distribution Assignments of Partitioned Data</p><p>    Cons: Persistent Store, not really designed for temporary</p><p> </p><p><strong>Jon: You are the judge!</strong></p><p> </p><p><strong>How to Research:</strong></p><p>* Email friends and family</p><p>* Email users of this for support of your points</p><p>* Read / skim the docs</p><p>* Install a test</p><p> </p><p><strong>THINGS YOU DON'T NORMALLY THINK ABOUT AND NEED TO:</strong></p><p>* Idiots must be able to setup and view status and restart and reboot and manage a node on the cluster or a cluster</p><p>    * I don't care if they can see the data inside the cluster, that's for our software to do.</p><p>* Least amount of extra cruft on install (i.e. avoid Java, avoid 8283MB installs, large memory footprint, etc.)</p><p>* We must be able to upgrade without taking down the cluster</p><p>* Keeping everything in Erlang is nice :-)</p><p> </p><p> </p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

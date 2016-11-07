@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Database Health</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-and-Maintenance_4194538.html">Monitoring and Maintenance</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Database Health
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span>, last modified by <span class='editor'> Justin B. Watson</span> on Oct 27, 2013
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Kazoo utilizes Cloudant's BigCouch database software. BigCouch allows for clustering the powerful Apache CouchDB product. This is what allows your cluster to scale across multiple servers, zones and continents.</p><p>BigCouch is a NoSQL, append-only database. Information is never deleted when updated or changed. Instead, revisions are continuously written to an ever-expanding file. Previous versions of data are always accessible.</p><h2 id="DatabaseHealth-Compaction">Compaction</h2><p>Writing to an ever-expanding file will eventually exhaust all your diskspace. Therefore, a process known as compaction (which is really just a glorified database copy) is performed periodically. During this process, a database's latest non-deleted contents are copied to a new file, resulting in only the latest data being preserved. When the copy is complete, the old database is destroyed and the new, smaller (compact) database takes the place of the old database. This all happens seamlessly once compaction is started.</p><p>Compaction should be performed continuously, preferably during low-activity times, on any CouchDB database. Compaction must be started by the software application using the database.</p><p>Kazoo normally takes care of compaction for you, running continuously in the background and traversing each database in the system periodically, making the contents smaller as the cluster grows.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p class="p1">When using the commands below, if you are working with a specific account database, the account ID and database name must be entered as: </p><p class="p1">account/ab/cd/3084a2394ddc820482b09420</p></div></div><p> </p><h2 id="DatabaseHealth-CheckingCompactionisWorking">Checking Compaction is Working</h2><p>There are two ways to see if compaction is running. First, check the config:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup whapps_config get whistle_couch compact_automatically</pre>
+</div></div><p><br/>Then check to see if the compactor process is running:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup couch_compactor_fsm status</pre>
+</div></div><p><br/>You should see a response like</p><p>{ok,[{node,&lt;&lt;&quot;bigcouch@db001-abc-server.2600hz.com&quot;&gt;&gt;},<br/> {db,&lt;&lt;&quot;offnet&quot;&gt;&gt;},<br/> {wait_left,9178},<br/> {queued_jobs,none}]}</p><p>This is good news! Automatic compaction is running. Based on the above, it's working on db001-abc-server.2600hz.com and currently compacting the offnet database.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If instead of a pid you saw 'undefined', then its not running.</p></div></div><p> </p><h2 id="DatabaseHealth-ConfiguringCouchCompaction">Configuring Couch Compaction</h2><p>Couch compaction is set as a variable in the system configuration whistle_couch document. You will need to have &quot;compact_automatically&quot; : &quot;true&quot; in your whistle_couch document, as such:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+   &quot;_id&quot;: &quot;whistle_couch&quot;,
+   &quot;default&quot;: {
+       &quot;compact_automatically&quot;: true,
+       &quot;sleep_between_poll&quot;: 5000,
+       &quot;sleep_between_compaction&quot;: 60000,
+       &quot;max_wait_for_compaction_pid&quot;: 360000,
+       &quot;bigcouch_cookie&quot;: &quot;couch_cookie&quot;
+   }
+}</pre>
+</div></div><p> </p><p>If you change the compact_automatically value you'll need to reload the system configuration documents that are in-memory and then restart Couch Compactor:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup whapps_config flush
+
+sup couch_compactor_fsm stop_auto_compaction
+sup couch_compactor_fsm start_auto_compaction</pre>
+</div></div><p> </p><h2 id="DatabaseHealth-ForcingCompactionManually">Forcing Compaction Manually</h2><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You can not manually compact a database while auto compaction is running. If you must compact a database manually, you must first stop auto-compaction with</p><p>sup couch_compactor_fsm stop_auto_compaction</p><p>sup couch_compactor_fsm cancel_all_jobs</p><p> </p><p>Make sure that worked:</p><p>sup couch_compactor_fsm status</p><p>You should see {ok, ready}</p><p> </p><p>Then run your manual compaction. When manual compaction is complete, re-start auto-compaction.</p></div></div><p> </p><p>Sometimes you have a lot of databases and one has grown too big too fast, or some other emergencies prompts manual compaction. You can run one time compaction with one of these options (only choose one):<br/><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">1&gt; sup couch_compactor_fsm compact_db &quot;some_db&quot;     # compact the DB &quot;some_db&quot; across all known DB servers
+ 
+2&gt; sup couch_compactor_fsm compact_db &quot;bigcouch@db1.somehost.com &quot;some_db&quot;     # compact the DB &quot;some_db&quot; on the server db1.somehost.com
+ 
+3&gt; sup couch_compactor_fsm compact_node &quot;bigcouch@db1.somehost.com&quot;       # compact the all DBs on the DB server
+
+ 
+You can verify your job has been queued by running:
+ 
+4&gt; sup couch_compactor_fsm status</pre>
+</div></div><h2 id="DatabaseHealth-MonitoringCouchCompactor">Monitoring Couch Compactor</h2><p>To determine what the compactor is up to, you can grep the logs for either &quot;couch_compactor&quot; or the pid # from the above commands.</p><p>The speed of compaction is a function of the size of the DB shard on disk, plus the pause time in between shard compactions. It defaults are to poll every five seconds while compacting a shard, then to wait 30 seconds until starting to compact the next shard (it defaults to 60 seconds, check system_config for values on your system).</p><h2 id="DatabaseHealth-TroubleshootingTheCompactor">Troubleshooting The Compactor</h2><h4 id="DatabaseHealth-ImproperCookie">Improper Cookie</h4><p>If you receive an error like:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">1&gt; couch_compactor_fsm:compact_db(&lt;&lt;&quot;bigcouch@db.somehost.com&quot;&gt;&gt;,&lt;&lt;&quot;some_db&quot;&gt;&gt;).
+** exception error: no match of right hand side value {error,{conn_failed,{error,econnrefused}}}
+     in function  couch_util:get_new_conn/3
+     in call from couch_compactor:get_conns/5
+     in call from couch_compactor:compact_db/2</pre>
+</div></div><p>This means the cookie we have store for your Bigcouch nodes is wrong. On your DB server, in /opt/bigcouch/etc/vm.args, there's a &quot;-setcookie YOUR_COOKIE&quot; line that you will need to look up. Once you have that value, the following steps should get you going:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sup whapps_config get whistle_couch bigcouch_cookie         # returns the wrong cookie
+&lt;&lt;&quot;monster&quot;&gt;&gt;
+
+sup whapps_config set whistle_couch bigcouch_cookie &quot;YOUR_COOKIE&quot;        # Fix the cookie
+{ok,...}
+
+sup whapps_config get whistle_couch bigcouch_cookie           # returns the right cookie, confirming the fix!
+&lt;&lt;&quot;YOUR_COOKIE&quot;&gt;&gt;</pre>
+</div></div><p> </p><h4 id="DatabaseHealth-IgnorableWarning">Ignorable Warning</h4><p>When you run the compaction commands manually, or with the whapps shell in dev mode, you may see warnings like:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">5&gt; couch_compactor_fsm:compact_db(&lt;&lt;&quot;bigcouch@db01.somehost.com&quot;&gt;&gt;,&lt;&lt;&quot;some_db&quot;&gt;&gt;).
+=ERROR REPORT==== 16-May-2012::23:39:09 ===
+global: &#39;whistle_con_1337211446@whapps.somehost.com&#39; failed to connect to &#39;bigcouch@db01.somehost.com&#39;
+=ERROR REPORT==== 16-May-2012::23:39:09 ===
+global: &#39;whistle_con_1337211446@whapps.somehost.com&#39; failed to connect to &#39;bigcouch@db02.somehost.com&#39;
+=ERROR REPORT==== 16-May-2012::23:39:10 ===
+global: &#39;whistle_con_1337211446@whapps.somehost.com&#39; failed to connect to &#39;bigcouch@db03.somehost.com&#39;
+=ERROR REPORT==== 16-May-2012::23:39:10 ===
+global: &#39;whistle_con_1337211446@whapps.somehost.com&#39; failed to connect to &#39;bigcouch@db04.somehost.com&#39;
+done
+
+</pre>
+</div></div><p>These are mostly-ignorable errors; if compaction runs despite their presence, they are of little consequence.</p><p> </p><h2 id="DatabaseHealth-CouchCompactorInternals">Couch Compactor Internals</h2><p>Currently, Couch Compactor is a long-running process that runs constantly through the list of known BigCouch nodes, locates the names of the shards within each node, locates the names of the design documents in each database, and chooses whether to compact said database or view based on two criteria: minimum disk size, and ratio of disk size to dataset size.</p><p>The size of a database varies between the actual dataset and the size the database occupies on disk. This is because old revisions of documents are not removed from disk until a compaction has been triggered. As such, it is not uncommon to see a 10MB dataset occupy 5GB of disk space (if new documents are frequently created or current documents updated frequently, for instance). Compaction removes the stale revisions from disk, freeing that space back up to the operating system.</p><p>The compaction routine can be manually triggered using the <a href="http://couch_compactorforce_compaction" class="external-link" rel="nofollow">couch_compactor_fsm:force_compaction/{0,2</a>} function call. <a href="http://couch_compactorforce_compaction" class="external-link" rel="nofollow">couch_compactor_fsm:force_compaction/0</a> is the equivalent of calling <a href="http://couch_compactorforce_compaction%280,1%29" class="external-link" rel="nofollow">couch_compactor_fsm:force_compaction(0,1)</a>. The two parameters are the minimum disk space and the ratio of disk-space/dataset. If set higher than 0, minimum disk space, or MDS, disregards any database or design that occupies less than the MDS. This is a simple way to ignore trivial databases, especially ones with a minimum number of documents and changes.</p><p>The more interesting parameter is the ratio of disk-space/dataset. The more a database changes, the larger the ratio becomes, and the more disk space that can be reclaimed through compaction. Not much benefit is gained by compacting a database with a ratio of 2, but a ratio of 500 suddenly becomes quite meaningful in terms of disk space freed.</p><p>The force_compaction/2 allows you to play with the settings to tailor the impact of a compaction run (running compaction is not without cost, in CPU and temporary disk space utilization). This force_compaction/2 function can be used to reclaim disk space on a busy BigCouch node that is reaching critical levels in free disk space.</p><p>If you want to compact a single database, you can call <a href="http://couch_compactorcompact_db" class="external-link" rel="nofollow">couch_compactor_fsm:compact_db/1</a>, passing the unencoded (so &lt;&lt;&quot;foo/bar&quot;&gt;&gt; instead of &lt;&lt;&quot;foo%2Fbar&quot;&gt;&gt;) version of the database (the compaction will be run with MDS=0 and ratio=1).</p><p>In all compaction routines, there is a self-imposed, random delay of 1-10 seconds between compactions, so as to not overload a node with requests. A compaction includes compacting the database, the views, and the view index (see <a class="external-link" href="http://wiki.apache.org/couchdb/Compaction#View_compaction" rel="nofollow">CouchDB compaction</a> for more).</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="16" width="16" src="http://wiki.2600hz.org/images/icons/emoticons/warning.gif" data-image-src="http://wiki.2600hz.org/images/icons/emoticons/warning.gif"></span></td><td class="confluenceTd"><p>For maximum effectiveness, a little setup is necessary to enable couch_compactor to peek behind the HAProxy veil. There is a config paramater (settable at runtime as well) in <a href="http://wiki.2600hz.org/display/docs/Whistle+Couch+Startup.Config" title="Whistle Couch Startup.Config" class="external-link" rel="nofollow">whistle_couch/priv/startup.config</a> called 'bigcouch_cookie'. Set this config parameter to the cookie you setup your BigCouch nodes with (or set it via <a href="http://couch_mgrset_node_cookie" class="external-link" rel="nofollow">couch_mgr:set_node_cookie/1</a>), and couch_compactor will be able to directly connect to the individual BigCouch nodes to compact their sharded databases.</p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

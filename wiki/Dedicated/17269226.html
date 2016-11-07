@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Faxing (T.37 and T.38)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="17269223.html">Learn more: Telecom</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Faxing (T.37 and T.38)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span> on Oct 03, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Faxing(T.37andT.38)-asdf">asdf</h2><p>asdfsafasdfasfd</p><p> </p><h2 id="Faxing(T.37andT.38)-StoreandForward(T.37)">Store and Forward (T.37)</h2><p>adsasdf</p><p> </p><p class="p1">Ways to transmit a Fax over IP:</p><p class="p2"> </p><p class="p1">PCMU<span class="Apple-tab-span"> </span>&lt;-- Plain old audio, uncompressed (64k) - regular phone line.</p><p class="p1"><span class="Apple-tab-span"> </span>PCMU is generally OK if you can guarantee the audio signal is consistent around 200-300ms latency</p><p class="p2"> </p><p class="p1">T.38 - At least two sides must understand T.38 to use it</p><p class="p1"><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>Negotiation was be successful between the two sides. Who negotiates first?</p><p class="p1"><span class="Apple-tab-span"> </span>v0</p><p class="p1"><span class="Apple-tab-span"> </span>v1</p><p class="p1"><span class="Apple-tab-span"> </span>v2</p><p class="p1"><span class="Apple-tab-span"> </span>v3</p><p class="p1"><span class="Apple-tab-span"> </span>ECM</p><p class="p1"><span class="Apple-tab-span"> </span>v17</p><p class="p1"><span class="Apple-tab-span"> </span>Max Speed (14400/9600)</p><p class="p1"><span class="Apple-tab-span"> </span>Redundancy Feature</p><p class="p2"> </p><p class="p2"> </p><p class="p2"> </p><p class="p1">FAX<span class="Apple-tab-span"> </span>&lt;-&gt;<span class="Apple-tab-span"> </span>ATA<span class="Apple-tab-span"> </span>&lt;-&gt; CLOUD<span class="Apple-tab-span"> </span>&lt;-&gt;<span class="Apple-tab-span"> </span>ATA/FAX</p><p class="p1"><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v1<span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v1</p><p class="p1"><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v2<span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v2</p><p class="p1"><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v3<span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>v3 (is a piece of shit)</p><p class="p2"> </p><p class="p1">STEPS FOR T.38 TO WORK:</p><p class="p1">1. Two devices must be able to hear each other initially via voice (to detect the tones)</p><p class="p1"><span class="Apple-tab-span"> </span>Best way to test: CALL THE FAX MACHINE. Also, have them call you from the fax machine if possible</p><p class="p1"><span class="Apple-tab-span"> </span>CLUE: No t38 message in the logs AND hang up within 15-30 seconds</p><p class="p1"><span class="Apple-tab-span"> </span>CATCH: Many fax machines don't answer for 5 rings, and your calling timeout might be too long</p><p class="p1"><span class="Apple-tab-span"> </span>You'll see NO_ANSWER in the FreeSWITCH log</p><p class="p2"> </p><p class="p1">2. Two devices must be able to negotiate T38 either with each other or with the upstream phone company</p><p class="p1"><span class="Apple-tab-span"> </span>(You won't know who's on the other side, and that's OK)</p><p class="p1"><span class="Apple-tab-span"> </span>You will see a log entry in the FS log that a negotiation of T38 was attempted</p><p class="p1"><span class="Apple-tab-span"> </span>You will then see a reply from the other side of either Not Acceptable Here / Incompatible Destination OR &quot;OK&quot;</p><p class="p1"><span class="Apple-tab-span"> </span>In addition, the OK will come back with the confirmed parameters</p><p class="p2"> </p><p class="p1">3. Two devices </p><p class="p2"> </p><p class="p2"> </p><p class="p1">For Testing:</p><p class="p1">1. Need One (1) Physical Fax that can Send &amp; Receive</p><p class="p1">2. Need One Virtual or Physical Fax that can Send &amp; Receive</p><p class="p1">3. PATIENCE!</p><p class="p1">4. Test PCMU. Should work over fast connection but may not always - The most optimized services should work, so for example RingCentral &lt;-&gt; Our Fax to Email (server) Service. Probably won't work to a real fax machine</p><p class="p1">5. Test Two-way Audio</p><p class="p1">6. Test Long/Complex Faxes<span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>&lt;-- most people care less</p><p class="p1">7. Test Short/Simple Faxes<span class="Apple-tab-span"> </span><span class="Apple-tab-span"> </span>&lt;-- most people care</p><p class="p1">8. Test Two Model ATAs :-) and no more then two models.</p><p class="p1">9. Test Two Fax Machines. Go on Craigslist and buy the worst crappiest one you can find</p><p class="p1">10. Test error conditions and how OUR software handles them</p><p class="p1">11. Inspect quality for lost rows/lines</p><p class="p1">12. Someday test store &amp; forward</p><p class="p1">13. Test Failback abilities on our side</p><p class="p2"> </p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

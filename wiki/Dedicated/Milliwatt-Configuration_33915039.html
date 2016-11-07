@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Milliwatt Configuration</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Kazoo-Apps_29786224.html">Kazoo Apps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Milliwatt_33915037.html">Milliwatt</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Milliwatt Configuration
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Peter Defebvre</span>, last modified on May 28, 2014
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="MilliwattConfiguration-ConfigurationDocument">Configuration Document</h1><p> </p><p>Create a document (with &quot;milliwatt&quot; for id) in the system_config database.</p><h3 id="MilliwattConfiguration-BaseParameters"><span>Base Parameters</span></h3><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>echo</strong></p>
+</div>
+</td><td class="confluenceTd"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>duration</strong></p>
+</div>
+</td><td style="text-align: left;margin-left: 30.0px;" class="confluenceTd"><span>This sets the duration of the echo action. The value is in milliseconds. </span><p style="text-align: left;"> </p><div id="expander-1921235908" class="expand-container"><div id="expander-control-1921235908" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-1921235908" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;duration&quot; : &quot;5000&quot;</pre>
+</div></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>caller_id</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd"><span>This sets the caller ids of the echo action. It means that any call made <strong>from</strong> theses numbers (or users) will be redirected to Milliwatt echo action.</span><p> </p><div id="expander-1122713379" class="expand-container"><div id="expander-control-1122713379" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-1122713379" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;caller_id&quot; : [&quot;4155555555&quot;, &quot;username&quot;]</pre>
+</div></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>number</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd"><span>This sets the number of the echo action. It means that any call made <strong>to</strong> these numbers will be redirected to Milliwatt echo action.</span><p> </p><div id="expander-133838471" class="expand-container"><div id="expander-control-133838471" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-133838471" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;number&quot; : [&quot;123456789&quot;, &quot;1011121314&quot;]</pre>
+</div></div></div></div></td></tr><tr><td colspan="2" class="confluenceTd"><div id="expander-206048703" class="expand-container"><div id="expander-control-206048703" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-206048703" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">&quot;echo&quot;: {
+	&quot;duration&quot;: &quot;5000&quot;,
+    &quot;caller_id&quot;: [
+		&quot;4155555555&quot;,
+		&quot;username&quot;
+	],
+	&quot;number&quot;: [
+		&quot;123456789&quot;
+	]
+}</pre>
+</div></div></div></div></td></tr></tbody></table></div></td></tr><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>tone</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd"><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>frequencies</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd"><span>This sets the frequencies used for the tone action.</span><p> </p><div id="expander-730361031" class="expand-container"><div id="expander-control-730361031" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-730361031" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;frequencies&quot; : [&quot;2600&quot;, &quot;2300&quot;]</pre>
+</div></div></div></div></td></tr><tr><td class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>duration</strong></p>
+</div>
+</td><td class="confluenceTd">This sets the duration of the tone action. The value is in milliseconds.<p> </p><div id="expander-305042937" class="expand-container"><div id="expander-control-305042937" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-305042937" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;duration&quot; : &quot;5000&quot;</pre>
+</div></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>caller_id</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd">This sets the caller ids of the tone action. It means that any call made <strong>from</strong> theses numbers (or users) will be redirected to Milliwatt tone action.<p> </p><div id="expander-1767087185" class="expand-container"><div id="expander-control-1767087185" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-1767087185" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;caller_id&quot; : [&quot;4155555555&quot;, &quot;username&quot;]</pre>
+</div></div></div></div></td></tr><tr><td colspan="1" class="confluenceTd"><div
+        class="parameterTitle"                 >
+    <p><strong>number</strong></p>
+</div>
+</td><td colspan="1" class="confluenceTd">This sets the number of the tone action. It means that any call made <strong>to</strong> these numbers will be redirected to Milliwatt tine action.<p> </p><div id="expander-1594530548" class="expand-container"><div id="expander-control-1594530548" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-1594530548" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence"> &quot;number&quot; : [&quot;123456789&quot;, &quot;1011121314&quot;]</pre>
+</div></div></div></div></td></tr><tr><td colspan="2" class="confluenceTd"><div id="expander-162432544" class="expand-container"><div id="expander-control-162432544" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">View Sample Code</span></div><div id="expander-content-162432544" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">&quot;tone&quot;: {
+	&quot;frequencies&quot;: [
+		&quot;2600&quot;
+	],
+	&quot;duration&quot;: &quot;5000&quot;,
+    &quot;caller_id&quot;: [
+		&quot;4155555555&quot;,
+		&quot;username&quot;
+	],
+	&quot;number&quot;: [
+		&quot;123456789&quot;
+	]
+}</pre>
+</div></div></div></div></td></tr></tbody></table></div></td></tr></tbody></table></div><p> </p><h2 id="MilliwattConfiguration-Example:">Example:</h2><div><span style="white-space: pre-wrap;"><span style="white-space: pre-wrap;"> </span></span><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: true; theme: Confluence" data-theme="Confluence">{
+   &quot;_id&quot;: &quot;milliwatt&quot;,
+   &quot;default&quot;: {
+       &quot;echo&quot;: {
+           &quot;duration&quot;: &quot;5000&quot;,
+           &quot;caller_id&quot;: [
+				&quot;username_echo&quot;
+           ],
+           &quot;number&quot;: [
+               &quot;5555555551&quot;
+           ]
+       },
+       &quot;tone&quot;: {
+           &quot;frequencies&quot;: [
+               &quot;2600&quot;
+           ],
+           &quot;duration&quot;: &quot;2000&quot;,
+           &quot;caller_id&quot;: [
+				&quot;username_tone&quot;
+           ],
+           &quot;number&quot;: [
+               &quot;5555555552&quot;
+           ]
+       }
+   }
+}</pre>
+</div></div></div>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

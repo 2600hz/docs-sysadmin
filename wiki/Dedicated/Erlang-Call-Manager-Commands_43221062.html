@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Erlang Call Manager Commands</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Monitoring-and-Maintenance_4194538.html">Monitoring and Maintenance</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Erlang Call Manager Commands
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span> on Oct 27, 2013
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p class="p1">Also, you are the only person receiving low_balance (code change).  I have also stopped the jonny5 reconciler:</p><p class="p2">·<span class="s1">         </span>sup jonny5_maintenance stop_reconciler</p><p class="p1"> </p><p class="p1">The following functions are now available for conferences:</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_details</p><p class="p1"> </p><p class="p1">To fix any errors there is also:</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance sync_conferences</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance sync_conferences freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_node_conferences freeswitch@server.com</p><p class="p1"> </p><p class="p1">This brings the complete list to:</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance add_fs_node freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance remove_fs_node freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance node_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance node_details</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance node_details freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance authz_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance channel_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance channel_summary freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance channel_details</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance channel_details 1913218612@192.168.1.133</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance  sync_channels</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance sync_channels freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_summary freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_details</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance conference_details b57f3183a8f11ba31b3b5163057e2adc</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance sync_conferences</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance sync_conferences freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_node_channels freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_node_conferences freeswitch@server.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_registrar</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_registrar bea1.sip.2600hz.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_registrar 105 bea1.sip.2600hz.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance registrar_summary</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance registrar_summary bea1.sip.2600hz.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance registrar_details</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance registrar_details bea1.sip.2600hz.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance registrar_details 105 bea1.sip.2600hz.com</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_authn</p><p class="p2">·<span class="s1">         </span>sup -necallmgr ecallmgr_maintenance flush_util</p><p class="p1"> </p><p class="p1"> </p><p class="p1"> </p><p class="p1"> </p><p class="p1"> </p><p class="p1"> </p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

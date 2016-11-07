@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kazoo Dedicated Cluster Guide : Call Rating</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Kazoo Dedicated Cluster Guide</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Home_47808640.html">Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Concepts_1638419.html">Advanced Concepts</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Build-Your-Own-Cloud-Platform_1638421.html">Build Your Own Cloud Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="15106056.html">Billing, Services and Limits</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Kazoo Dedicated Cluster Guide : Call Rating
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Darren Schreiber</span>, last modified by <span class='editor'> James Aimonetti</span> on Sep 14, 2012
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Kazoo provides a basic facility to load a rate-deck into the system for the purpose of rating each call. The rate is only utilized if the system determines the caller does not have any flat-rate services available for the number being dialed.</p><ul style="list-style-type: square;"><li>How to load the rate deck</li><li>How to test the rate deck (if possible)</li><li>How to check our costs vs. retail costs</li><li>How to make sure the rating module is loaded / running / being utilized</li></ul><h4 id="CallRating-Infodumptolaterbecleanedup">Info dump to later be cleaned up</h4><p>Call rating is handled by the 'hotornot' application. When it starts up for the first time, it will create a database called 'ratedeck' and load an initial rate document for US-domestic calls. That document looks like:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: javascript; gutter: false; theme: Confluence" data-theme="Confluence">{
+   &quot;_id&quot;: &quot;US-1&quot;,
+   &quot;direction&quot;: [
+       &quot;inbound&quot;,
+       &quot;outbound&quot;
+   ],
+   &quot;pvt_internal_rate_cost&quot;: &quot;0.01&quot;,
+   &quot;iso_country_code&quot;: &quot;US&quot;,
+   &quot;options&quot;: [
+   ],
+   &quot;prefix&quot;: &quot;1&quot;,
+   &quot;rate_cost&quot;: &quot;0.02&quot;,
+   &quot;rate_increment&quot;: 60,
+   &quot;rate_minimum&quot;: 60,
+   &quot;rate_name&quot;: &quot;US-1&quot;,
+   &quot;rate_surcharge&quot;: &quot;0.00&quot;,
+   &quot;routes&quot;: [
+       &quot;^0111(\\d{10})$&quot;,
+       &quot;^\\+1(\\d{10})$&quot;
+   ],
+   &quot;pvt_type&quot;: &quot;rate&quot;
+}
+</pre>
+</div></div><h5 id="CallRating-Createyourownratedocument">Create your own rate document</h5><ol><li>&quot;_id&quot; is arbitrary, but we recommend using iso_country_code + prefix</li><li>&quot;direction&quot; determines whether to apply the rate to an inbound or outbound call (or both)</li><li>&quot;pvt_internal_rate_cost&quot; is what you are charged by your upstream carrier (optional)</li><li>&quot;iso_country_code&quot; what country this rate is applicable.</li><li>&quot;options&quot; what features does this rate apply to. You might put [&quot;Fax&quot;] for a rate, and if a fax machine is configured and has the same flag in its settings, this rate will be used.</li><li>&quot;rate_cost&quot; how much the call will cost, per rate_increment</li><li>&quot;rate_increment&quot; how many seconds the rate_cost applies to. So $0.02 for rate_cost and 60 for rate_increment means 2 cents per minute.</li><li>&quot;rate_minimum&quot; how many seconds to bill for at a minimum. If a call lasts 30 seconds and rate_minimum is 60, bill it as a 60-second call.</li><li>&quot;rate_name&quot; friendly name, eventually will be exposed in the GUI</li><li>&quot;rate_surcharge&quot; flat rate to charge for connecting the call.</li><li>&quot;routes&quot; list of regex to apply to the dialed DID to determine if this rate is eligible to be applied to the call.</li><li>&quot;pvt_type&quot; must be &quot;rate&quot;</li></ol><h5 id="CallRating-Otherinfo">Other info</h5><p>The rate chosen is based on the prefix length. So if I have two rates with routes that match the dialed DID, one with prefix &quot;1&quot; and one with prefix &quot;123&quot;, the rate for prefix &quot;123&quot; will be applied.</p><p>The rate information is placed in the channel variables and will appear in the call's CDR data under the &quot;Custom-Channel-Vars&quot; field.</p>
+                    </div>
+
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Nov 07, 2016 15:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
