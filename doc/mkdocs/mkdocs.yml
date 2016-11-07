@@ -53,5 +53,6 @@ pages:
     - 'Debian' : 'doc/install/install_manually_debian.md'
     - 'CentOS' : 'doc/install/install_manually_centos.md'
     - 'Kazoo-config' : 'doc/config/kazoo-config.md'
-    - 'Kazoo-couch' : 'doc/intro/kazoo-couch.ms'
+    - 'Kazoo-couch' : 'doc/intro/kazoo-couch.md'
+    - 'Kazoo-media' : 'doc/intro/kazoo-media.md'
     
