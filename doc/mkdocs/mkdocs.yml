@@ -74,6 +74,11 @@ pages:
     - 'Jonny5-WhApp' : 'doc/WhApp/jonny5.md'
     - 'Kazoo-Call-Rating' : 'doc/kazoo/call-rating.md'
     - 'Cluster-Design' : 'doc/intro/cluster-design-patterns.md'
+    - 'Cluster-Health' : 'doc/operation/cluster-health.md'
+    - 'Kazoo-TDM' : 'doc/kazoo/tdm.md'
+    - 'Kazoo-CSS' : 'doc/config/css-custom.md'
+    - 'DB-Health' : 'doc/config/database-health.md'
+    - 'Disable-Servers' : 'doc/intro/disabling-servers.md'
     
     
     
