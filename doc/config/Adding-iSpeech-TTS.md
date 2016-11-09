@@ -1,0 +1,28 @@
+######**Adding iSpeech TTS to Kazoo**
+
+**iSpeech**
+
+Adding **iSpeech** TTS to **Kazoo** provides a nice TTS engine for turning your dynamic text into a sound file for playing to your callers. Once **Kazoo** is configured properly, **iSpeech** will be used to generate the TTS wav files instead of the `default mod_flite` **FreeSWITCH** module. Generally speaking, the **iSpeech** versions are of a higher quality. As **iSpeech** is a third-party service, you will need to setup and maintain your **iSpeech** account/credits outside of **Kazoo** itself.
+ 
+**Configure Kazoo to use iSpeech**
+
+Access your **BigCouch**/**CouchDB Futon GUI** (usually located at http://your.host.com:5984/_utils)
+
+Open up the `system_config` database
+
+Edit the speech document:
+
+` { _id : speech ,
+
+     default:  
+       
+tts_provider : ispeech ,
+       
+tts_url : http://api.ispeech.org/api/json ,
+       
+tts_api_key : YOUR_ISPEECH_API_KEY
+
+}
+`
+
+These configs should take effect the next time something (such as directory or **Pivot's** Say) utilizes the TTS commands in **Kazoo**.  **Kazoo** will proxy/cache the generated .wav file for a time, and normal **FreeSWITCH** media caching will also take place, so an oft-used TTS string should not require accessing **iSpeech** (resulting in audio delays).
