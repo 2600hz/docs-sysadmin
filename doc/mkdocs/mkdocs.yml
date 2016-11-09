@@ -79,6 +79,12 @@ pages:
     - 'Kazoo-CSS' : 'doc/config/css-custom.md'
     - 'DB-Health' : 'doc/config/database-health.md'
     - 'Disable-Servers' : 'doc/intro/disabling-servers.md'
+    - 'Distributed-Registration' : 'doc/intro/distributed-reg.md'
+    - 'ETS-Persist' : 'doc/operation/ets-persist.md'
+    - 'Email--Config' : 'doc/config/email-templates.md'
+    - 'Enable-CNAM' : 'doc/kazoo/enable-cnam.md'
+    - 'Ecallmgr-Cmd' : 'doc/kazoo/ecallmgr-cmd.md'
+    - 'Expand-Cluster' : 'doc/intro/expand-cluster.md'
     
     
     
