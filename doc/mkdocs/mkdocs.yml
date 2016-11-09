@@ -85,6 +85,7 @@ pages:
     - 'Enable-CNAM' : 'doc/kazoo/enable-cnam.md'
     - 'Ecallmgr-Cmd' : 'doc/kazoo/ecallmgr-cmd.md'
     - 'Expand-Cluster' : 'doc/intro/expand-cluster.md'
+    - 'Lineman-Expect' : 'doc/config/lineman-expect.md'
     
     
     
