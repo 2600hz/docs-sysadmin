@@ -71,6 +71,9 @@ pages:
     - 'Basic-SIPp' : 'doc/config/basic-sipp.md'
     - 'Store-Forward' : 'doc/intro/storefwd.md'
     - 'iSpeech-TTS' : 'doc/config/adding-ispeech-tts.md'
+    - 'Jonny5-WhApp' : 'doc/WhApp/jonny5.md'
+    - 'Kazoo-Call-Rating' : 'doc/kazoo/call-rating.md'
+    - 'Cluster-Design' : 'doc/intro/cluster-design-patterns.md'
     
     
     
