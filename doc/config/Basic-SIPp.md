@@ -1,4 +1,4 @@
-**Overview**
+######**Overview**
 
 From http://sipp.sourceforge.net/:
 
@@ -6,7 +6,7 @@ From http://sipp.sourceforge.net/:
 
 The **2600hz** team has created a repo with some very simple **SIPp** configurations for use as examples.
 
-**Quick Setup**
+######**Quick Setup**
 
 Install **SIPp** using your package manager
 
@@ -20,11 +20,9 @@ Clone the **2600hz SIPp** example repo onto a server, such as a **Kazoo** app se
  
 Create a **Kazoo** account with the Realm : **sipp.2600hz.com**
 
-On the website hover over 'Voip Services' then click 'Accounts'
+On the website hover over 'Voip Services' then click 'Accounts', click 'New Account' and name the account anything you wish.
 
-Click 'New Account' and name the account anything you wish.
-
-Enter into the Realm **sipp.2600hz.com** then click and save.
+Enter into the Realm **sipp.2600hz.com** and save.
 
 
 Click 'Use Account'
@@ -36,17 +34,19 @@ Create a **Kazoo** device:
 **password**: *pwd_101*
 
 
-Hover over 'Voip Services'then click 'Devices',
+Hover over 'Voip Services' then click 'Devices',
 
 Click 'Add Device' then click 'SIP Device' and give the device any name you wish.
 
-Click 'Advanced Settings'then go to the SIP Setting and change the 
+Click 'Advanced Settings'then go to the SIP Setting and change: 
 
 **username**: *user_101* 
 
 **password**: *pwd_101*
 
 Click 'Save' 
+
+
 
 Create a **Kazoo** device:
 
@@ -62,21 +62,27 @@ Click 'Advanced Settings' then go to the 'SIP Setting'
 From there change:
 
 *username*: **user_102** 
+
 *password*: **pwd_102**
 
 Click 'Save'.
 
+
 Create a **Kazoo** device with: 
+
 **username**: *user_103*
+
 **password**: *pwd_103*
 
 Click 'Add Device'
 
 Click 'SIP Device' and give the device any name you wish.
 
+
 Click 'Advanced Settings' then go to 'SIP Setting' 
 
-Change 
+Change:
+
 **username**: *user_103* 
 
 **password**: *pwd_103* 
@@ -86,7 +92,9 @@ and make sure to click 'Save'.
 
 Enable the 'Check Voicemail' feature code on the account. Hover over 'Voip Services' then click 'Feature Codes'and expand the 
 
-'Miscellaneous'section. Click the 'Enabled'box by the 'Check Voicemail' feature code and click 'Save'. The **SIPp** test account does not 
+'Miscellaneous'section. 
+
+Click the 'Enabled'box by the 'Check Voicemail' feature code and click 'Save'. The **SIPp** test account does not 
 
 need phone numbers, callflows, or voicemials unless you plan to test them.
 
@@ -96,8 +104,6 @@ need phone numbers, callflows, or voicemials unless you plan to test them.
 
 
 `call_with_auth.sh
-
-#!/bin/bash
 
 cd dirname $0
 
@@ -143,8 +149,6 @@ To start the test type:
 
 `register.sh
 
-#!/bin/bash
-
 cd dirname $0
 
 sipp -inf users.csv -sf register.xml -d 1000 -s 5000 -i 192.168.5.42 192.168.5.151`
@@ -185,8 +189,6 @@ Create a 'Voicemail Box' under the **SIPp** test account and create a callflow t
 #Edit 
 
 `leave_vm.sh
-
-#!/bin/bash
 
 cd dirname $0
 
