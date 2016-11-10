@@ -95,7 +95,8 @@ pages:
     - 'Inbound-Call' : 'doc/intro/inbound-call-issue.md'
     - 'Inbound-Fail' : 'doc/intro/inbound-call-fail.md'
     - 'Lineman-Test' : 'doc/intro/lineman-test.md'
-    
+    - 'Load-Failure' : 'doc/intro/load-failure.md'
+    - 'Login-NoApps' : 'doc/operation/login-noapps.md
     
     
     
