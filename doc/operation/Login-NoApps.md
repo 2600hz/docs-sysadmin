@@ -1,6 +1,9 @@
-If you login to your Kazoo UI but no applications appear at the top of the page, your user or your config.js have mismatched API URLs. For security and validation, when you login the system checks to make sure the API you are logging into matches the API you are requesting apps from. If they don't, things won't work right (without special CORS headers - that's an advanced topic).
-To fix this issue, follow these steps.
-Step 1: Identify the Authentication URL
+If you login to your **Kazoo** UI but no applications appear at the top of the page, your user or your config.js have mismatched API URLs. For security and validation, when you login the system checks to make sure the API you are logging into matches the API you are requesting apps from. If they don't, things won't work right (without special CORS headers - that's an advanced topic).
+
+To fix this issue, follow these steps:
+
+
+**Step 1: Identify the Authentication URL**
 In your Kazoo UI's HTML folders there is a folder named config and a file named config.js. Inside that file is a configuration section which includes a default auth app which specifies the API you are authenticating against.
     winkstart.apps = {
         
@@ -15,7 +18,8 @@ http://YOUR.SERVER.NAME.COM:8000/v1
 
 Note the api_url that is set.
  
-Step 2: Identify the User's Apps
+**Step 2: Identify the User's Apps**
+
 For each user that logs in they have a configured list of apps. These apps also utilize an API URL. If you are running Kazoo UI on your own server you'll want users to be utilizing the same API they authenticated with.
 To find the user's app list, take the following steps:
 Login to Futon (your CouchDB's graphical user interface) on port 5984 on your server.   
