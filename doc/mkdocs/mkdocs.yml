@@ -90,7 +90,11 @@ pages:
     - 'G729-Licensing' : 'doc/intro/G729-licensing.md'
     - 'Getting-Started' : 'doc/intro/getting-started.md'
     - 'Global-Resources' : 'doc/config/global-resources.md'
-    - 
+    - 'Home-Page' : 'doc/kazoo/home-page.md'
+    - 'Sup-Command' : 'doc/config/sup-command'
+    - 'Inbound-Call' : 'doc/intro/inbound-call-issue.md'
+    - 'Inbound-Fail' : 'doc/intr//inbound-call-fail.md'
+    
     
     
     
