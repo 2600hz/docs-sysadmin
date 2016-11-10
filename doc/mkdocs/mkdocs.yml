@@ -93,8 +93,8 @@ pages:
     - 'Home-Page' : 'doc/kazoo/home-page.md'
     - 'Sup-Command' : 'doc/config/sup-command'
     - 'Inbound-Call' : 'doc/intro/inbound-call-issue.md'
-    - 'Inbound-Fail' : 'doc/intr//inbound-call-fail.md'
-    
+    - 'Inbound-Fail' : 'doc/intro/inbound-call-fail.md'
+    - 'Lineman-Test' : 'doc/intro/lineman-test.md'
     
     
     
