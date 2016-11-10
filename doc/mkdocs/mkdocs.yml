@@ -86,6 +86,8 @@ pages:
     - 'Ecallmgr-Cmd' : 'doc/kazoo/ecallmgr-cmd.md'
     - 'Expand-Cluster' : 'doc/intro/expand-cluster.md'
     - 'Lineman-Expect' : 'doc/config/lineman-expect.md'
+    - 'Dedicated-FS' : 'doc/kazoo/dedicated-fs.md'
+    
     
     
     
