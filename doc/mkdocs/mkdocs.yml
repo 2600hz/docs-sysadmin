@@ -97,6 +97,8 @@ pages:
     - 'Lineman-Test' : 'doc/intro/lineman-test.md'
     - 'Load-Failure' : 'doc/intro/load-failure.md'
     - 'Login-NoApps' : 'doc/operation/login-noapps.md
-    
+    - 'Create-Template' : 'doc/intro/create-template.md'
+    - 'Milliwatt-Config' : 'doc/config/milliwatt-config'
+    - 'Milliwat-Intro' : 'doc/intro/milliwatt.md
     
     
