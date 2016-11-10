@@ -87,6 +87,10 @@ pages:
     - 'Expand-Cluster' : 'doc/intro/expand-cluster.md'
     - 'Lineman-Expect' : 'doc/config/lineman-expect.md'
     - 'Dedicated-FS' : 'doc/kazoo/dedicated-fs.md'
+    - 'G729-Licensing' : 'doc/intro/G729-licensing.md'
+    - 'Getting-Started' : 'doc/intro/getting-started.md'
+    - 'Global-Resources' : 'doc/config/global-resources.md'
+    - 
     
     
     
