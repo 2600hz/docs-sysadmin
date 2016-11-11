@@ -102,4 +102,5 @@ pages:
     - 'Milliwat-Intro' : 'doc/intro/milliwatt.md
     - 'Monitor-Maintain' : 'doc/config/monitor-maintain.md'
     - 'Number-Lifecycle' : 'doc/intro/number-lifecycle.md'
-    
+    - 'Kazoo-Optimize' : 'doc/kazoo/kazoo-optimize.md'
+    - 'Monster-Optimize' : 'doc/monster/optimize-monster.md'
