@@ -110,5 +110,8 @@ pages:
     - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
     - 'Registrar-Design' : 'doc/config/registrar-design.md'
     - 'Kazoo-Debug' : 'doc/kazoo/kazoo-debug.md'
-    - 'KazooUI-Misc' : 'doc/kazoo/kazoouimisc.md'
+    - 'KazooUI-Misc' : 'doc/kazoo/kazooui-misc.md'
+    - 'Kazoo-ServerMisc' : 'doc/kazoo/kazoo-servermisc.md'
+    - 'Kazoo-SIPFlowchart' : 'doc/kazoo/sip-flowchart.md'
+    
     
