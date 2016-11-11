@@ -108,3 +108,4 @@ pages:
     - 'Startup-Sequence' : 'doc/intro/startup-sequence.md'
     - 'Monster-LoginIssue' : 'doc/monster/login-issue.md'
     - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
+    - 'Registrar-Design' : 'doc/config/registrar-design.md'
