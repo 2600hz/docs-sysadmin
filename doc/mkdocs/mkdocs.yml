@@ -104,3 +104,7 @@ pages:
     - 'Number-Lifecycle' : 'doc/intro/number-lifecycle.md'
     - 'Kazoo-Optimize' : 'doc/kazoo/kazoo-optimize.md'
     - 'Monster-Optimize' : 'doc/monster/optimize-monster.md'
+    - 'Kazoo-RateEngine' : 'doc/kazoo/raiting-engine.md.
+    - 'Startup-Sequence' : 'doc/intro/startup-sequence.md'
+    - 'Monster-LoginIssue' : 'doc/monster/login-issue.md'
+    - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
