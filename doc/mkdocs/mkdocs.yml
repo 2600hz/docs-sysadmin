@@ -116,5 +116,5 @@ pages:
     - 'Kazoo-ServiceLimits' : 'doc/kazoo/service-limits.md'
     - 'Kazoo-ServicePlans' : 'doc/kazoo/service-plans.md'
     - 'Kazoo-OpenSource' : 'doc/kazoo/open-source.md'
-    
+    - 'Kazoo-ClusterGuide' : 'doc/kazoo/cluster-guide.md
     
