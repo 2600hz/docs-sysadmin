@@ -113,5 +113,6 @@ pages:
     - 'KazooUI-Misc' : 'doc/kazoo/kazooui-misc.md'
     - 'Kazoo-ServerMisc' : 'doc/kazoo/kazoo-servermisc.md'
     - 'Kazoo-SIPFlowchart' : 'doc/kazoo/sip-flowchart.md'
+    - 'Kazoo-ServiceLimits' : 'doc/kazoo/service-limits.md'
     
     
