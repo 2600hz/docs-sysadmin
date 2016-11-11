@@ -109,3 +109,5 @@ pages:
     - 'Monster-LoginIssue' : 'doc/monster/login-issue.md'
     - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
     - 'Registrar-Design' : 'doc/config/registrar-design.md'
+    - 'Kazoo-Debug' : 'doc/kazoo/kazoo-debug.md'
+    
