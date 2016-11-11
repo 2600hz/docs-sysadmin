@@ -100,5 +100,6 @@ pages:
     - 'Create-Template' : 'doc/intro/create-template.md'
     - 'Milliwatt-Config' : 'doc/config/milliwatt-config'
     - 'Milliwat-Intro' : 'doc/intro/milliwatt.md
-    
+    - 'Monitor-Maintain' : 'doc/config/monitor-maintain.md'
+    - 'Number-Lifecycle' : 'doc/intro/number-lifecycle.md'
     
