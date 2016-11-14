@@ -1,8 +1,11 @@
+## Kazoo Debug
+
 To be able to debug your setup you need to check the logs. The command tail `-f xxx.log` will open the `logfile` and present a live 
 running view.
  
 Essential log files are:
-` /var/log/2600hz/kazoo.log`
+
+    /var/log/2600hz/kazoo.log
 
 The main log of the **Kazoo** platform, tells you roughly what is happening on your systems in terms of **Kazoo**. It requires some getting used to, but after that its your best friend. If you need it to show you more details you can set the verbose level: 
     
@@ -12,17 +15,20 @@ The main log of the **Kazoo** platform, tells you roughly what is happening on y
     )
     /var/log/haproxy.log
     
-Underestimated tiny log file, really descriptive. It tells you if `haproxy` is doing the needed magic, if not your system won't run nicely. Used by **Kazoo** to access mulitple systems as if they where one (**BigCOUCH** DB) 
- 
-    /var/log/kamailio/kamailio.log
+Underestimated tiny log file, really descriptive. It tells you if `haproxy` is doing the needed magic, if not your system won't run nicely. Used by **Kazoo** to access mulitple systems as if they where one (**BigCOUCH** DB):
 
-**Kamailio** is your SBC, it receives registration requests  (+some) and validates them.
+    /var/log/kamailio/kamailio.log
+    
+
+**Kamailio** is your SBC, it receives registration requests  (+some) and validates them:
 
     /var/log/freeswitch/debug.log
 
-**Freeswitch** should be obvious, all calls are handles by it. This file will give you a lot of info. One could also use `fs_cli` on a **Freeswitch** box. 
+
+**Freeswitch** should be obvious, all calls are handles by it. This file will give you a lot of info. One could also use `fs_cli` on a **Freeswitch** box: 
  
     /var/log/rabbitmq/rabbit.log
+
 
 **Rabbitmq** is the communication tool used by **Kazoo** to communicate internally.
  
@@ -30,9 +36,10 @@ Typical usage:
  
 User case: 
 
-Inbound call fails
+Inbound call fails:
 
-Just imagine what should happen for a call to be accepted.
+
+*Just imagine what should happen for a call to be accepted:*
 
 A call needs to be placed by someone, then delivered to **Kazoo** platform, then accepted by **Freeswitch**, then dealt with.
 So.. can you confirm that someone (you?) is dialing the right number? Is the number configured at the DID provider to be routed to **Kazoo**? ARE U SURE?? Ok, so lets first shutdown one FS box or tail `-f /var/log/freeswitch/debug.log` on all FS boxes.
