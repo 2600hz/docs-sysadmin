@@ -1,16 +1,13 @@
-######**Kazoo Dedicated Cluster Guide**
+## Kazoo Dedicated Cluster Guide
 
 
-This is our core open-source product and the basis for our company. Everything listed here is effectively open-sourced:
+**This is our core open-source product and the basis for our company. Everything listed here is effectively open-sourced:**
 
-Cluster Deployment
-
+1. Cluster Deployment
  
-Configuration
+2. Configuration
 
- 
-Maintenance 
+3. Maintenance 
 
-
-Troubleshooting
+4. Troubleshooting
  
