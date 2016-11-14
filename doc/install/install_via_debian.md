@@ -1,4 +1,2 @@
-Installing!
-
-via RPM
+## Installing via RPM
 
