@@ -1,4 +1,4 @@
-## Minimum Requirements
+# Minimum Requirements
 
 
 ## Minimal Computational Resources
