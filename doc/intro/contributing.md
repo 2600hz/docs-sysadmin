@@ -1,10 +1,14 @@
-Contributing
+## Contributing
 
-# Code
-XXX
+ 
+## Code
 
-# Documentation
-XXX
+xxx
 
-# Reward System
-XXX
+## Documentation
+
+xxx
+
+## Reward System
+
+xxx
