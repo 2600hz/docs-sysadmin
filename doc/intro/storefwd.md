@@ -1,28 +1,35 @@
 
-######**Store and Forward (T.37)**
+**Store and Forward (T.37)**
 
  
-#####**Ways to transmit a Fax over IP:**
- 
-#####**PCMU**
+**Ways to transmit a Fax over IP:**
+
+
+**PCMU**
  
 Plain old audio, uncompressed (64k) regular phone line.
  
+ 
 PCMU is OK if you can guarantee the audio signal is consistent around 200-300ms latency
  
+ 
 T.38 - At least two sides must understand T.38 to use it
  
+ 
 Negotiation was be successful between the two sides. Who negotiates first?
  
+ 
 v0, v1, v2, v3, ECM, v17
  
+ 
 Max Speed (14400/9600)
  
-Redundancy Feature - FAX - ATA - CLOUD
-v1, v2, v3
+ 
+Redundancy Feature - FAX - ATA - CLOUD - v1, v2, v3
  
- 
-#####**STEPS FOR T.38 TO WORK:**
+
+
+**STEPS FOR T.38 TO WORK:**
 
 
   Two devices must be able to hear each other initially via voice (to detect the tones)
@@ -50,7 +57,8 @@ In addition, the OK will come back with the confirmed parameters
 
 
 
-#####**For Testing:**
+**For Testing:**
+
 1. Need One (1) Physical Fax that can Send/Receive
 2. Need One Virtual or Physical Fax that can Send /Receive
 3. PATIENCE!
