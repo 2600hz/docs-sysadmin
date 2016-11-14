@@ -1,50 +1,60 @@
-#####**Intro**
+## Intro
 
 When most people talk about a phone line, they are actually (unknowingly) referring to a package of services provided by their local phone company. This package is actually put together from independent services. Each service is often provided from a different server, service or in some cases a completely external service provider, but to make things easy for customers all the services are packaged and sold together. This makes marketing and sales simpler.
 
+
 As some companies have begun re-inventing telephony via VoIP, VoIP service providers are able to pick and choose what they wish to provide and how. To remain competitive each VoIP provider must look at the cost of providing services and decide which services to offer, how to offer them and what to price them at. Some providers use statistics to average their costs across all clients for various services. Other providers (often ones providing bargain basement prices) package almost nothing and require you to pay a-la-carte for add-ons.
+
 
 At it's core, a phone line can (and usually does) consist of services that impact inbound calling and services that impact outbound calling. We break down each service below:
 
 
-#####**Inbound Calls**
+## Inbound Calls
 
-1.  Inbound calls (commonly referred to as "origination") occur over what are called circuits, or ports, at most providers. In this manner, a provider might have 500 phone lines which cost $20 each a month to maintain. When you make a call outbound the provider recoups the cost of these circuits, plus the cost of long-distance charges, by charging you a per-minute fee. For inbound calls, however, most people don't expect to pay anything but in reality providers pay a fee to have the phone circuits available for phone calls, so they are losing money. Many wholesale and VoIP companies assume that a circuit will be used mostly for outbound so they give you inbound calling for free, and some VoIP companies charge tariffs (sort of like taxes) to other companies when they receive inbound calls, which pay for the call. But ultimately, inbound calls do cost money and must be charged somewhere. These ports can be marketed for flat-rates for as little as $6 or as much as $30, but they always cost something. If you're getting an inbound port for free, your carrier is making up the costs in some other way (either by charging you for DIDs, or charging other companies tariffs, or assuming you'll spend money on outbound).
+Inbound calls (commonly referred to as "origination") occur over what are called circuits, or ports, at most providers. In this manner, a provider might have 500 phone lines which cost $20 each a month to maintain. When you make a call outbound the provider recoups the cost of these circuits, plus the cost of long-distance charges, by charging you a per-minute fee. For inbound calls, however, most people don't expect to pay anything but in reality providers pay a fee to have the phone circuits available for phone calls, so they are losing money. Many wholesale and VoIP companies assume that a circuit will be used mostly for outbound so they give you inbound calling for free, and some VoIP companies charge tariffs (sort of like taxes) to other companies when they receive inbound calls, which pay for the call. But ultimately, inbound calls do cost money and must be charged somewhere. These ports can be marketed for flat-rates for as little as $6 or as much as $30, but they always cost something. If you're getting an inbound port for free, your carrier is making up the costs in some other way (either by charging you for DIDs, or charging other companies tariffs, or assuming you'll spend money on outbound).
 
-2.  Inbound Caller ID Name
+
+## Inbound Caller ID Name
+
 When you receive a call from a remote number, the phone number is delivered with the call and can be shown on your Caller ID display for free. In countries outside the US, the caller's name also comes with the call and can be displayed for free. However, in the US, Caller ID Name is not free. For each call that comes into your phone where you see the Caller ID Name, YOUR receiving phone company must pay for access to lookup the name of the person who is calling. This fee is usually between $0.001 and $0.0001 per call/lookup, depending on volume discounts. Most companies either give this feature away for free (factoring the cost of the feature into the monthly cost of a phone number) or charge a small flat-fee for having Caller ID Name. Almost no company charges per-lookup as that's way too confusing and nit-picky for most customers to understand.
 
-3.  Calls from Payphones
+
+## Calls from Payphones
 
 Inbound calls sometimes come from payphones, though rarely these days. As payphones now cost much more money to maintain then they usually get in revenue, providers of payphones began charging surcharges for calls from payphones, especially to 800 numbers. These charges are usually just passed onto the end customer.
 
-4.  Collect and Third-Party Calls
+
+## Collect and Third-Party Calls
 
 Collect calls are uncommon in the US these days but allow you to charge the receiving party for a call, plus a fee (and usually a big mark-up). They are still used (and popular) from prisons and for overseas individuals calling US phone numbers in emergencies. These charges are usually heavily marked up and passed to the end customer, as the use of this feature is usually only done when one is in distress or in a situation where no other option is available.
 
-**Toll-free numbers**
+
+## Toll-free numbers
 
 Toll-free numbers consist of two types of charges - the cost of reserving the toll-free number itself and the cost, per-minute, of receiving calls on a toll-free number. Like long-distance calls, there is no such thing as a flat-rate charge for toll-free calls - the calls are always billed based on the From and To number of the caller and the negotiated tariffs of the sending and receiving phone companies, which are usually based on distance and population. That said, to make life easy for consumers, the numbers are usually averaged into rates like 2 cents per minute, that people can easily understand.
 
-**SMS**
+
+## SMS
 
 SMS is free on inbound in most cases when you go direct to the carrier. However, it is assumed most people sending SMS messages also receive them. In that case, many companies charge a lower outbound fee than it actually costs them (to beat their competition's pricing) but also charge for inbound text messages. Their assumption is that the total number of outbound and inbound messages will result in them retaining a margin. This is usually a fair bet since most outbound messages 
 (Hi honey, what's for dinner?) result in a response message (Mac and Cheese!).
 
-**Video Calling**
+
+## Video Calling
 
 1.  Video calling is simply a different codec and additional RTP channel used for transmitting video in addition to audio. It is supported by the SIP protocol itself and many providers are introducing formal support for these protocols. However, video doesn't work over the old PSTN and video also increases bandwidth utilization significantly. Some companies are charging various rates for this (which are still evolving) to compensate for increased data usage.
 
 2.  Video calling also often requires a Media Processing device to transcode signals when they are not the same (such as an H261 phone to an H263 phone). Most companies offering video have invested in one of these units, which usually allow a certain number of conversations at a time. For sample purposes, let's say the media processing server can handle 100 channels at a time and cost $100,000 to implement. That's $1,000 a channel. Assuming most people use the video processing only a few times a month, you could spread that cost out across your customers at $5 per customer per month (over, say, 200 customers) to recoup those fees, assuming out of 200 customers only 100 channels are in use at any time. This is the basis for these fees - not the bandwidth or telecommunications fees.
 
-**Codecs (G729, T38)**
 
-1.  G729 is a pay codec that was engineered to allow low-bandwidth audio phone calls to sound like regular phone calls. The codec took a lot of money to develop and is patented. To deal with being able to offer G729, most companies buy G729 licenses which, like video calling above, cost a certain amount for each active call that will be in use on the system. If 100 people are on G729 calls then 100 licenses are needed. In this scenario, the cost of the license is fixed but to recoup the cost, most service providers spread the cost out over their client base by increasing the per-minute cost of calls or otherwise.
+## Codecs G729 & T38
 
-2.  T38 is a fax codec that uses various tricks to make fax machines more tolerant of delays in the line when a fax needs to be processed. It often requires special equipment to be handled properly, which also costs money. This cost is, again, usually spread across the per-minute costs of a service.
+1.  **G729** is a pay codec that was engineered to allow low-bandwidth audio phone calls to sound like regular phone calls. The codec took a lot of money to develop and is patented. To deal with being able to offer **G729**, most companies buy **G729** licenses which, like video calling above, cost a certain amount for each active call that will be in use on the system. If 100 people are on **G729** calls then 100 licenses are needed. In this scenario, the cost of the license is fixed but to recoup the cost, most service providers spread the cost out over their client base by increasing the per-minute cost of calls or otherwise.
+
+2.  **T38** is a fax codec that uses various tricks to make fax machines more tolerant of delays in the line when a fax needs to be processed. It often requires special equipment to be handled properly, which also costs money. This cost is, again, usually spread across the per-minute costs of a service.
  
  
-######**Outbound Calling (Termination)**
+## Outbound Calling 
 
 
 **Long Distance Calling**
