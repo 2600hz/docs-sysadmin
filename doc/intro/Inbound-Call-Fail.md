@@ -1,23 +1,25 @@
+## Inbound Call Failure
+
+
 If you are unable to receive inbound calls (but outbound calls work), you have one of four problems:
 
-The carrier who is calling in isn't in your allowed list of inbound IP addresses.
+1. The carrier who is calling in isn't in your allowed list of inbound IP addresses.
 
-The phone number being called to isn't formatted in a way we understand (by default it must be E.164 formatted)
+2. The phone number being called to isn't formatted in a way we understand (by default it must be E.164 formatted)
 
-The phone number being called to isn't in the database properly
+3. The phone number being called to isn't in the database properly
 
-The inbound INVITE packet is malformed or contains required features we don't support
+4. The inbound INVITE packet is malformed or contains required features we don't support
 
-The steps below will help you identify which issue is causing the problem.
 
-Ensure Carrier is Allowed (ACLs)
+The steps below will help you identify which issue is causing the problem:
 
-While ACLs in Freeswitch generally are controlled within local files on each FS instance, Kazoo has moved control of the FS ACLs within it's own database under:
+1. Ensure Carrier is Allowed (ACLs)
 
-`system_config 
- ecallmgr`
+2. While ACLs in **FreeSWITCH** generally are controlled within local files on each FS instance, **Kazoo** has moved control of the **FS** ACLs within it's own database under: `system_config ecallmgr`
  
-Your ACLs should be between the `fs_cmds` and `authz_enabled` elements.
+3. Your ACLs should be between the `fs_cmds` and `authz_enabled` elements.
+
 
 *** IT'S VERY IMPORTANT YOU DO NOT SIMPLY CUT AND PASTE THIS INTO YOUR DB DOCUMENT. IT IS A GENERIC EXAMPLE AND REQUIRES YOUR CUSTOM DATA ***
 
@@ -86,98 +88,107 @@ flowroute2: {
   }
 }
 `
-NOTE: Sections `opensips-proxy1` and `opensips-proxy2` should have your `opensips` server IPs in the 'cidr' field. These sections are required, as they tell FS to allow connections from your own Opensips servers.
+**NOTE:** Sections `opensips-proxy1` and `opensips-proxy2` should have your `opensips` server IPs in the 'cidr' field. These sections are required, as they tell **FS** to allow connections from your own **Opensips** servers.
  
 Once you have changed this document, you must issue 
 `sup -necallmgr ecallmgr_config flush` to clear the local `ecallmgr` and `sysconf` caches. You can check to see what will be retrieved by issuing: `sup -necallmgr ecallmgr_config get acls`
  
  
-**Identifying This Issue**
+## Identifying This Issue
 
 To determine if this is the problem preventing your inbound calls:
 
-Login to all your **FreeSWITCH** servers.
+1. Login to all your **FreeSWITCH** servers.
 
-Enter the **FreeSWITCH** CLI by typing 'cli'
+2. Enter the **FreeSWITCH** CLI by typing 'cli'
 
-Call the number in question that is not routing properly.
+3. Call the number in question that is not routing properly.
 
-In your **FreeSWITCH** console you should see a line with the word INVITE in it that looks like this:
+4. In your **FreeSWITCH** console you should see a line with the word INVITE in it that looks like this:
 
 `2012-03-18 03:30:55.435847 [WARNING] sofia_reg.c:1428 SIP auth challenge (INVITE) on sofia profile sipinterface_1
 for [2125551234@your.ip.add.ress] from ip 22.33.44.55`
 
-If you see the above line and you are sure it is for the phone number you are testing you are challenging (requesting username/password) your carrier. You probably shouldn't be.
+5. If you see the above line and you are sure it is for the phone number you are testing you are challenging (requesting username/password) your carrier. You probably shouldn't be.
 
 
-**Other Identification Tips**
+## Other Identification Tips
 
 Note that each carrier behaves differently when unable to reach your box. Your caller may:
 
-Hear a recording that the number is unavailable, out of service or disconnected
+1. Hear a recording that the number is unavailable, out of service or disconnected
 
-Hear dead-air
+2. Hear dead-air
 
-Hear a busy signal
+3. Hear a busy signal
 
-Hear ringing forever
+4. Hear ringing forever
 
-Note that this problem will never result in:
 
-Callers reaching voicemail
+## Note that this problem will never result in:
 
-Callers reaching your main menu / IVR
+1. Callers reaching voicemail
 
-Callers ringing your phone but being unable to hear or speak with you (i.e. if your phone does actually ring, but you have no audio, ACLs are not your issue)
+2. Callers reaching your main menu / IVR
+
+3. Callers ringing your phone but being unable to hear or speak with you (i.e. if your phone does actually ring, but you have no audio, ACLs are not your issue)
  
-**Fixing Your ACLs**
+## Fixing Your ACLs
 
-See the format for ACLs above and correct your database document. The IP address displayed on your **FreeSWITCH** console is NOT the IP address of your carrier if you are using OpenSIPs in your cluster, it's the IP address of your own server! Do NOT add the OpenSIPs server to your trusted list above. You need to find out your carrier's real IP address through some other method.
+1. See the format for ACLs above and correct your database document. The IP address displayed on your **FreeSWITCH** console is NOT the IP address of your carrier if you are using **OpenSIP**s in your cluster, it's the IP address of your own server! Do NOT add the **OpenSIP**s server to your trusted list above. You need to find out your carrier's real IP address through some other method.
 
-Reload the ACLs within FreeSWITCH by typing: `cli -x reloadacl` You should see a SUCCESS and an `OK acl reloaded` result
+2. Reload the ACLs within FreeSWITCH by typing: `cli -x reloadacl` You should see a SUCCESS and an `OK acl reloaded` result
 Once you've updated your ACLs your calls should process properly.
  
-**Ensure Number Formatting**
+## Ensure Number Formatting
 
-We expect inbound calls to be in a format we can understand, with the INVITE URI containing the desired number for routing. Some carriers put the phone number they are trying to reach in a different header, and some carriers simply don't format the number properly. You can identify this issue as follows: XXX
+We expect inbound calls to be in a format we can understand, with the INVITE URI containing the desired number for routing. Some carriers put the phone number they are trying to reach in a different header, and some carriers simply don't format the number properly. 
+
+You can identify this issue as follows: *XXX*
  
-**Ensure Number Mapping in Database**
+## Ensure Number Mapping in Database
 
-Each phone number processed for inbound calls exists as a small document in a numbers/XXXXX database. These databases check the first five digits of a dialed number and contain a mapping for identifying which account that number belongs to. Sometimes these mappings can break. Before assuming that's what's happened you should check if the number is mapped incorrectly. There are two ways to do this:
+Each phone number processed for inbound calls exists as a small document in a numbers/XXXXX database. These databases check the first five digits of a dialed number and contain a mapping for identifying which account that number belongs to. Sometimes these mappings can break. Before assuming that's what's happened you should check if the number is mapped incorrectly. 
 
-**Check Using a Maintenance Command**
+There are two ways to do this:
 
-From the **WhApps** console (./conn-to-apps.sh), run this command:
-`stepswitch_maintenance:lookup_number(+14155555555).`
+*XXX*
+
+
+## Check Using a Maintenance Command
+
+From the **WhApps** console (./conn-to-apps.sh), run this command: `stepswitch_maintenance:lookup_number(+14155555555).`
+
 If the number is known, you will get an `{ok,document_id} ` response. 
 
-Otherwise you'll get an error. A sample is below.
+Otherwise you'll get an error. A sample is below:
 
-`Eshell V5.8.4  (abort with ^G)
-(whistle_apps@apps001-aa-ord.2600hz.com)1
- stepswitch_maintenance:lookup_number(
-+14158867900).
-{ok,
-503d96f14def94f23458cf3e1a025375
-,false}`
+    Eshell V5.8.4  (abort with ^G)
+    (whistle_apps@apps001-aa-ord.2600hz.com)1
+    stepswitch_maintenance:lookup_number(
+    +14158867900).
+    {ok,
+    503d96f14def94f23458cf3e1a025375
+    ,false}
 
 
- 
-**Check Using the Database**
+## Check Using the Database
 
-Go into your CouchDB via port 5984 and enter the numbers/+1415 database, where +1415 is the first 5 characters (usually +1
+Go into your **CouchDB** via port 5984 and enter the numbers/+1415 database, where +1415 is the first 5 characters (usually +1
 areacode in the U.S.) of the phone number in E.164 format.
  
-**Identify Malformed INVITE Packets**
+
+## Identify Malformed INVITE Packets
 
 Sometimes, carriers send bad INVITE packets. This can happen for a number of reasons:
 
-Additional features cause the INVITE packet to be too big
+1. Additional features cause the INVITE packet to be too big
 
-Broken firewalls or routers change the INVITEs incorrectly
+2. Broken firewalls or routers change the INVITEs incorrectly
 
-The INVITEs contain requested features that your system doesn't support
+3. The INVITEs contain requested features that your system doesn't support
 
 You can identify that this is happening by reviewing the logs. You will see:
-XXXX
+
+1. *XXXX*
  
