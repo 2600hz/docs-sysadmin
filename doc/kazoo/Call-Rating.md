@@ -1,54 +1,43 @@
-######**CALL RATING**
-
-
+## CALL RATING
 
 
 **Kazoo** provides a basic facility to load a rate-deck into the system for the purpose of rating each call. The rate is only utilized if 
 
 the system determines the caller does not have any flat-rate services available for the number being dialed.
 
-How to load the rate deck
 
-How to test the rate deck (if possible)
+1. How to load the rate deck
 
-How to check our costs vs. retail costs
+2. How to test the rate deck (if possible)
 
-How to make sure the rating module is loaded / running / being utilized
+3. How to check our costs vs. retail costs
 
-Info dump to later be cleaned up
+4. How to make sure the rating module is loaded / running / being utilized
 
-**Call Rating** is handled by the **'hotornot'** application. When it starts up for the first time, it will create a database called 
+5. Info dump to later be cleaned up
 
-**'ratedeck'** and load an initial rate document for US-domestic calls. That document looks like:
 
-{ _id : US-1, direction: [ inbound, outbound ],
-   
-pvt_internal_rate_cost : 0.01,
-   
-iso_country_code: US, options: [ ],
-   
-prefix: 1,
-   
-rate_cost: 0.02,
-   
-rate_increment: 60,
-   
-rate_minimum: 60,
-   
-rate_name: US-1,
-   
-rate_surcharge: 0.00,
-   
-routes: [^0111(\\d{10})$, ^\\+1(\\d{10})$],
-   
+**Call Rating** is handled by the **'hotornot'** application. When it starts up for the first time, it will create a database called **'ratedeck'** and load an initial rate document for US-domestic calls. That document looks like:
+
+```
+{ _id : US-1, direction: [ inbound, outbound ], 
+pvt_internal_rate_cost : 0.01,   
+iso_country_code: US, options: [ ],   
+prefix: 1,   
+rate_cost: 0.02,   
+rate_increment: 60,   
+rate_minimum: 60,   
+rate_name: US-1,  
+rate_surcharge: 0.00,  
+routes: [^0111(\\d{10})$, ^\\+1(\\d{10})$],   
 pvt_type: rate
 
 }
 
-######**Create your own rate document**
+```
+## Create your own rate document
 
 `_id` is arbitrary, but we recommend using `iso_country_code` + prefix direction determines whether to apply the rate to an inbound or 
-
 outbound call (or both).
 
 `pvt_internal_rate_cost` // is what you are charged by your upstream carrier (optional)
@@ -80,7 +69,7 @@ call.
 `rate` //
 
 
-######**Other info**
+## Other info
 
 The rate chosen is based on the prefix length. So if I have two rates with routes that match the dialed DID, one with prefix 
 
