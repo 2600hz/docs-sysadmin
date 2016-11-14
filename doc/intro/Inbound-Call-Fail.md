@@ -1,7 +1,7 @@
 ## Inbound Call Failure
 
 
-If you are unable to receive inbound calls (but outbound calls work), you have one of four problems:
+**If you are unable to receive inbound calls (but outbound calls work), you have one of four problems:**
 
 1. The carrier who is calling in isn't in your allowed list of inbound IP addresses.
 
@@ -12,7 +12,7 @@ If you are unable to receive inbound calls (but outbound calls work), you have o
 4. The inbound INVITE packet is malformed or contains required features we don't support
 
 
-The steps below will help you identify which issue is causing the problem:
+**The steps below will help you identify which issue is causing the problem:**
 
 1. Ensure Carrier is Allowed (ACLs)
 
@@ -24,9 +24,9 @@ The steps below will help you identify which issue is causing the problem:
 *** IT'S VERY IMPORTANT YOU DO NOT SIMPLY CUT AND PASTE THIS INTO YOUR DB DOCUMENT. IT IS A GENERIC EXAMPLE AND REQUIRES YOUR CUSTOM DATA ***
 
 
-An example for this format is as follows:
-`
-{_id: ecallmgr,default: {
+**An example for this format is as follows:**
+
+    {_id: ecallmgr,default: {
        
        fs_nodes: [freeswitch@kazoofsserver1.example.com
        ,freeswitch@kazoofsserver2.example.com ]
@@ -37,41 +37,44 @@ An example for this format is as follows:
     ,network-list-name:trusted
     ,cidr:198.22.64.214/32
        }
- ,les.net1: { type: allow
- ,network-list-name: trusted
- ,cidr:64.34.181.47/32 }
- ,les.net2: {
- ,type:allow
- ,network-list-name:trusted
- ,cidr: 64.34.176.212/32
-   },
+        
+     ,les.net1: { type: allow
+     ,network-list-name: trusted
+     ,cidr:64.34.181.47/32 }
+     ,les.net2: {
+     ,type:allow
+     ,network-list-name:trusted
+     ,cidr: 64.34.176.212/32
+ 
+    },
            
-flowroute1: {
-   type:allow
-  ,network-list-name: trusted
-  ,cidr: 216.115.69.144/32
+    flowroute1: {
+     type:allow
+    ,network-list-name: trusted
+    ,cidr: 216.115.69.144/32
 
            },
            
-flowroute2: {
-   type: allow
+    flowroute2: {
+     type: allow
      ,network-list-name: trusted
      ,cidr: 70.167.153.130/32
-           }
+     
+     },
            
-    ,kamailio-proxy1: {
-               
+    kamailio-proxy1: {          
     type: allow
      ,network-list-name: authoritative
      ,cidr: kamailio1.ip.goes.here/32
-
-           },
+     
+     },
            
     kamailio-proxy2: {           
     type:allow
      ,network-list-name: authoritative
      ,cidrkamailio2.ip.goes.here/32
-           }
+        },
+        
        }
        
      ,authz_enabled: false
@@ -85,13 +88,11 @@ flowroute2: {
      ,recording_file_path: /tmp/
      ,record_waste_resources: false
      ,default_fax_extension: .tiff
-  }
-}
-`
-**NOTE:** Sections `opensips-proxy1` and `opensips-proxy2` should have your `opensips` server IPs in the 'cidr' field. These sections are required, as they tell **FS** to allow connections from your own **Opensips** servers.
- 
-Once you have changed this document, you must issue 
-`sup -necallmgr ecallmgr_config flush` to clear the local `ecallmgr` and `sysconf` caches. You can check to see what will be retrieved by issuing: `sup -necallmgr ecallmgr_config get acls`
+      },
+    }
+
+
+**NOTE:** Sections `opensips-proxy1` and `opensips-proxy2` should have your `opensips` server IPs in the 'cidr' field. These sections are required, as they tell **FS** to allow connections from your own **Opensips** servers. Once you have changed this document, you must issue `sup -necallmgr ecallmgr_config flush` to clear the local `ecallmgr` and `sysconf` caches. You can check to see what will be retrieved by issuing: `sup -necallmgr ecallmgr_config get acls`
  
  
 ## Identifying This Issue
@@ -100,14 +101,14 @@ To determine if this is the problem preventing your inbound calls:
 
 1. Login to all your **FreeSWITCH** servers.
 
-2. Enter the **FreeSWITCH** CLI by typing 'cli'
+2. Enter the **FreeSWITCH** CLI by typing `cli`
 
 3. Call the number in question that is not routing properly.
 
 4. In your **FreeSWITCH** console you should see a line with the word INVITE in it that looks like this:
 
-`2012-03-18 03:30:55.435847 [WARNING] sofia_reg.c:1428 SIP auth challenge (INVITE) on sofia profile sipinterface_1
-for [2125551234@your.ip.add.ress] from ip 22.33.44.55`
+    2012-03-18 03:30:55.435847 [WARNING] sofia_reg.c:1428 SIP auth challenge (INVITE) on sofia profile sipinterface_1
+    for [2125551234@your.ip.add.ress] from ip 22.33.44.55
 
 5. If you see the above line and you are sure it is for the phone number you are testing you are challenging (requesting username/password) your carrier. You probably shouldn't be.
 
@@ -187,6 +188,7 @@ Sometimes, carriers send bad INVITE packets. This can happen for a number of rea
 2. Broken firewalls or routers change the INVITEs incorrectly
 
 3. The INVITEs contain requested features that your system doesn't support
+
 
 You can identify that this is happening by reviewing the logs. You will see:
 
