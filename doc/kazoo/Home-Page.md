@@ -1,10 +1,10 @@
-Welcome to **Kazoo**, the core open-source product from **2600hz**. 
+## Kazoo Home Page
 
-This documentation exists to help you install and manage your own dedicated **Kazoo** cluster.
+Welcome to **Kazoo**, the core open-source product from **2600hz**. This documentation exists to help you install and manage your own dedicated **Kazoo** cluster.
 
-Before You Begin
+Before You Begin:
 
-Who This Is For - **PLEASE READ!**
+Who This Is For - **PLEASE READ!**:
  
 Architectural Review
 
