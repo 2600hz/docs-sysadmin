@@ -1,4 +1,4 @@
-######**Single Server**
+## Single Server
 
 **Active / Active Cluster Design**
 
