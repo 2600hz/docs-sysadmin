@@ -1,3 +1,1 @@
-Installing!
-
-via Cluster Manager
+## Installing via Cluster Manager
