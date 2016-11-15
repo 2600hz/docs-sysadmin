@@ -1,8 +1,8 @@
-#####**Jonny5 Account Limits**
+## Jonny5 Account Limits
 
-   
-`twoway_trunks`: 0, // two way flat rate trunks can only be used if `system_config.jonny5.` `flat_rate_whitelist` regex matches AND `system_config.jonny5.` `flat_rate_blacklist` does not. This can also be specified as a `pvt_twoway_trunks`, the lower will be used.
-   
+ 
+ 
+`twoway_trunks`: 0, // two way flat rate trunks can only be used if `system_config.jonny5.` `flat_rate_whitelist` `regex` matches AND `system_config.jonny5.` `flat_rate_blacklist` does not. This can also be specified as a `pvt_twoway_trunks`, the lower will be used.  
    
 `inbound_trunks`: 0, // exactly the same as two-way trunks but only used for inbound calls. If there are more inbound calls then trunks two-way trunks will be checked next.
 
