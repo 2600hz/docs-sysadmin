@@ -6,7 +6,7 @@
 #+TITLE: configure_kazoo
 #+DATE: <2016-11-15 Tue>
 #+AUTHOR: James Aimonetti
-#+EMAIL: james.aimonetti@gmail.com
+#+EMAIL: james@2600hz.com
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
