@@ -100,7 +100,7 @@ Any application which receives rate requests and wishes to respond will need to 
 
     }
 
-
+```
 
 **Description of the Rate Response JSON payload:**
 
