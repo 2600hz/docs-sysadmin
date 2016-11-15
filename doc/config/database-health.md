@@ -122,8 +122,6 @@ The speed of compaction is a function of the size of the DB shard on disk, plus 
 
 ## Troubleshooting The Compactor
 
-**Improper Cookie**
-
 If you receive an error like:
 ```
     couch_compactor_fsm:compact_db(
@@ -140,7 +138,7 @@ This means the cookie we have store for your **Bigcouch** nodes is wrong. On you
 
 `sup whapps_config get whistle_couch bigcouch_cookie`         
 
-#returns the wrong cookie
+  #returns the wrong cookie
 
 
 ## Monster
