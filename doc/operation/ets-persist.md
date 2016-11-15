@@ -1,14 +1,19 @@
-######**ETS Persistence**
+## ETS Persistence
 
-**Don't lose your data**
+
+
+## Don't lose your data
+
 When using ETS tables, when the owner dies, typically the ETS table will be deleted as well. On some occasions, this is not desired behaviour. See Steve Vinoski's blog article for more.
 
 
-**Kazoo's Approach**
+## Kazoo's Approach
+
 We have an implementation of an ETS manager server process that will handle creating the ETS table, handing off control to the process that will actually use the table for work, receiving notifications when that process dies, and handing off control once a replacement process is available.
 
 
-**How it works** 
+## How it works
+
 If you navigate over to `kazoo_etsmgr_srv.erl`, you will find the `gen_server` code to manage an ETS table. To make use of the server, here's the typical steps involved:
 
 Define the ETS properties
@@ -30,7 +35,7 @@ Handle gaining control of the ETS table from the manager process
 This might go in your `gen_server`, `gen_listener`, etc.
 
 1. Defining the ETS properties
-
+```
 -export([table_id/0
         
         ,table_options/0
@@ -95,7 +100,7 @@ Start the manager process
 
     ]).
                   
-
+```
 In your `gen_server`/`gen_listener`, handle receiving control of the ETS table
 
 **Gain control**
