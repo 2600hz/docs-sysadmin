@@ -1,6 +1,7 @@
-Setting up IPTABLES
-Skip to end of metadata
-Created by Justin B. Watson, last modified by Darren Schreiber on Jan 11, 2014 Go to start of metadata
+## Setting up IPTABLES
+
+
+
 For your Kazoo / Kamailio Servers create a file called secure.sh. Paste the below script into secure.sh and modify to fit your environment.  
 After saving the file you need to make it executable.  
 "chmod +x secure.sh"
