@@ -1,4 +1,5 @@
-## Tips to get you started 
+## Getting Started 
+
 
 
 ## Create a page
@@ -29,6 +30,7 @@ Macros'to add macros for navigation, special formatting and other media:
 Here are some tips for organising your content:
 
 Change the page order.The sidebar on the left displays your pages in a hierarchy. If you have 'Space Administrator' permissions you can click 'Space Tools' to reorder Pages to move pages around. 
+
 
 ## Add labels
 
