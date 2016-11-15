@@ -90,11 +90,12 @@ If you use the regex above, any number 5 digits or more will route to your carri
 Getting numbers to route in Kazoo requires a few steps. This guide will use the defaults in the system (read: mostly US-based numbers) to make this fast. Alternative documentation should be created for handling other areas of the world.
 
 1. Add the carrier to the ACLs
-#+BEGIN_SRC bash
+   #+BEGIN_SRC bash
 sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
-#+END_SRC
+   #+END_SRC
+   You can set the IP as a raw IPv4 IP address or in [[https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation][CIDR notation]].
 2. Add a number that you expect your carrier to route to you
-#+BEGIN_SRC bash
+   #+BEGIN_SRC bash
 curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
      -d '{"data":{}}' \
      "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
@@ -103,10 +104,10 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
      -d '{"data":{}}' \
      "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
-#+END_SRC
+   #+END_SRC
 3. Create a callflow for that DID. You could also amend the callflow created for the first device, adding the number to its "numbers" array.
-#+BEGIN_SRC bash
+   #+BEGIN_SRC bash
 curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
      -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
      http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
-#+END_SRC
+   #+END_SRC
