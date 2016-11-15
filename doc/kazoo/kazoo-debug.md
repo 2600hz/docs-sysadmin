@@ -1,5 +1,7 @@
 ## Kazoo Debug
 
+
+
 To be able to debug your setup you need to check the logs. The command tail `-f xxx.log` will open the `logfile` and present a live 
 running view.
  
@@ -29,7 +31,6 @@ Underestimated tiny log file, really descriptive. It tells you if `haproxy` is d
  
     /var/log/rabbitmq/rabbit.log
 
-
 **Rabbitmq** is the communication tool used by **Kazoo** to communicate internally.
  
 Typical usage:
@@ -46,7 +47,7 @@ So.. can you confirm that someone (you?) is dialing the right number? Is the num
 Place a test call...do you see an invite coming in that file? Yes? Great...find the CALL ID and close the log file, then `grep` CALL ID `/var/log/freeswitch/debug.log` The result of that action should be relevant log lines for that call. Check it line for line to see what happened and why it did not do what you expected.
 
 Most errors in the early stage of the **Kazoo** learning curve have to do with ACLS. Also check Inbound Calls Fail and this page
-No invite? That suggests that the call is not delivered to your systems. Can you confirm that someone (you?) is dialing the right number? Is the number configured at the DID provider to be routed to **Kazoo**? ARE YOU SURE?? If so, please check if you dont have a firewall in place thats messing stuff up. One easy but dangerous way to test is to disable the firewall for a while. Still nothing? If you are using a SIP address when directing calls to **Kazoo**, please check DNS and DNS propagation, if unsure try to use the ip address instead of domain name. Still nothing you could check the **Kazoo** log, i dont think it will contain anything but you (actually i) never know.
+No invite? That suggests that the call is not delivered to your systems. Can you confirm that someone (you?) is dialing the right number? Is the number configured at the DID provider to be routed to **Kazoo**? ARE YOU SURE? If so, please check if you dont have a firewall in place thats messing stuff up. One easy but dangerous way to test is to disable the firewall for a while. Still nothing? If you are using a SIP address when directing calls to **Kazoo**, please check DNS and DNS propagation, if unsure try to use the ip address instead of domain name. Still nothing you could check the **Kazoo** log, i dont think it will contain anything but you (actually i) never know.
  
  
  
