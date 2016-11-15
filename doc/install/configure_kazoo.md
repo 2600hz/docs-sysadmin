@@ -1,23 +1,23 @@
-- [Configuring Kazoo](#orge21edc8)
-  - [API Basics](#org9a0a9da)
-  - [Create a device](#orgfaa42c6)
-    - [Via API](#orgdf62784)
-    - [Via MonsterUI](#orgcaad19c)
-  - [Create a callflow for the device](#orge61c82e)
-    - [Via API](#orgd36111f)
-  - [Create an outbound carrier](#orgbb1762b)
-  - [Route numbers to your setup](#orgf32b8cd)
+- [Configuring Kazoo](#org2c87c09)
+  - [API Basics](#orgc19aa2a)
+  - [Create a device](#org4bd6265)
+    - [Via API](#org57c85ce)
+    - [Via MonsterUI](#org0a15515)
+  - [Create a callflow for the device](#orgf82b2fe)
+    - [Via API](#org901af58)
+  - [Create an outbound carrier](#org23933fd)
+  - [Route numbers to your setup](#org7a28157)
 
 
 
-<a id="orge21edc8"></a>
+<a id="org2c87c09"></a>
 
 # Configuring Kazoo
 
 This guide assumes you've installed Kazoo via one of the supported methods and are now ready to create devices, users, carriers, etc.
 
 
-<a id="org9a0a9da"></a>
+<a id="orgc19aa2a"></a>
 
 ## API Basics
 
@@ -41,12 +41,12 @@ export ACCOUNT_ID="{ACCOUNT_ID}"
 Now your shell will have an auth token and account id to use (please export the real values and not the {&#x2026;} placeholders.
 
 
-<a id="orgfaa42c6"></a>
+<a id="org4bd6265"></a>
 
 ## Create a device
 
 
-<a id="orgdf62784"></a>
+<a id="org57c85ce"></a>
 
 ### Via API
 
@@ -68,19 +68,19 @@ curl -X PATCH -H "X-Auth-Token: $AUTH_TOKEN" \
 Using the realm of the account, you should now be able to register a phone using the credentials created.
 
 
-<a id="orgcaad19c"></a>
+<a id="org0a15515"></a>
 
 ### Via MonsterUI
 
 Use SmartPBX - Screenshots welcomed
 
 
-<a id="orge61c82e"></a>
+<a id="orgf82b2fe"></a>
 
 ## Create a callflow for the device
 
 
-<a id="orgd36111f"></a>
+<a id="org901af58"></a>
 
 ### Via API
 
@@ -95,7 +95,7 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 You should now be able to create a second device and call 1001 to ring the first device
 
 
-<a id="orgbb1762b"></a>
+<a id="org23933fd"></a>
 
 ## Create an outbound carrier
 
@@ -122,7 +122,7 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 If you use the regex above, any number 5 digits or more will route to your carrier.
 
 
-<a id="orgf32b8cd"></a>
+<a id="org7a28157"></a>
 
 ## Route numbers to your setup
 
@@ -130,27 +130,27 @@ Getting numbers to route in Kazoo requires a few steps. This guide will use the 
 
 1.  Add the carrier to the ACLs
 
-```bash
-sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
-```
+    ```bash
+    sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
+    ```
 
-1.  Add a number that you expect your carrier to route to you
+    You can set the IP as a raw IPv4 IP address or in [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation).
+2.  Add a number that you expect your carrier to route to you
 
-```bash
-curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-     -d '{"data":{}}' \
-     "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
+    ```bash
+    curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+         -d '{"data":{}}' \
+         "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
 
-# Activate the number
-curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-     -d '{"data":{}}' \
-     "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
-```
+    # Activate the number
+    curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+         -d '{"data":{}}' \
+         "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
+    ```
+3.  Create a callflow for that DID. You could also amend the callflow created for the first device, adding the number to its "numbers" array.
 
-1.  Create a callflow for that DID. You could also amend the callflow created for the first device, adding the number to its "numbers" array.
-
-```bash
-curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-     -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
-     http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
-```
+    ```bash
+    curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+         -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
+         http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
+    ```
