@@ -1,8 +1,10 @@
+## Cluster Health
+
+
+
 These instructions assume you are running as `root`. All services MUST be working as indicated in order to have a properly running **Kazoo** platform.
 
-
-
-######**FreeSWITCH**
+## FreeSWITCH
 
 Is **FreeSWITCH** running?
  
@@ -26,7 +28,7 @@ Is **FreeSWITCH** Connected?
 
 You should see at least one of your other servers listed. If you don't, or there are no listeners, then **FreeSWITCH** is running by `ecallmgr` is not connected to it.
  
-######**ECallMgr**
+## ECallMgr
 
 Is **ECallMgr** Running?
 
@@ -43,7 +45,6 @@ This command should return a list of **FreeSWITCH** nodes which **ECallMgr** is 
 If it does not, try restarting `ECallMgr`:
 
   `service ecallmgr restart`
- 
 
 Check **RabbitMQ** status
 
@@ -105,7 +106,8 @@ If not then:
  
 `# service rabbitmq-server restart`
  
-######**Kazoo Applications**
+ 
+## Kazoo Applications
  
 `# service whapps status`
  
@@ -138,7 +140,7 @@ and if not
 `# service haproxy restart`
  
 
-######Check **BigCouch**
+## Check BigCouch
 
 Assuming localhost
  
