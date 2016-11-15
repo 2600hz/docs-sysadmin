@@ -1,5 +1,7 @@
 ## Kazoo and TDM
 
+
+
 **Kazoo** allows you to connect your **FreeSWITCH** servers to TDM-based networks via PRIs or other digital circuits. Using cards 
 supporting the **FreeSWITCH FreeTDM** system you can program **Kazoo** to utilize hardware inside **FreeSWITCH** servers to call via those 
 circuits. The current **Kazoo FreeTDM** support is fairly limited. You must have a TDM card installed, with similar capacity, in each system where calls are to be placed. To configure the user of TDM circuits, add a document such as the sample below to your offnet or carriers record:
