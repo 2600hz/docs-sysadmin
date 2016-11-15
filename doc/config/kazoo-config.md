@@ -1,7 +1,7 @@
-#
-Kazoo Config
+## Kazoo Config
 
-Created by Karl Anderson, last modified on Apr 12, 2013 
+
+```
 ; config.ini sample
 ; section are between [] = [section]
 ; key = value
@@ -25,3 +25,4 @@ admin_port = 5986
 syslog = info
 console = notice
 file = error
+```
