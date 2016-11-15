@@ -65,7 +65,7 @@ pages:
     - 'Kazoo-WhApp' : 'doc/WhApp/build.md'
     - 'Crossbar-API' : 'doc/crossbar/api-design.md'
     - 'Crossbar-REST' : 'doc/crossbar/REST-SSL.md'
-    - 'Crossbar-Haproxy' : 'doc/crossbar/haproxy.md'
+    - 'Crossbar-Haproxy' : 'doc/crossbar/HaProxy.md'
     - 'Kazoo-Routing' : 'doc/carrier-numbers/routing.md'
     - 'Kazoo-CarrierModules' : 'doc/config/carrier-modules.md'
     - 'Advanced-Concepts' : 'doc/intro/advanced-concepts.md'
