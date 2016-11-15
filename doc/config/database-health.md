@@ -28,13 +28,11 @@ Then check to see if the compactor process is running:
 
 You should see a response like
 ```
-  {ok,[{node, bigcouch@db001-abc-server.2600hz.com
- },
- 
-  {db,offnet
- },
- {wait_left,9178},
- {queued_jobs,none}]}`
+  {ok,
+    [{node, bigcouch@db001-abc-server.2600hz.com},
+      {db,offnet},
+      {wait_left,9178},
+      {queued_jobs,none}]}
  ```
  
 This is good news! Automatic compaction is running. Based on the above, it's working on `db001-abc-server.2600hz.com` and currently 
@@ -46,14 +44,13 @@ compacting the offnet database. If instead of a `pid` you saw 'undefined', then 
 **CouchDB** compaction is set as a variable in the system configuration `whistle_couch `document. You will need to have `compact_automatically:true`in your `whistle_couch` document, as such:
 ```
     {_id: whistle_couch,
-   default: {
+     default: {
        compact_automatically: true,
        sleep_between_poll: 5000,
        sleep_between_compaction: 60000,
        max_wait_for_compaction_pid: 360000,
        
-    bigcouch_cookie: couch_cookie
-
+     bigcouch_cookie: couch_cookie
    }
 }
 ``` 
@@ -63,7 +60,7 @@ restart **Couch Compactor**:
 ```
 sup whapps_config flush
 sup couch_compactor_fsm stop_auto_compaction
-sup couch_compactor_fsm start_auto_compaction`
+sup couch_compactor_fsm start_auto_compaction
 ```
 
 
@@ -100,7 +97,9 @@ Then run your manual compaction. When manual compaction is complete, re-start au
     some_db
     ```
     #compact the DB 
+    
     `some_db`
+    
 on the server `db1.somehost.com`
  
 3.
