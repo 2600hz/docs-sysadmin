@@ -1,6 +1,7 @@
 ## CALL RATING
 
 
+
 **Kazoo** provides a basic facility to load a rate-deck into the system for the purpose of rating each call. The rate is only utilized if 
 the system determines the caller does not have any flat-rate services available for the number being dialed.
 
