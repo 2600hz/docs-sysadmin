@@ -62,7 +62,7 @@ pages:
     - 'Kazoo-Provider' : 'doc/carrier-numbers/kazoo-provider.md'
     - 'Kazoo-NumbersDocsI' : 'doc/carrier-numbers/kazoo-numberdoc.md'
     - 'Kazoo-Numberlifecycle' : 'doc/carrier-numbers/kazoo-numberlifecycle.md'
-    - 'Kazoo-WhApp' : 'doc/whapp/build.md'
+    - 'Kazoo-WhApp' : 'doc/WhApp/build.md'
     - 'Crossbar-API' : 'doc/crossbar/api-design.md'
     - 'Crossbar-REST' : 'doc/crossbar/rest-ssl.md'
     - 'Crossbar-Haproxy' : 'doc/crossbar/haproxy.md'
