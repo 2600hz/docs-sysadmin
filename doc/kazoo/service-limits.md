@@ -1,5 +1,7 @@
 ## Kazoo Service Limits
 
+
+
 **Kazoo** provides facilities to limit what services are being used by a particular client. Limits can involve simultaneous outbound channels, simultaneous inbound channels, total channel count, and enforcement of credit minimums. 
 
 **These features can be used to provide:**
