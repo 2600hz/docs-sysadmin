@@ -1,8 +1,11 @@
-SUP Commands
+## SUP Commands
 
-* `sup stepswitch_maintenance flush`
-  Stepswitch caches the properties of a number when it looks them up, including the account it belongs to.
-  If the number is updated via the API it will be removed from the cache automatically. However, if a manual change is made you may want to flush the cache so it takes affect.
+
+
+ `sup stepswitch_maintenance flush`  
+ 
+Stepswitch caches the properties of a number when it looks them up, including the account it belongs to. If the number is updated via the API it will be removed from the cache automatically. However, if a manual change is made you may want to flush the cache so it takes affect.
+
   ```shell
   [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance flush
   sup stepswitch_maintenance refresh
@@ -10,6 +13,7 @@ SUP Commands
 
 Stepswitch uses the offnet database which must be set up properly so resources can be queried (see CouchDB views).
 This command will ensure the database is present, properly configured to the version of Stepswitch and clean up any depreciated documents that might be present.
+
 ```shell
 [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance refresh
 sup stepswitch_maintenance reload_resources
@@ -33,11 +37,16 @@ This provides insight into what account a number is associated with for inbound 
 43579fc0a3aa11e29e960800200c9a66
 ,[{force_outbound,false},{pending_port,false},{local,false},{inbound_cnam,false}]}
 ```
-The return is formated as: {ok, ACCOUNT ID, LIST OF PARAMETERS}
+
+The return is formated as: `{ok, ACCOUNT ID, LIST OF PARAMETERS}`
+
 Parameters:
-  * `force_outbound` - If this is false when an account in the system calls this number it will no leave the Kazoo platform (known as on-net calls)
-  * `pending_port` - If this is true then the number was created as a port request but no inbound request from the carrier has not occurred yet (port is not complete).
-  * `inbound_cnam` - If this is true when inbound calls are made to this number a CNAM lookup will take place to update the caller id name in the US.
+
+   `force_outbound` - If this is false when an account in the system calls this number it will no leave the Kazoo platform (known as on-net calls)
+   
+  `pending_port` - If this is true then the number was created as a port request but no inbound request from the carrier has not occurred yet (port is not complete).
+  
+   `inbound_cnam` - If this is true when inbound calls are made to this number a CNAM lookup will take place to update the caller id name in the US.
 
 ```shell
 sup stepswitch_maintenance reload_resources NUMBER
@@ -57,4 +66,5 @@ bae2f840a3d311e29e960800200c9a66
 sip:+14158867998@192.168.4.16
 }]
 ```
-The return is formatted as a list of: {RESOURCE ID, DELAY (in seconds), SIP URI}
+
+The return is formatted as a list of: `{RESOURCE ID, DELAY (in seconds), SIP URI}`
