@@ -1,13 +1,14 @@
-**Login Issues**
+## Login Issues
 
 
-User can't login: Check that the API Url set up in the JS / config.js is correct.
 
-User can login but lands on a white page: Check that the API Url of the apps are setup correctly in the database. Apps are defined in the admin account database, in the `app_store` view. If you need to update these documents, refresh the views: 
+1. User can't login: Check that the API Url set up in the JS / `config.js` is correct.
+
+2. User can login but lands on a white page: Check that the API Url of the apps are setup correctly in the database. Apps are defined in the admin account database, in the `app_store` view. If you need to update these documents, refresh the views: 
 
 `sup whapps_maintenance blocking_refresh`
 
-**Phone Numbers Issues**
 
+## Phone Numbers Issues
 
-User can't search/buy/list numbers: Make sure that the correct `phonebook_url` are defined properly in the `system_configs`, `crossbar.phone_numbers` and `number_manager.other`.
+1. User can't search/buy/list numbers: Make sure that the correct `phonebook_url` are defined properly in the `system_configs`, `crossbar.phone_numbers` and `number_manager.other`.
