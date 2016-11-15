@@ -1,5 +1,7 @@
 ## Optimize Kazoo UI
 
+
+
 How to optimize **Kazoo** UI? The optimizer will reduce the size, obfuscate and reformat all the CSS and JS file in the project. 
 
 
