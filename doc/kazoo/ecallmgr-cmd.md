@@ -1,5 +1,7 @@
 ## Kazoo ECallMgr
 
+
+
 Also, you are the only person receiving `low_balance` (code change).  I have also stopped the `jonny5` reconciler:
          
 `sup jonny5_maintenance stop_reconciler`
@@ -11,9 +13,8 @@ Also, you are the only person receiving `low_balance` (code change).  I have al
 sup -necallmgr ecallmgr_maintenance conference_summary  
 
 sup -necallmgr ecallmgr_maintenance conference_details
-
 ```
- 
+
 
 ## To fix any errors there is also:
 ```         
@@ -22,8 +23,6 @@ sup -necallmgr ecallmgr_maintenance sync_conferences 
 sup -necallmgr ecallmgr_maintenance sync_conferences freeswitch@server.com
 
 ```
-
-
 ## This brings the complete list to:        
 ```
 sup -necallmgr ecallmgr_maintenance add_fs_node freeswitch@server.com       
