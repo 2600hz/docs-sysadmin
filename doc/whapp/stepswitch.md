@@ -4,30 +4,30 @@
 
  `sup stepswitch_maintenance flush`  
  
-Stepswitch caches the properties of a number when it looks them up, including the account it belongs to. If the number is updated via the API it will be removed from the cache automatically. However, if a manual change is made you may want to flush the cache so it takes affect.
-
-  ```shell
-  [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance flush
-  sup stepswitch_maintenance refresh
+**Stepswitch** caches the properties of a number when it looks them up, including the account it belongs to. If the number is updated via the API it will be removed from the cache automatically. However, if a manual change is made you may want to flush the cache so it takes affect.
+```
+ shell
+ [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance flush
+ sup stepswitch_maintenance refresh
   ```
 
-Stepswitch uses the offnet database which must be set up properly so resources can be queried (see CouchDB views).
-This command will ensure the database is present, properly configured to the version of Stepswitch and clean up any depreciated documents that might be present.
-
-```shell
+**Stepswitch** uses the offnet database which must be set up properly so resources can be queried (see CouchDB views).
+This command will ensure the database is present, properly configured to the version of **Stepswitch** and clean up any depreciated documents that might be present.
+```
+shell
 [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance refresh
 sup stepswitch_maintenance reload_resources
 ```
 
-Stepswitch monitors the offnet database for any changes (manual or API) and update the in-memory resource list.
-However, for older versions without this feature this command must be manually run on all servers with Stepswitch before new or updated resources are used.
-
-```shell
+**Stepswitch** monitors the offnet database for any changes (manual or API) and update the in-memory resource list.
+However, for older versions without this feature this command must be manually run on all servers with **Stepswitch** before new or updated resources are used.
+```
+shell
 [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance reload_resources
 sup stepswitch_maintenance lookup_number {NUMBER}
 ```
 
-When provided with a number Stepswitch will return the known parameters of that number.
+When provided with a number **Stepswitch** will return the known parameters of that number.
 These are drawn from the local cache if present or looked up and cached if not.
 This provides insight into what account a number is associated with for inbound calls as well as if outbound calls to this number will stay on-net.
 
@@ -40,9 +40,9 @@ This provides insight into what account a number is associated with for inbound 
 
 The return is formated as: `{ok, ACCOUNT ID, LIST OF PARAMETERS}`
 
-Parameters:
+## Parameters:
 
-   `force_outbound` - If this is false when an account in the system calls this number it will no leave the Kazoo platform (known as on-net calls)
+   `force_outbound` - If this is false when an account in the system calls this number it will no leave the **Kazoo** platform (known as on-net calls)
    
   `pending_port` - If this is true then the number was created as a port request but no inbound request from the carrier has not occurred yet (port is not complete).
   
