@@ -1,2 +1,1 @@
-## Installing via RPM
-
+## Installing via DEB
