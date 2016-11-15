@@ -14,6 +14,7 @@ New guy just installed his cluster, wants to bill his clients
 
 A service plan document defines services, such as DIDs or SIP devices, which have a cost. It also defines the name of the corresponding element that will be used in your given bookkeeper (i.e. you may call DIDs in Quickbooks Phone Numbers, and therefore you need to map our name to your name). Together, these two concepts make up a service plan. The service plan document(s) is located within a reseller's account. The master account on every system is automatically considered the default reseller.
 
+
 ## Master / Default Service Plans
 
 Standard accounts are accounts which live underneath a reseller. By default, the master account is the first reseller in the system. For the purposes of this example, we'll assume you're creating your first account beneath your master/reseller account.
@@ -123,6 +124,7 @@ It may be useful to have a reseller account with subaccounts, who in turn have t
   SERVICES DATABASE IS UPDATED WITH LATEST COUNT --
   ACCOUNT IS MARKED AS DIRTY
  
+ 
 ## PERIODIC MAINTENANCE:
 
  SCAN FOR DIRTY ACCOUNTS --
@@ -131,6 +133,7 @@ It may be useful to have a reseller account with subaccounts, who in turn have t
  BOOKKEEPER
  IF CUSTOMER IS PART OF A RESELLER, DIRTY THE RESELLER'S ACCOUNT
  
+ 
 ## BOOKKEEPER:
  TAKE NORMALIZED LIST OF ITEMS --
  PASS TO BOOKKEEPER SPECIFIC LOGIC (Could be WHMCS, Braintree, Stripe, etc.)  --
