@@ -1,4 +1,4 @@
-##Crossbar REST SSL
+## Crossbar REST SSL
 
 
 
@@ -60,6 +60,7 @@ Remove the need for a passphrase:
 
 `$ openssl rsa -in crossbar.key -out crossbar.pem`
 
+
 ## Writing RSA key
 
 Generate the certificate signing request (CSR). Be sure, when answering the "Common Name" question to put either your FQDN or IP address that will show in the browser:
@@ -90,6 +91,7 @@ $ openssl x509 -req -in crossbar.csr -CA 2600hzCA.pem -CAkey 2600hzCA.key -CAcre
 Signature ok
 subject=/C=US/ST=California/L=San Francisco/O=2600Hz/CN=thinky64.2600hz.com
 ```
+
 ## Getting CA Private Key
 
 Generate the self-signed certificate:
@@ -97,6 +99,7 @@ Generate the self-signed certificate:
 Signature ok
 subject=/C=US/ST=California/L=San Francisco/O=2600Hz/CN=thinky64.2600hz.com
 `
+
 ## Getting Private key
 
 Modify the **Crossbar** doc in the `system_config` database with the following values:
@@ -161,6 +164,7 @@ $ curl -v -k https://api.2600hz.com:8443/v1/accounts`
 
 ```
 You should now be able to interact with your APIs via `port 8443`, and have the communication protected from endpoint to server and vice versa. You can optionally disable the plaintext API server if you only want your APIs accessible via SSL. Edit the **Crossbar** doc in the `system_config` database, toggling `use_plaintext` from `true` to `false`. The next time **Crossbar** is started, only the SSL API server should start.
+
 
 ## Securing **Kazoo UI**
 
