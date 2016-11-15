@@ -1,5 +1,7 @@
 ## Lineman FreeSWITCH Simulator
 
+
+
 The **FreeSWITCH** tool of `lineman` is designed to allow full emulation of a (currently single) **FreeSWITCH** server.  This allows a workorder greater control to:
 
 1. Without requiring a running **FreeSWITCH** server and SIP endpoint/simulators
@@ -54,12 +56,12 @@ Attribute:
 
 Description:
 
-##Binding
+
+## Binding
 
 A **FreeSWITCH** event binding `args`The argument requested when the binding is invoked `error` if this is set to `true`then the XML value is present to `ecallmgr` as an `error` response.
 
 `clean` If this is set to `false` then the XML value will not be cleaned up. See **Lineman Test Tool** for details.
-
 
 A list of available binds is below:
  
@@ -226,7 +228,6 @@ Example:
     event-header name= username device_1/event-header
     event-header name= realm test.2600hz.com/event-header
     event-header name= user-agent PolycomSoundPointIP-SPIP_330-UA/3.3.2.0413/event-header/freeswitch/sequence/sequences/workorder
-
 
 
 ## Event Headers
