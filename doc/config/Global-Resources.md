@@ -1,12 +1,16 @@
-**GLOBAL RESOURCES**
+## GLOBAL RESOURCES
+
+
 
 Creating carriers to route outbound calls has never been easier! A single doc for each carrier inside the offnet/ database will make a carrier available to all customers. (Individual customers can optionally set their own carriers in the APIs or via a GUI)
 The base doc is pretty simple at this level. Just create a new doc:
  
 `{_id: random_doc_id, name:my carrier}`
  
-**A carrier**
-Defining a carrier for the system is relatively simple. The keys required are `enabled`, `flag`, `weight_cost`, `route`, and `gateway`.
+## A Carrier
+
+
+Defining a carrier for the system is relatively simple. The keys required are `enabled`, `flag`, `weight_cost`, `route`, and `gateway`:
 
 `enabled` // toggles whether the carrier is to be included when deciding how to route an outbound call.
 
@@ -20,32 +24,25 @@ You can add regexes for specific area codes, toll-free, E911, and international 
 
 `gateway` //  a list of gateways provided by the carrier that will handle the routes matched by the regex(s).
 
-`callerid_type` // an optional field that can toggle how CallerID is passed to the carrier. Potential values are 
-`rpid`, `pid`, and from (corresponding to Remote Party ID, P-*-Identity headers, and From).
+`callerid_type` // an optional field that can toggle how CallerID is passed to the carrier. Potential values are `rpid`, `pid`, and from (corresponding to Remote Party ID, P-*-Identity headers, and From).
 
 `formatter` // an optional object of formatting instructions for inbound requests from the carrier.
-
-` {_id:5bbc699c76df9da56363233dcc1214bd, pvt_type:resource, name:Some Carrier, enabled:true, flags:[ ],
-  
+```
+ {_id:5bbc699c76df9da56363233dcc1214bd, pvt_type:resource, name:Some Carrier, enabled:true, flags:[ ], 
       weight_cost: 30,
-   
       rules: [^\\+1(\\d{10})$],
-
       gateways: [... see below ...],
-
       grace_period: 5,
-
       formatters: {request: [ {regex: ^\\+?1?\\d{6}(\\d{4})$,
-
       prefix: ,suffix: }]}
-
     }
- `
+    
+ ```
 
-**Gateways**
+## Gateways
 
-Each gateway has a simple configuration that offers enough flexibility for most carriers.
-The only two required fields are server and enabled, but a host of other parameters are available to tweak the setup.
+
+Each gateway has a simple configuration that offers enough flexibility for most carriers. The only two required fields are server and enabled, but a host of other parameters are available to tweak the setup:
 
 `server` // hostname or IP of the gateway 
 
@@ -63,9 +60,10 @@ The only two required fields are server and enabled, but a host of other paramet
 
 `progress_timeout` //  the number of seconds to wait for the gateway to connect the call before failing to the next gateway
 To clarify the prefix/suffix/capture group, the route sent to the switch will be built as follows:
-DID +12223334444 is being called, and the above regex is matched. The capture group becomes 2223334444. If prefix or suffix are not set, they default to, the empty string. The resulting INVITE will look like PREFIXcapture_groupSUFFIX@SERVER where the text in caps correspond to the fields above.
 
-`
+`DID +12223334444` is being called, and the above `regex` is matched. The capture group becomes `2223334444`. If prefix or suffix are not set, they default to, the empty string. The resulting INVITE will look like `PREFIXcapture_groupSUFFIX@SERVER` where the text in caps correspond to the fields above.
+
+```
 gateways: [
   {server: sip001.server.voip_carrier.com 
    ,username:myacctid 
@@ -76,63 +74,42 @@ gateways: [
    ,enabled: true
   }
 ]
-`
+```
 
-**Bringing it together**
+## Bringing it together
+
 
 Here's the stitched-together carriers document:
- `
-    {_id: 5bbc699c76df9da56363233dcc1214bd
-    
+ ```
+    {_id: 5bbc699c76df9da56363233dcc1214bd   
     ,pvt_type:resource
-   
    ,name:Some Carrier
-   
    ,enabled: true
-   
-   ,flags: []
-   
-   ,weight_cost: 30
-   
+   ,flags: [
+   ,weight_cost: 3
    ,rules: [^\\+1(\\d{10}) ]
-    
-    ,gateways: [
-    
+   ,gateways: [  
     {server:sip.carrier.com
-   
     ,realm: sip.carrier.com
-   
     ,username:username
-    
     ,password: password
-   
     ,prefix:+
-   
     ,suffix: 
-    
     ,codecs: [ ]
-   
     ,enabled: true
-   
      }]
     
-    
     ,grace_period: 5
-   
-   
     ,formatters: {request: [ {regex: ^\\+?1?\\d{6}(\\d{4})$
-   
    ,prefix: 
-  
-  
-  ,suffix: 
-  
+  ,suffix:
    }]
   
   ]
 
 }
- `
+```
+ 
 A carrier is defined. The first has a route that matches E.164 numbers (so US numbers only). The second carrier will match any number starting with 011 or any number that starts with +2-9 (not +1XXXX..., so no US numbers).
  
  
