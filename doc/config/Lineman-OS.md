@@ -1,14 +1,16 @@
-**Lineman OS**
+## Lineman OS
+
+
 
 This tool executes a operating system command.  It can optionally publish the result on a binding so the except tool can compare the result.
 
 
-**Toolbag**
+## Toolbag
 
 This tool has no configuration parameters.
 
 
-**Sequence Elements**
+## Sequence Elements
 
 The only sequence element this tool provides is:
 
@@ -22,8 +24,8 @@ Event
 
 An option event, if specified will be used as the routing key to publish the returned content of the command. Dont forget that sequences run in parallel, use the variables tool to give the event attribute a unique name or your consumers might not be getting the content from this sequence's execution!
  
-**Example:**
-
+Example:
+```
     ?xml version=
     1.0
      encoding=
@@ -41,3 +43,4 @@ An option event, if specified will be used as the routing key to publish the ret
     /sequence
     /sequences
     /workorder
+```
