@@ -1,22 +1,23 @@
-- [Configuring Kazoo](#org16d66e4)
-  - [API Basics](#org9be87b6)
-  - [Create a device](#org1073db1)
-    - [Via API](#orgbe13569)
-    - [Via MonsterUI](#org09361ef)
-  - [Create a callflow for the device](#org9b23dba)
-    - [Via API](#org41ec4d6)
-  - [Create an outbound carrier](#orgc7aee6a)
+- [Configuring Kazoo](#orge21edc8)
+  - [API Basics](#org9a0a9da)
+  - [Create a device](#orgfaa42c6)
+    - [Via API](#orgdf62784)
+    - [Via MonsterUI](#orgcaad19c)
+  - [Create a callflow for the device](#orge61c82e)
+    - [Via API](#orgd36111f)
+  - [Create an outbound carrier](#orgbb1762b)
+  - [Route numbers to your setup](#orgf32b8cd)
 
 
 
-<a id="org16d66e4"></a>
+<a id="orge21edc8"></a>
 
 # Configuring Kazoo
 
 This guide assumes you've installed Kazoo via one of the supported methods and are now ready to create devices, users, carriers, etc.
 
 
-<a id="org9be87b6"></a>
+<a id="org9a0a9da"></a>
 
 ## API Basics
 
@@ -40,12 +41,12 @@ export ACCOUNT_ID="{ACCOUNT_ID}"
 Now your shell will have an auth token and account id to use (please export the real values and not the {&#x2026;} placeholders.
 
 
-<a id="org1073db1"></a>
+<a id="orgfaa42c6"></a>
 
 ## Create a device
 
 
-<a id="orgbe13569"></a>
+<a id="orgdf62784"></a>
 
 ### Via API
 
@@ -67,19 +68,19 @@ curl -X PATCH -H "X-Auth-Token: $AUTH_TOKEN" \
 Using the realm of the account, you should now be able to register a phone using the credentials created.
 
 
-<a id="org09361ef"></a>
+<a id="orgcaad19c"></a>
 
 ### Via MonsterUI
 
 Use SmartPBX - Screenshots welcomed
 
 
-<a id="org9b23dba"></a>
+<a id="orge61c82e"></a>
 
 ## Create a callflow for the device
 
 
-<a id="org41ec4d6"></a>
+<a id="orgd36111f"></a>
 
 ### Via API
 
@@ -94,7 +95,7 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 You should now be able to create a second device and call 1001 to ring the first device
 
 
-<a id="orgc7aee6a"></a>
+<a id="orgbb1762b"></a>
 
 ## Create an outbound carrier
 
@@ -119,3 +120,37 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 ```
 
 If you use the regex above, any number 5 digits or more will route to your carrier.
+
+
+<a id="orgf32b8cd"></a>
+
+## Route numbers to your setup
+
+Getting numbers to route in Kazoo requires a few steps. This guide will use the defaults in the system (read: mostly US-based numbers) to make this fast. Alternative documentation should be created for handling other areas of the world.
+
+1.  Add the carrier to the ACLs
+
+```bash
+sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
+```
+
+1.  Add a number that you expect your carrier to route to you
+
+```bash
+curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+     -d '{"data":{}}' \
+     "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
+
+# Activate the number
+curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+     -d '{"data":{}}' \
+     "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
+```
+
+1.  Create a callflow for that DID. You could also amend the callflow created for the first device, adding the number to its "numbers" array.
+
+```bash
+curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+     -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
+     http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
+```
