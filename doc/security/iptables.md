@@ -2,13 +2,17 @@
 
 
 
-For your Kazoo / Kamailio Servers create a file called secure.sh. Paste the below script into secure.sh and modify to fit your environment.  
-After saving the file you need to make it executable.  
-"chmod +x secure.sh"
-Now let's run our new script. 
-"./secure.sh"
+For your **Kazoo** / **Kamailio** servers create a file called `secure.sh`. Paste the below script into `secure.sh` and modify to fit your environment.  
 
-IPTABLES - Kazoo Server
+After saving the file you need to make it executable.  
+`chmod +x secure.sh`
+
+Now let's run our new script. 
+`./secure.sh`
+
+
+## IPTABLES - Kazoo Server
+```
 #!/bin/bash
 # cwd=/etc/sysconfig/
 #
@@ -89,3 +93,4 @@ iptables-save > /etc/sysconfig/iptables
 #
 iptables -L -v
 
+```
