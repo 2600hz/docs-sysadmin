@@ -98,15 +98,15 @@ pages:
     - 'Inbound-Fail' : 'doc/intro/inbound-call-fail.md'
     - 'Lineman-Test' : 'doc/intro/lineman-test.md'
     - 'Load-Failure' : 'doc/intro/load-failure.md'
-    - 'Login-NoApps' : 'doc/operation/login-noapps.md
+    - 'Login-NoApps' : 'doc/operation/login-noapps.md'
     - 'Create-Template' : 'doc/intro/create-template.md'
     - 'Milliwatt-Config' : 'doc/config/milliwatt-config'
-    - 'Milliwat-Intro' : 'doc/intro/milliwatt.md
+    - 'Milliwat-Intro' : 'doc/intro/milliwatt.md'
     - 'Monitor-Maintain' : 'doc/config/monitor-maintain.md'
     - 'Number-Lifecycle' : 'doc/intro/number-lifecycle.md'
     - 'Kazoo-Optimize' : 'doc/kazoo/kazoo-optimize.md'
     - 'Monster-Optimize' : 'doc/monster/optimize-monster.md'
-    - 'Kazoo-RateEngine' : 'doc/kazoo/raiting-engine.md.
+    - 'Kazoo-RateEngine' : 'doc/kazoo/raiting-engine.md'
     - 'Startup-Sequence' : 'doc/intro/startup-sequence.md'
     - 'Monster-LoginIssue' : 'doc/monster/login-issue.md'
     - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
