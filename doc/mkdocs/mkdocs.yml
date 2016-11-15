@@ -57,7 +57,6 @@ pages:
     - 'Kazoo-Config' : 'doc/config/kazoo-config.md'
     - 'Kazoo-Couch' : 'doc/intro/kazoo-couch.md'
     - 'Kazoo-Media' : 'doc/intro/kazoo-media.md'
-    - 'Kazoo-Mediastream' : 'doc/intro/kazoo-media.md'
     - 'Kazoo-Number-Manager' : 'doc/carrier-numbers/docs.md'
     - 'Kazoo-Carrier' : 'doc/carrier-numbers/kazoo-carrier.md'
     - 'Kazoo-Provider' : 'doc/carrier-numbers/kazoo-provider.md'
