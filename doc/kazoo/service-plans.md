@@ -1,5 +1,7 @@
 ## Service Plans
 
+
+
 Service Plans define costs associated with various services in the system. Services figure out how many devices, trunks, users and similar 
 features are in use for an account. Those totals are applied to one or more service plans on the account and then passed to a bookkeeper to handle the actual billing functionality.
  
