@@ -53,6 +53,7 @@ pages:
 - 'Appendix':
   - 'Advanced-Concepts' : 'doc/intro/Advanced-Concepts.md'
   - 'Basic-SIPp' : 'doc/config/basic-sipp.md'
+  - 'Build-Own' : 'doc/intro/build-own.md'
   - 'CentOS' : 'doc/install/install_manually_centos.md'
   - 'Cluster-Design' : 'doc/intro/cluster-design.md'
   - 'Cluster-Health' : 'doc/operation/cluster-health.md'
@@ -77,6 +78,7 @@ pages:
   - 'Home-Page' : 'doc/kazoo/home-page.md'
   - 'Inbound-Call' : 'doc/intro/inbound-call-issue.md'
   - 'Inbound-Fail' : 'doc/intro/inbound-call-fail.md'
+  - 'iSpeech-TTS' : 'doc/config/adding-ispeech-tts.md'
   - 'Jonny5-WhApp' : 'doc/WhApp/jonny5.md'
   - 'Kazoo-CSS' : 'doc/config/css-custom.md'
   - 'Kazoo-Call-Rating' : 'doc/kazoo/call-rating.md'
@@ -116,7 +118,5 @@ pages:
   - 'Startup-Sequence' : 'doc/intro/startup-sequence.md'
   - 'Store-Forward' : 'doc/intro/storefwd.md'
   - 'Sup-Command' : 'doc/config/sup-command'
-  - 'iSpeech-TTS' : 'doc/config/adding-ispeech-tts.md'
-  - 'Build-Own' : 'doc/intro/build-own.md'
-  - 
+
   
