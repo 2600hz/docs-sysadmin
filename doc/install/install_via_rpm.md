@@ -1,6 +1,6 @@
-Installing!
+## Install via RPM
 
-via RPM
+
 
 Overview
  
@@ -125,7 +125,8 @@ Create the admin level account for Kazoo by running this command on a Kazoo node
 # Restart whapps to make sure all the crossbar modules are loaded
 service kz-whistle_apps restart
   
-# Create the account
+## Create the account
+
 /opt/kazoo/utils/sup/sup crossbar_maintenance create_account ACCOUNTNAME SIP.REALM.COM USERNAME PASSWORD
 Connect Ecallmgr to your FreeSWITCH servers
 #Run this command for each FreeSWITCH server
