@@ -14,18 +14,14 @@ Adding **iSpeech** TTS to **Kazoo** provides a nice TTS engine for turning your 
 2. Open up the `system_config` database
 
 3. Edit the speech document:
-
-` { _id : speech ,
-
+```
+ { _id : speech ,
      default:  
-       
 tts_provider : ispeech ,
-       
-tts_url : http://api.ispeech.org/api/json ,
-       
+tts_url : http://api.ispeech.org/api/json ,       
 tts_api_key : YOUR_ISPEECH_API_KEY
 
 }
-`
+```
 
 These configs should take effect the next time something (such as directory or **Pivot's** Say) utilizes the TTS commands in **Kazoo**.  **Kazoo** will proxy/cache the generated .wav file for a time, and normal **FreeSWITCH** media caching will also take place, so an oft-used TTS string should not require accessing **iSpeech** (resulting in audio delays).
