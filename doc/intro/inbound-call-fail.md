@@ -1,7 +1,8 @@
 ## Inbound Call Failure
 
 
-**If you are unable to receive inbound calls (but outbound calls work), you have one of four problems:**
+
+## If you are unable to receive inbound calls (but outbound calls work), you have one of four problems:
 
 1. The carrier who is calling in isn't in your allowed list of inbound IP addresses.
 
@@ -12,7 +13,7 @@
 4. The inbound INVITE packet is malformed or contains required features we don't support
 
 
-**The steps below will help you identify which issue is causing the problem:**
+## The steps below will help you identify which issue is causing the problem:
 
 1. Ensure Carrier is Allowed (ACLs)
 
@@ -133,7 +134,8 @@ Note that each carrier behaves differently when unable to reach your box. Your c
 2. Callers reaching your main menu / IVR
 
 3. Callers ringing your phone but being unable to hear or speak with you (i.e. if your phone does actually ring, but you have no audio, ACLs are not your issue)
- 
+
+
 ## Fixing Your ACLs
 
 1. See the format for ACLs above and correct your database document. The IP address displayed on your **FreeSWITCH** console is NOT the IP address of your carrier if you are using **OpenSIP**s in your cluster, it's the IP address of your own server! Do NOT add the **OpenSIP**s server to your trusted list above. You need to find out your carrier's real IP address through some other method.
@@ -141,12 +143,14 @@ Note that each carrier behaves differently when unable to reach your box. Your c
 2. Reload the ACLs within FreeSWITCH by typing: `cli -x reloadacl` You should see a SUCCESS and an `OK acl reloaded` result
 Once you've updated your ACLs your calls should process properly.
  
+ 
 ## Ensure Number Formatting
 
 We expect inbound calls to be in a format we can understand, with the INVITE URI containing the desired number for routing. Some carriers put the phone number they are trying to reach in a different header, and some carriers simply don't format the number properly. 
 
 You can identify this issue as follows: *XXX*
  
+ 
 ## Ensure Number Mapping in Database
 
 Each phone number processed for inbound calls exists as a small document in a numbers/XXXXX database. These databases check the first five digits of a dialed number and contain a mapping for identifying which account that number belongs to. Sometimes these mappings can break. Before assuming that's what's happened you should check if the number is mapped incorrectly. 
