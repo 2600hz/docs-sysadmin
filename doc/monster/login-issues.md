@@ -6,7 +6,7 @@
 
 2. User can login but lands on a white page: Check that the API Url of the apps are setup correctly in the database. Apps are defined in the admin account database, in the `app_store` view. If you need to update these documents, refresh the views: 
 
-`sup whapps_maintenance blocking_refresh`
+  `sup whapps_maintenance blocking_refresh`
 
 
 ## Phone Numbers Issues
