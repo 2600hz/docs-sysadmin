@@ -15,7 +15,7 @@ Setting up a **Rackspace**, **Amazon**, **Synapse Global**, or other hosted prov
  
 ## Operating System Recommendations
 
-It is strongly recommended that **Kazoo** be deployed on the **Linux** distribution **CentOS**, version 6.4 or 6.5.  Since **FreeSWITCH** is a large influence on **Kazoo**, and they recommend using **CentOS**; we have a similar recommendation. Also note that this is the OS of choice for 2600hz's production deployments. As time goes on, we will be testing other platforms with **Kazoo** and updating this page with recommendations. However, any operating system that **Erlang** or **FreeSWITCH** run on should suffice. 
+It is strongly recommended that **Kazoo** be deployed on the **Linux** distribution **CentOS**, version 6.4 or 6.5.  Since **FreeSWITCH** is a large influence on **Kazoo**, and they recommend using **CentOS**; we have a similar recommendation. Also note that this is the OS of choice for **2600hz**'s production deployments. As time goes on, we will be testing other platforms with **Kazoo** and updating this page with recommendations. However, any operating system that **Erlang** or **FreeSWITCH** run on should suffice. 
 
 
 ## Preparing Computational and Operating System Resources
@@ -31,8 +31,7 @@ If running running the command above results in both the servers name and the do
  
 To configure your system with a FQDN Hostname you can follow these steps:
 
-We will modify the systems "hosts" file such that it will be able to understand a FQDN (such as "bob.example.com") belongs to an IP address.  The hosts file can be found at "/etc/hosts".
+We will modify the systems "hosts" file such that it will be able to understand a FQDN (such as "bob.example.com") belongs to an IP address.  The hosts file can be found at `/etc/hosts`.
  
-If you have a DNS server for the domain, say "example.com" rather than modify the hosts file you could add an A record "bob.example.com" with the servers IP. This will make it easier to manage the cluster if the IP addresses of the equipment is expect to change.  
-However, if you use a DNS service (rather than the hosts file) to resolve the FQDN of the servers in your cluster you need to ensure it is 100% available! DNS failure in this configuration will disrupt voice service.
+If you have a DNS server for the domain, say "example.com" rather than modify the hosts file you could add an A record "bob.example.com" with the servers IP. This will make it easier to manage the cluster if the IP addresses of the equipment is expect to change. However, if you use a DNS service (rather than the hosts file) to resolve the FQDN of the servers in your cluster you need to ensure it is 100% available! DNS failure in this configuration will disrupt voice service.
  
