@@ -31,7 +31,8 @@ When provided with a number **Stepswitch** will return the known parameters of t
 These are drawn from the local cache if present or looked up and cached if not.
 This provides insight into what account a number is associated with for inbound calls as well as if outbound calls to this number will stay on-net.
 
-```shell
+```
+shell
 [root@apps001 example]# /opt/kazoo/utils/sup/sup stepswitch_maintenance lookup_number 4158867900
 {ok,
 43579fc0a3aa11e29e960800200c9a66
