@@ -1,5 +1,7 @@
 ## CentOs Manual Install
 
+
+
 Pre-Requirements
 
 Packages:
@@ -255,7 +257,9 @@ Your **HAProxy** IPs for the **BigCouch** nodes match what's in your **BigCouch*
 Test, using `curl`, both **HAProxy**'s IP/Ports and each **BigCouch** nodes' IP/Ports that they return a **JSON** string.
 Check **BigCouch**'s default.ini for `bind_address = 0.0.0.0`. If you're having issues connecting to this host from the **HAProxy** server, change the `bind_address` IP to the IP **HAProxy** is trying to connect on. Any changes to the configs require a restart of the corresponding service.
 
+
 ## Install FreeSWITCH
+
 *This guide is based on the official **FreeSWITCH** installation Guide*
 
 Pre-Requirements
