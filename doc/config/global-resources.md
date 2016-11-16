@@ -42,7 +42,8 @@ You can add regexes for specific area codes, toll-free, E911, and international 
 ## Gateways
 
 
-Each gateway has a simple configuration that offers enough flexibility for most carriers. The only two required fields are server and enabled, but a host of other parameters are available to tweak the setup:
+Each gateway has a simple configuration that offers enough flexibility for most carriers. 
+The only two required fields are server and enabled, but a host of other parameters are available to tweak the setup:
 
 `server` // hostname or IP of the gateway 
 
