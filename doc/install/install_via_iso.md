@@ -1,10 +1,13 @@
 ## Install via ISO 
 
+
+
 **Overview**
 
 *DISCLAIMER: The Kazoo Single Server ISO is still under development and is not guaranteed to work.*
 
 If you need a small development or testing **Kazoo** environment, a single server installation may work for you. Keep in mind that only using a single server to host the various **Kazoo** platform software results in limited performance and no redundancy or backups. The **Kazoo** platform was designed to be a scalable, failure resistant platform. 
+ 
  
 ## Installing the ISO
 
