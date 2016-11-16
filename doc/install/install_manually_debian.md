@@ -1,6 +1,7 @@
 ## Install Debian Manually
 
 
+
 This guide is a bit outdated and will install on a unrecommended platform. Its not impossible, nut also not for the weak of heart.
  
 Try the single server install (script), the **Kazoo** single server ISO install (experimental) or follow the general install instructions.
@@ -55,7 +56,7 @@ sv start bigcouch #start BigCouch
 svn stop bigcouch #stop BigCouch
 ```
 
-Configure **BigCouch**
+## Configure BigCouch
 
 To set admin users and database folder edit the `local.ini` in `/opt/bigcouch/etc folder`:
 ```
