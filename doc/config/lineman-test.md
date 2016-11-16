@@ -31,7 +31,7 @@ sequences
  .../sequences/workorder
 ```
 
-*Each section will be detailed bellow.
+*Each section will be detailed below*
 
 ## Parameters
 
