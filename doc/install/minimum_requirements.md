@@ -1,17 +1,22 @@
 # Minimum Requirements
 
 
+
 ## Minimal Computational Resources
 
+
 **Kazoo** is designed to be as flexible as possible on what platforms it runs on. Realistically, you would not want to rely on an embedded device with 256MB of RAM to handle 1,000,000 calls per second. That said, with modest hardware **Kazoo** will run just fine for small to medium sized businesses, and scaling to larger capacity servers is relatively seamless and painless.
+
 
 ## Virtualized or not?
 
 Setting up a **Rackspace**, **Amazon**, **Synapse Global**, or other hosted provider is more than acceptable, especially when starting out. As demands increase, moving the **FreeSWITCH** components onto dedicated hardware (or adding more virtualized nodes) is generally enough to increase performance and capacity. Whether you use a virtualized service, dedicated hardware in a datacenter, or a server on your intranet, **Kazoo** will install and work. You can also setup hybrid clusters where some clients are hosted in your "cloud" while others are hosted on site (replicating and failing over to the "cloud" if the premise server goes down). Since joining a **Kazoo** cluster is easy, the configurations possible are flexible and powerful.
  
+ 
 ## Operating System Recommendations
 
 It is strongly recommended that **Kazoo** be deployed on the **Linux** distribution **CentOS**, version 6.4 or 6.5.  Since **FreeSWITCH** is a large influence on **Kazoo**, and they recommend using **CentOS**; we have a similar recommendation. Also note that this is the OS of choice for 2600hz's production deployments. As time goes on, we will be testing other platforms with **Kazoo** and updating this page with recommendations. However, any operating system that **Erlang** or **FreeSWITCH** run on should suffice. 
+
 
 ## Preparing Computational and Operating System Resources
 
