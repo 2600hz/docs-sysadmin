@@ -54,7 +54,7 @@ pages:
   - 'Advanced-Concepts' : 'doc/intro/Advanced-Concepts.md'
   - 'Basic-SIPp' : 'doc/config/basic-sipp.md'
   - 'CentOS' : 'doc/install/install_manually_centos.md'
-  - 'Cluster-Design' : 'doc/intro/cluster-design-patterns.md'
+  - 'Cluster-Design' : 'doc/intro/cluster-design.md'
   - 'Cluster-Health' : 'doc/operation/cluster-health.md'
   - 'Create-Template' : 'doc/intro/create-template.md'
   - 'Crossbar-API' : 'doc/crossbar/api-design.md'
@@ -70,7 +70,7 @@ pages:
   - 'Email--Config' : 'doc/config/email-templates.md'
   - 'Enable-CNAM' : 'doc/kazoo/enable-cnam.md'
   - 'Expand-Cluster' : 'doc/intro/expand-cluster.md'
-  - 'G729-Licensing' : 'doc/intro/G729-licensing.md'
+  - 'G729-Licensing' : 'doc/intro/g729-licensing.md'
   - 'Getting-Started' : 'doc/intro/getting-started.md'
   - 'Global-Resources' : 'doc/config/global-resources.md'
   - 'Happy-Programmer' : 'doc/intro/happy-programmer.md'
@@ -117,3 +117,6 @@ pages:
   - 'Store-Forward' : 'doc/intro/storefwd.md'
   - 'Sup-Command' : 'doc/config/sup-command'
   - 'iSpeech-TTS' : 'doc/config/adding-ispeech-tts.md'
+  - 'Build-Own' : 'doc/intro/build-own.md'
+  - 
+  
