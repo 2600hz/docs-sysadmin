@@ -7,82 +7,83 @@ From http://sipp.sourceforge.net/: **SIPp** is a free Open Source test tool / tr
 
 ## Quick Setup
 
-1. Install **SIPp** using your package manager:
-
-`yum install -y sipp`
+Install **SIPp** using your package manager: `yum install -y sipp`
  
-2. Clone the **2600hz SIPp** example repo onto a server, such as a **Kazoo** app server:
+Clone the **2600hz SIPp** example repo onto a server, such as a **Kazoo** app server: `$ git clone git://github.com/2600hz/sipp.git`
 
-`$ git clone git://github.com/2600hz/sipp.git`
+Create a **Kazoo** account with the Realm : sipp.2600hz.com
 
-3. Create a **Kazoo** account with the Realm : **sipp.2600hz.com**
+On the website hover over 'Voip Services' then click 'Accounts', click 'New Account' and name the account anything you wish.
 
-4. On the website hover over 'Voip Services' then click 'Accounts', click 'New Account' and name the account anything you wish.
+Enter into the Realm **sipp.2600hz.com** and save.
 
-5. Enter into the Realm **sipp.2600hz.com** and save.
+Click 'Use Account'
 
-6. Click 'Use Account'
-
-7. Create a **Kazoo** device:
+Create a **Kazoo** device: 
 ```
 username: user_101
 password: pwd_101
 ```
 
-8. Hover over 'Voip Services' then click 'Devices',
+Hover over 'Voip Services' then click 'Devices',
 
-9. Click 'Add Device' then click 'SIP Device' and give the device any name you wish.
+Click 'Add Device' then click 'SIP Device' and give the device any name you wish.
 
-10. Click 'Advanced Settings'then go to the SIP Setting and change: 
+Click 'Advanced Settings'then go to the SIP Setting and change: 
+
 ```
 username: user_101 
 password: pwd_101
 ```
 
-11. Click 'Save' 
+Click 'Save' 
 
-12. Create a **Kazoo** device:
-``
+Create a **Kazoo** device:
+```
 username: user_102
 password: pwd_102
+```
 
-13. Click 'Add Device'
+Click 'Add Device'
 
-14. Click 'SIP Device' and give the device any name you wish.
+Click 'SIP Device' and give the device any name you wish.
 
-15. Click 'Advanced Settings' then go to the 'SIP Setting' 
+Click 'Advanced Settings' then go to the 'SIP Setting' 
 
-16. From there change:
+From there change:
+
 ```
 username: user_102 
 password: pwd_102
 ```
 
-17. Click 'Save'.
+Click 'Save'.
 
-18. Create a **Kazoo** device with: 
+Create a **Kazoo** device with: 
+
 ```
 username: user_103
 password: pwd_103
 ```
 
-19. Click 'Add Device'
+Click 'Add Device'
 
-20. Click 'SIP Device' and give the device any name you wish.
+Click 'SIP Device' and give the device any name you wish.
 
-21. Click 'Advanced Settings' then go to 'SIP Setting' 
+Click 'Advanced Settings' then go to 'SIP Setting' 
 
-22. Change:
+Change:
+
 ```
 username: user_103
 password: pwd_103 
 ```
 
-23. Click 'Save'.
+Click 'Save'.
 
-24. Enable the 'Check Voicemail' feature code on the account. Hover over 'Voip Services' then click 'Feature Codes'and expand the 'Miscellaneous'section. 
+Enable the 'Check Voicemail' feature code on the account. Hover over 'Voip Services' then click 'Feature Codes'and expand the 'Miscellaneous'section. 
 
-25. Click the 'Enabled'box by the 'Check Voicemail' feature code and click 'Save'. The **SIPp** test account does not need phone numbers, callflows, or voicemials unless you plan to test them.
+Click the 'Enabled'box by the 'Check Voicemail' feature code and click 'Save'. The **SIPp** test account does not need phone numbers, callflows, or voicemials unless you plan to test them.
 
 
 ## Calls to Voicemail with Authentication
