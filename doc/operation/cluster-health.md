@@ -53,8 +53,8 @@ Check **RabbitMQ** status
  service rabbitmq-server status`
 
 That command should return something like:
- 
- ` Status of node rabbit@mydomain.com...
+ ```
+  Status of node rabbit@mydomain.com...
     
   [{pid,2049
    },
@@ -105,7 +105,7 @@ Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:4:4] [rq:4] [async-threads:30]
 If not then:
  
 `# service rabbitmq-server restart`
- 
+ ```
  
 ## Kazoo Applications
  
@@ -129,7 +129,7 @@ Some of these are optional and some are mandatory. I believe **Crossbar** is nec
 
 from the 'Some Useful Commands' section of this wiki.
 
-######**HAProxy**
+## HAProxy
  
 `# service haproxy status`
 
