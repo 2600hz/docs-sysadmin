@@ -117,6 +117,5 @@ pages:
   - 'Registrar-Design' : 'doc/config/registrar-design.md'
   - 'Startup-Sequence' : 'doc/intro/startup-sequence.md'
   - 'Store-Forward' : 'doc/intro/storefwd.md'
-  - 'Sup-Command' : 'doc/config/sup-command'
-
-  
+  - 'Sup-Command' : 'doc/config/sup-command.md'
+  - 'iSpeech-TTS' : 'doc/config/adding-ispeech-tts.md'
