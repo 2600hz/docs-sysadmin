@@ -56,7 +56,6 @@ SMS is free on inbound in most cases when you go direct to the carrier. However,
  
 ## Outbound Calling 
 
-
 **Long Distance Calling**
 
 Long distance calling in the US and in most other places still is charged per-minute. Many people have run statistics and advertise 
