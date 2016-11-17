@@ -25,5 +25,6 @@ sup crossbar_module_sup stop_mod cb_noauthz
 We just stopped and unloaded the two dummy modules that blindly reply to authentication and authorization requests. You will now be enforcing username/password and auth token requirements as normal.
  
 To verify the enabling/disabling
+
 XXXX
 
