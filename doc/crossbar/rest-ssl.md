@@ -27,9 +27,7 @@ Sign the `root` key (fill out a questionaire):
 
 `$ openssl req -x509 -new -nodes -key 2600hzCA.key -days 1024 -out 2600hzCA.pem`
 
-You are about to be asked to enter information that will be incorporated
-into your certificate request. What you are about to enter is what is called a "Distinguished Name" or a "DN".
-There are quite a few fields but you can leave some blank, in some fields there will be a default value. If you enter ' . ', the field will be left blank.
+You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a "Distinguished Name" or a "DN". There are quite a few fields but you can leave some blank, in some fields there will be a default value. If you enter ' . ', the field will be left blank.
 
 -----
 ```
@@ -95,6 +93,7 @@ subject=/C=US/ST=California/L=San Francisco/O=2600Hz/CN=thinky64.2600hz.com
 ## Getting CA Private Key
 
 Generate the self-signed certificate:
+
 `$ openssl x509 -req -days 60 -in crossbar.csr -signkey crossbar.key -out crossbar.crt
 Signature ok
 subject=/C=US/ST=California/L=San Francisco/O=2600Hz/CN=thinky64.2600hz.com
