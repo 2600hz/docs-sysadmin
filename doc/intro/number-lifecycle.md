@@ -32,9 +32,7 @@ This document describes the lifecycle of direct inward dialing (DID) numbers.
 
 5. Only numbers in the `port_in` state allow the porting documents to be managed.
 
-6. These numbers can only exist in the following states: 
-
-  a. `in_service`, `port_out`, and `disconnected`. 
+6. These numbers can only exist in the following states: `in_service`, `port_out`, and `disconnected`. 
 
 7. None of these transitions can be preformed by accounts.
 
@@ -80,7 +78,6 @@ This document describes the lifecycle of direct inward dialing (DID) numbers.
   c. The new account assignment is a descendant of the current assignment.
 
   d. When a number is reserved the new assignment is added to the history of assignments.
-
 
 7. A flagged account can create a reserved number of type `wnm_local`. These numbers can only be acquired and managed by the creating account or a descendant.
 
