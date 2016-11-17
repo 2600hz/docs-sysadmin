@@ -1,5 +1,7 @@
 ## Create A Template 
 
+
+
 Give your authors a helping hand by using templates in your documentation space. You will need "Space Administrator" permissions to create templates.
 
 To create a Template:
@@ -13,4 +15,4 @@ To create a Template:
 4. Your template will become available in the 'Create' dialog for this space.
 
 
-*Useful hint Confluence Administrators can also make templates that are available across your whole Confluence instance.
+*Useful hint: **Confluence** Administrators can also make templates that are available across your whole **Confluence** instance.
