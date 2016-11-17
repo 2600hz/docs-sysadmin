@@ -1,5 +1,6 @@
-
 ## Database Design
+
+
 
 *Created by Darren Schreiber on May 13, 2012* 
 
@@ -48,6 +49,7 @@ Replication also enables you to be strategic in where you host your clusters. If
 ## Why **BigCouch**
 
 **CouchDB** does not natively do clustering; **BigCouch** adds a nice layer of clustering on top of the already great replication and storage of **CouchDB**. With **BigCouch**, partitioning databases across several nodes increases data availability (because nodes inevitable come and go), making sure you can continue to route calls, but also so you can increase storage capacity seamlessly without the applications using the cluster being aware of it.
+
 
 ## What are we modelling?
 
