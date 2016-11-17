@@ -25,7 +25,7 @@
 *** IT'S VERY IMPORTANT YOU DO NOT SIMPLY CUT AND PASTE THIS INTO YOUR DB DOCUMENT. IT IS A GENERIC EXAMPLE AND REQUIRES YOUR CUSTOM DATA ***
 
 
-**An example for this format is as follows:**
+## Example
 
     {_id: ecallmgr,default: {
        
@@ -140,8 +140,7 @@ Note that each carrier behaves differently when unable to reach your box. Your c
 
 1. See the format for ACLs above and correct your database document. The IP address displayed on your **FreeSWITCH** console is NOT the IP address of your carrier if you are using **OpenSIP**s in your cluster, it's the IP address of your own server! Do NOT add the **OpenSIP**s server to your trusted list above. You need to find out your carrier's real IP address through some other method.
 
-2. Reload the ACLs within FreeSWITCH by typing: `cli -x reloadacl` You should see a SUCCESS and an `OK acl reloaded` result
-Once you've updated your ACLs your calls should process properly.
+2. Reload the ACLs within FreeSWITCH by typing: `cli -x reloadacl` You should see a SUCCESS and an `OK acl reloaded` result once you've updated your ACLs your calls should process properly.
  
  
 ## Ensure Number Formatting
