@@ -7,12 +7,8 @@
 
 ## PCMU
  
-Plain old audio, uncompressed (64k) regular phone line.
- 
-PCMU is OK if you can guarantee the audio signal is consistent around 200-300ms latency
- 
-T.38 - At least two sides must understand T.38 to use it
- 
+Plain old audio, uncompressed (64k) regular phone line. PCMU is OK if you can guarantee the audio signal is consistent around 200-300ms latency. T.38 - At least two sides must understand T.38 to use it:
+
 Negotiation was be successful between the two sides. Who negotiates first?
  
 v0, v1, v2, v3, ECM, v17 - Max Speed (14400/9600)
