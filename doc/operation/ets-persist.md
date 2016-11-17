@@ -37,67 +37,33 @@ This might go in your `gen_server`, `gen_listener`, etc.
 1. Defining the ETS properties
 ```
 -export([table_id/0
-        
         ,table_options/0
-        
         ,find_me_function/0
-        
         ,gift_data/0
-        
         ]).
  
 table_id() -
- 
  ?MODULE. %% Any atom will do
-
-
  table_options() -[].
-
  find_me_function() -
- 
  whereis(?MODULE).
-
  gift_data() -
+ok.
+#This might go in your application's supervisor
 
-ok
-.
-This might go in your application's supervisor
+#Start the manager process
 
-Start the manager process
-
-    -define(CHILDREN, [?WORKER_ARGS(
-
-    kazoo_etsmgr_srv
-
-    , [[{
-
-    table_id
-
-    , your_srv:table_id()}
-                                                       
-
+    -define(CHILDREN, [?WORKER_ARGS(kazoo_etsmgr_srv, [[{
+    table_id, your_srv:table_id()}                                                    
     ,{
 
-    table_options
-
-    , your_srv:table_options()}
-
-    ,{
-  
-    find_me_function
-
-    , fun your_srv:find_me_function/0}
-
-    ,{
-
+    table_options, your_srv:table_options()}
+    ,{find_me_function, fun your_srv:find_me_function/0},
+    {
      gift_data
-
-     ,your_srv:gift_data()}
-
-    ]])
-
+     ,your_srv:gift_data()}]])
     ,...
-
+    
     ]).
                   
 ```
@@ -106,12 +72,9 @@ In your `gen_server`/`gen_listener`, handle receiving control of the ETS table
 **Gain control**
 
 `handle_info({
-ETS-TRANSFER
-, TableId, From, GiftData}, State) -
-
-  %% Now this process can write to the ETS table
-  {
-noreply
-, State};`
+ ETS-TRANSFER
+ ,TableId, From, GiftData}, State) -
+  #Now this process can write to the ETS table
+  {noreply, State};`
  
 Now your process should be all set to write to the ETS table (and you can do the reads in the calling processes to parallelize reading, unless you want to serialize the reads through the server as well).
