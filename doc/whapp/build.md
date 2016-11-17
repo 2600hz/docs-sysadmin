@@ -37,7 +37,7 @@ You will be prompted for the username and password. If you haven't set one, pres
 
 ## RabbitMQ
 
-Similar to **CouchDB**, we have an abstraction layer for **RabbitMQ** and a simple configuration file for it as well, located at          
+Similar to **CouchDB**, we have an abstraction layer for **RabbitMQ** and a simple configuration file for it as well, located at:          
 
 `$ KAZOO/lib/whistle_amqp-X.Y.Z/priv/startup.config` 
 
