@@ -1,5 +1,7 @@
 ## Happy programmers write happy code
 
+
+
 Summarized thusly: 
 
 *Only program the happy case, what the specification says the task is supposed to do ~ Joe Armstrong*
