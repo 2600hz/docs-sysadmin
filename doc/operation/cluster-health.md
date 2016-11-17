@@ -8,11 +8,11 @@ These instructions assume you are running as `root`. All services MUST be workin
 ## FreeSWITCH
 
 Is **FreeSWITCH** running?
- 
-  `service freeswitch status
+``` 
+  service freeswitch status
  
-  freeswitch(pid:xxxx): up`
-
+  freeswitch(pid:xxxx): up
+```
 If not then:
 
   `service freeswitch start`
@@ -56,7 +56,7 @@ Check **RabbitMQ** status
 
 That command should return something like:
  ```
-  Status of node rabbit@mydomain.com...
+  #Status of node rabbit@mydomain.com...
     
   [{pid,2049
    },
@@ -78,6 +78,7 @@ That command should return something like:
   {os,{unix,linux}},
  
    {erlang_version,
+   
 Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:4:4] [rq:4] [async-threads:30] [kernel-poll:true]\n},
  
 {memory,[{total, 26165880},
@@ -104,7 +105,7 @@ Erlang R14B03 (erts-5.8.4) [source] [64-bit] [smp:4:4] [rq:4] [async-threads:30]
 
 ...done.
  
-If not then:
+#If not then:
  
 `# service rabbitmq-server restart`
  ```
@@ -113,14 +114,10 @@ If not then:
  
 `# service whapps status`
  
-Should give you something like:
- 
-Searching for running **WhApps** on 'whistle_apps@mydomain.com
-
-`[cdr,sysconf,conference,registrar,hangups,media_mgr,crossbar,callflow,
- 
-stepswitch]`
- 
+Should give you something like: Searching for running **WhApps** on `whistle_apps@mydomain.com`
+```
+[cdr,sysconf,conference,registrar,hangups,media_mgr,crossbar,callflow,stepswitch]
+ ```
 If it does not, try restarting it. 
 
 `service whapps restart`
@@ -136,9 +133,7 @@ from the 'Some Useful Commands' section of this wiki.
  
 `# service haproxy status`
 
-haproxy (pid  xxxx) is running...
- 
-and if not
+haproxy (pid  xxxx) is running...and if not
  
 `# service haproxy restart`
  
