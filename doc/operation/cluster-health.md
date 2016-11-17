@@ -4,6 +4,7 @@
 
 These instructions assume you are running as `root`. All services MUST be working as indicated in order to have a properly running **Kazoo** platform.
 
+
 ## FreeSWITCH
 
 Is **FreeSWITCH** running?
@@ -21,13 +22,14 @@ Is **FreeSWITCH** Connected?
 **FreeSWITCH** must be connected to the rest of the platform. You can check this from within **FreeSWITCH** itself. Enter the 
 
 **FreeSWITCH** CLI and check for erlang listener(s). You should have at least one:
+```
+  cli -x 
 
-  `cli -x 
-
-  erlang listeners`
-
+  erlang listeners
+```
 You should see at least one of your other servers listed. If you don't, or there are no listeners, then **FreeSWITCH** is running by `ecallmgr` is not connected to it.
  
+ 
 ## ECallMgr
 
 Is **ECallMgr** Running?
@@ -128,6 +130,7 @@ Some of these are optional and some are mandatory. I believe **Crossbar** is nec
 `whapps_maintenance:refresh().`
 
 from the 'Some Useful Commands' section of this wiki.
+
 
 ## HAProxy
  
