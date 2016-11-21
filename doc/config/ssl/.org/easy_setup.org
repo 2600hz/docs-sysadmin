@@ -1,84 +1,66 @@
-- [Quick SSL Setup Guide](#org8171286)
-  - [Let's Encrypt Cert Setup](#orgce39c9b)
-    - [Setup Let'sEncrypt and Apache](#org6e1c560)
-    - [Auto-renew](#org60e370d)
-  - [Setup Apache as a reverse proxy](#org1528f34)
-    - [MonsterUI](#org5313361)
-    - [API Reverse Proxy](#org27bb82a)
-    - [Reconfigure MonsterUI and the Apps](#orgf0ebbfc)
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: Easy Setup of SSL
+#+DATE: <2016-11-21 Mon>
+#+AUTHOR: James Aimonetti
+#+EMAIL: james@2600hz.com
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.0.50.1 (Org mode 9.0)
 
-
-
-<a id="org8171286"></a>
-
-# Quick SSL Setup Guide
+* Quick SSL Setup Guide
 
 This guide assumes you have configured your DNS properly to point to the server you wish to secure. It will assume you are using Apache to serve MonsterUI and as a reverse proxy for Crossbar (the API server) for SSL termination.
 
+** Let's Encrypt Cert Setup
 
-<a id="orgce39c9b"></a>
-
-## Let's Encrypt Cert Setup
-
-We'll use [Let's Encrypt](https://letsencrypt.org/) to generate a free SSL certificate for us. See [these instructions](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-14-04) for a more detailed guide.
-
-```bash
+We'll use [[https://letsencrypt.org/][Let's Encrypt]] to generate a free SSL certificate for us. See [[https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-14-04][these instructions]] for a more detailed guide.
+#+BEGIN_SRC bash
 # First, get the script from EFF
 sudo wget -O /usr/local/sbin https://dl.eff.org/certbot-auto
 
 # Make it executable
 sudo chmod a+x /usr/local/sbin/certbot-auto
-```
+#+END_SRC
 
-
-<a id="org6e1c560"></a>
-
-### Setup Let'sEncrypt and Apache
+*** Setup Let'sEncrypt and Apache
 
 To start an interactive session to setup the certificate for your domain (in this case, kazoo.mycompany.com):
 
-```bash
+#+BEGIN_SRC bash
 certbot-auto --apache -d kazoo.mycompany.com
-```
+#+END_SRC
 
-Certificates will be installed to \`/etc/letsencrypt/live\`
+Certificates will be installed to `/etc/letsencrypt/live`
 
-
-<a id="org60e370d"></a>
-
-### Auto-renew
+*** Auto-renew
 
 Let's Encrypt certificates are valid for 90 days. Triggering the renewal process is straight-forward:
 
-```bash
+#+BEGIN_SRC bash
 certbot-auto renew
-```
+#+END_SRC
 
 Setup auto-renewal in the form of a cronjob:
 
-```bash
+#+BEGIN_SRC bash
 sudo crontab -e
-```
+#+END_SRC
 
-```crontab
+#+BEGIN_SRC crontab
 30 2 * * 1 /usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log
-```
-
-
-<a id="org1528f34"></a>
-
-## Setup Apache as a reverse proxy
+#+END_SRC
+** Setup Apache as a reverse proxy
 
 Having Apache (or any HTTP server) proxy the requests for the API server makes sense. You can manage your certificates in fewer places and API servers can come and go since each request is independent of any others (no state shared between requests on a given API server).
 
 We create two VirtualHost entries, one for serving MonsterUI assets and one for proxying to Crossbar.
-
-
-<a id="org5313361"></a>
-
-### MonsterUI
-
-```apache
+*** MonsterUI
+#+BEGIN_SRC apache
 <VirtualHost *:443>
     ServerName kazoo.mycompany.com:443
 
@@ -96,14 +78,9 @@ We create two VirtualHost entries, one for serving MonsterUI assets and one for 
         Allow from all
     </Directory>
 </VirtualHost>
-```
-
-
-<a id="org27bb82a"></a>
-
-### API Reverse Proxy
-
-```apache
+#+END_SRC
+*** API Reverse Proxy
+#+BEGIN_SRC apache
 <VirtualHost *:8443>
     ServerName kazoo.mycompany.com:8443
     ProxyPreserveHost On
@@ -115,25 +92,21 @@ We create two VirtualHost entries, one for serving MonsterUI assets and one for 
     ProxyPass / http://10.1.10.29:8000/
     ProxyPassReverse / http://10.1.10.29:8000/
 </VirtualHost>
-```
+#+END_SRC
 
-
-<a id="orgf0ebbfc"></a>
-
-### Reconfigure MonsterUI and the Apps
+*** Reconfigure MonsterUI and the Apps
 
 Once you've reloaded Apache, you'll want to update MonsterUI's config.js:
 
-```bash
+#+BEGIN_SRC bash
 vim /var/www/html/monster-ui/js/config.js
 # Update api_url to 'https://kazoo.mycompany.com:8443/v2'
-```
+#+END_SRC
 
 And re-init the apps:
-
-```bash
+#+BEGIN_SRC bash
 # Re-initialize Monster Apps
 sup crossbar_maintenance init_apps \
 /var/www/html/monster-ui/apps \
 https://kazoo.mycompany.com:8443/v2
-```
+#+END_SRC
