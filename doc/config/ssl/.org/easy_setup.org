@@ -80,6 +80,7 @@ We create two VirtualHost entries, one for serving MonsterUI assets and one for 
 </VirtualHost>
 #+END_SRC
 *** API Reverse Proxy
+Be sure to replace the IPs with the IP Crossbar is using.
 #+BEGIN_SRC apache
 <VirtualHost *:8443>
     ServerName kazoo.mycompany.com:8443

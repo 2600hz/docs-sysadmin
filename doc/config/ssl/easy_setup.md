@@ -1,22 +1,22 @@
-- [Quick SSL Setup Guide](#org8171286)
-  - [Let's Encrypt Cert Setup](#orgce39c9b)
-    - [Setup Let'sEncrypt and Apache](#org6e1c560)
-    - [Auto-renew](#org60e370d)
-  - [Setup Apache as a reverse proxy](#org1528f34)
-    - [MonsterUI](#org5313361)
-    - [API Reverse Proxy](#org27bb82a)
-    - [Reconfigure MonsterUI and the Apps](#orgf0ebbfc)
+- [Quick SSL Setup Guide](#org4bdaaae)
+  - [Let's Encrypt Cert Setup](#org02c5c19)
+    - [Setup Let'sEncrypt and Apache](#orgeb6046d)
+    - [Auto-renew](#org5109f70)
+  - [Setup Apache as a reverse proxy](#org18e6150)
+    - [MonsterUI](#org26cc7b3)
+    - [API Reverse Proxy](#orgc503092)
+    - [Reconfigure MonsterUI and the Apps](#orga3c7a5d)
 
 
 
-<a id="org8171286"></a>
+<a id="org4bdaaae"></a>
 
 # Quick SSL Setup Guide
 
 This guide assumes you have configured your DNS properly to point to the server you wish to secure. It will assume you are using Apache to serve MonsterUI and as a reverse proxy for Crossbar (the API server) for SSL termination.
 
 
-<a id="orgce39c9b"></a>
+<a id="org02c5c19"></a>
 
 ## Let's Encrypt Cert Setup
 
@@ -31,7 +31,7 @@ sudo chmod a+x /usr/local/sbin/certbot-auto
 ```
 
 
-<a id="org6e1c560"></a>
+<a id="orgeb6046d"></a>
 
 ### Setup Let'sEncrypt and Apache
 
@@ -44,7 +44,7 @@ certbot-auto --apache -d kazoo.mycompany.com
 Certificates will be installed to \`/etc/letsencrypt/live\`
 
 
-<a id="org60e370d"></a>
+<a id="org5109f70"></a>
 
 ### Auto-renew
 
@@ -65,7 +65,7 @@ sudo crontab -e
 ```
 
 
-<a id="org1528f34"></a>
+<a id="org18e6150"></a>
 
 ## Setup Apache as a reverse proxy
 
@@ -74,7 +74,7 @@ Having Apache (or any HTTP server) proxy the requests for the API server makes s
 We create two VirtualHost entries, one for serving MonsterUI assets and one for proxying to Crossbar.
 
 
-<a id="org5313361"></a>
+<a id="org26cc7b3"></a>
 
 ### MonsterUI
 
@@ -99,9 +99,11 @@ We create two VirtualHost entries, one for serving MonsterUI assets and one for 
 ```
 
 
-<a id="org27bb82a"></a>
+<a id="orgc503092"></a>
 
 ### API Reverse Proxy
+
+Be sure to replace the IPs with the IP Crossbar is using.
 
 ```apache
 <VirtualHost *:8443>
@@ -118,7 +120,7 @@ We create two VirtualHost entries, one for serving MonsterUI assets and one for 
 ```
 
 
-<a id="orgf0ebbfc"></a>
+<a id="orga3c7a5d"></a>
 
 ### Reconfigure MonsterUI and the Apps
 
