@@ -87,6 +87,7 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 
 If you use the regex above, any number 5 digits or more will route to your carrier.
 ** Route numbers to your setup
+
 Getting numbers to route in Kazoo requires a few steps. This guide will use the defaults in the system (read: mostly US-based numbers) to make this fast. Alternative documentation should be created for handling other areas of the world.
 
 1. Add the carrier to the ACLs
@@ -111,3 +112,11 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
      -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
      http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
    #+END_SRC
+** Create a PBX
+If you have existing PBXes and want to provide them with SIP trunks, create a "connectivity" doc.
+Be sure any DIDs you add here have been added in the above method (or similar).
+#+BEGIN_SRC bash
+curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+     -d '{"data":{"account":{"auth_realm":"{ACCOUNT_SIP_REALM}"},"servers":[{"DIDs":{"+12125554321":{}},"options":{"inbound_format":"e164"},"auth":{"auth_method":"password","auth_user":"{USERNAME}","auth_password":"{PASSWORD}"}}]}}'
+http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/connectivity
+#+END_SRC
