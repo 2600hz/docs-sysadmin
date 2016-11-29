@@ -24,7 +24,7 @@ pages:
     - 'via ISO' : 'doc/install/install_via_iso.md'
 - 'Configuration':
   - 'Quick Start' : 'doc/install/configure_kazoo.md'
-  - 'General Concepts':
+#  - 'General Concepts':
 #     - 'Configuration Documents' : 'doc/config/system_config.md'
   - 'Account Management':
     - 'Manual Creation' : 'doc/config/account_creation.md'
