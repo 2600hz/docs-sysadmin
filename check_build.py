@@ -6,7 +6,10 @@ def parse_page(page):
     "parse a page for existence"
     if isinstance(page, dict):
         for header, pages in page.items():
-            parse_page(pages)
+            if pages is None:
+                print "section ", header, " is incomplete"
+            else:
+                parse_page(pages)
     elif isinstance(page, list):
         for p in page:
             parse_page(p)

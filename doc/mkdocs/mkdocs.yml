@@ -35,7 +35,7 @@ pages:
 #     - 'SSL for APIs' : 'doc/config/ssl/for_api.md'
 #     - 'SSL for WSS' : 'doc/config/ssl/for_wss.md'
 #     - 'SSL for TLS' : 'doc/config/ssl/for_tls.md'
-  - 'Limits':
+#  - 'Limits':
 #     - 'Concepts' : 'doc/config/limits/concepts.md'
 #     - 'Configuration' : 'doc/config/limits/config.md'
 #     - 'Commands' : 'doc/config/limits/commands.md'
