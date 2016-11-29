@@ -10,8 +10,8 @@ def parse_page(page):
     elif isinstance(page, list):
         for p in page:
             parse_page(p)
-    else:
-        if ("index.md" != page) and (not os.path.isfile(page)):
+    elif isinstance(page, str):
+        if "index.md" != page and (not os.path.isfile(page)):
             print "page ", page, " is not valid"
 
 stream = open("doc/mkdocs/mkdocs.yml", 'r')
