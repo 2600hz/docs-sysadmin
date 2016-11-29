@@ -40,15 +40,15 @@ pages:
 #     - 'Configuration' : 'doc/config/limits/config.md'
 #     - 'Commands' : 'doc/config/limits/commands.md'
 - 'Cluster Operation':
-  - 'Monitoring' :
+#  - 'Monitoring' :
 #     - 'Things to Monitor' : 'doc/operation/monitoring.md'
   - 'Security' :
     - 'IPTables' : 'doc/security/iptables.md'
 - 'Advanced Concepts':
   - 'API Control':
     - 'Authentication' : 'doc/crossbar/authentication.md'
-  - 'Extending Kazoo':
-# #     - 'Authorization' : 'doc/extending/authz.md'
+#  - 'Extending Kazoo':
+#     - 'Authorization' : 'doc/extending/authz.md'
 - 'Appendix':
 #   - 'Advanced-Concepts' : 'doc/intro/advanced-concepts.md'
   - 'Basic-SIPp' : 'doc/config/basic-sipp.md'
