@@ -1,15 +1,3 @@
-- [Installation Guide for Centos 7](#org7f23469)
-  - [Setup the server](#orgbf6e301)
-  - [Setting up RabbitMQ](#org2482a6e)
-  - [Setting up Kamailio](#org6fcad7d)
-  - [Setting up FreeSWITCH](#org63ef918)
-  - [Setting up BigCouch](#org950a7a7)
-  - [Setting up HAProxy](#org70b9d92)
-  - [Setting up Kazoo Applications](#org81fec67)
-  - [Setting up ecallmgr](#org9bccde5)
-  - [Setting up MonsterUI](#org65b4b29)
-
-
 
 <a id="org7f23469"></a>
 
