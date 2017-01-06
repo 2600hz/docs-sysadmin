@@ -1,15 +1,3 @@
-- [Configuring Kazoo](#org728b8e7)
-  - [API Basics](#orge01008e)
-  - [Create a device](#org34cfaaa)
-    - [Via API](#orgf05a11c)
-    - [Via MonsterUI](#org685c0b6)
-  - [Create a callflow for the device](#orgcd0f6f9)
-    - [Via API](#orgee602db)
-  - [Create an outbound carrier](#org93a7a98)
-  - [Route numbers to your setup](#org6d191a6)
-  - [Create a PBX](#org5c74911)
-
-
 
 <a id="org728b8e7"></a>
 
