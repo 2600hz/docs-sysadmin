@@ -1,4 +1,4 @@
-ROOT = .
+ROOT = $(shell readlink -f .)
 DOCS_ROOT=$(ROOT)/doc/mkdocs
 
 docs:
