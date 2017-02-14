@@ -1,14 +1,9 @@
-
-<a id="org7f23469"></a>
-
 # Installation Guide for Centos 7
 
 This is a reference guide for installing all of the necessary components for Kazoo. Once you have completed this guide, you should have an all-in-one installation of Kazoo complete and ready to configure for use.
 
 The CentOS packages for the various dependencies are installed along with a wrapper that sets up the various configs and scripts that Kazoo needs. So when you install \`kazoo-kamailio\` you get the vanilla Kamailio packages along with the \`kazoo-kamailio\` overlay. Be aware that you'll need to use \`kazoo-kamailio\` when interacting with systemd.
 
-
-<a id="orgbf6e301"></a>
 
 ## Setup the server
 
@@ -31,9 +26,9 @@ sed -i 's/ONBOOT=no/ONBOOT=yes/' /etc/sysconfig/network-scripts/ifcfg-eth0
 systemctl restart network
 
 # Add 2600Hz RPM server
-# You can find the latest 4.0 RPM here: https://packages.2600hz.com/artifacts/2600hz-release/4.0/centos/7/
-export RPMFILE=2600hz-release-4.0-1.el7.centos.noarch.rpm
-RPMPATH=artifacts/2600hz-release/4.0/centos/7/; \
+# You can find the latest 4.0 RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
+export RPMFILE=2600hz-release-4.0-2.el7.centos.noarch.rpm
+RPMPATH=centos/7/stable/2600hz-release/; \
 RPMSITE=https://packages.2600hz.com; \
 curl -o $RPMFILE -k $RPMSITE/$RPMPATH/$RPMFILE
 yum install $RPMFILE
@@ -49,8 +44,6 @@ ntpdate ntp.2600hz.com
 systemctl start ntpd
 ```
 
-
-<a id="org2482a6e"></a>
 
 ## Setting up RabbitMQ
 
@@ -86,8 +79,6 @@ kazoo-rabbitmq status
 ```
 
 
-<a id="org6fcad7d"></a>
-
 ## Setting up Kamailio
 
 ```bash
@@ -122,8 +113,6 @@ kamctl stats
 ```
 
 
-<a id="org63ef918"></a>
-
 ## Setting up FreeSWITCH
 
 ```bash
@@ -148,8 +137,6 @@ chmod 755 /usr/bin/sipify.sh
 
 Do note that mod\_sofia isn't loaded on boot. FreeSWITCH is shipped with no dialplan as Kazoo itself controls all of the routing decisions, thus FreeSWITCH isn't of much use until Kazoo is connected.
 
-
-<a id="org950a7a7"></a>
 
 ## Setting up BigCouch
 
@@ -181,8 +168,6 @@ curl localhost:5984/_membership | python -mjson.tool
 ```
 
 
-<a id="org70b9d92"></a>
-
 ## Setting up HAProxy
 
 ```bash
@@ -199,8 +184,6 @@ systemctl start kazoo-haproxy
 curl localhost:15984
 ```
 
-
-<a id="org81fec67"></a>
 
 ## Setting up Kazoo Applications
 
@@ -237,8 +220,6 @@ sup -h
 ```
 
 
-<a id="org9bccde5"></a>
-
 ## Setting up ecallmgr
 
 Traditionally ecallmgr ran in its own VM. This is no longer required and ecallmgr can run in the same VM as the rest of the Kazoo applications if you choose.
@@ -269,8 +250,6 @@ fs_cli -x 'sofia status'
 kazoo-kamailio status
 ```
 
-
-<a id="org65b4b29"></a>
 
 ## Setting up MonsterUI
 
