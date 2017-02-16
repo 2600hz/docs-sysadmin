@@ -48,6 +48,8 @@ pages:
     - 'Authentication' : 'doc/crossbar/authentication.md'
 #  - 'Extending Kazoo':
 #     - 'Authorization' : 'doc/extending/authz.md'
+- 'Provisioner':
+    - 'doc/provisioner/README.md'
 - 'Appendix':
 #   - 'Advanced-Concepts' : 'doc/intro/advanced-concepts.md'
   - 'Basic-SIPp' : 'doc/config/basic-sipp.md'
