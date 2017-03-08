@@ -86,6 +86,31 @@ Standard accounts are accounts which live underneath a reseller. By default, the
      }
     }
    }
+   
+   >>The following is how to not bill a client for their first 50 phones, but bill for those after 50
+       
+   "devices": {
+   "_all": {
+   "name": "SIP Device",
+   "as": "sip_devices",
+   "cascade": true,
+   "rates": {
+   "50": 0,
+   "51": 24.95
+   }
+   }
+   },
+   
+   >>   The following will take the first rate that is less than the current quantity and charge that flat rate.  If the currently quantity exceeds all flat rates then the normal process (rate x quantity) is applied.
+   >> The example below reads, if this was for devices: The first 5 devices, inclusive, will charge you $0 a month (IE: free). The 6th device to the 20th, inclusive, will charge you $24.95.  The 21st to 50th, inclusive, will charge you $49.95.  The 51st device and up will be $1.00 a device a month.
+   
+   "rate": 1.00,
+   "rates": {
+   50: 49.95,
+   20: 24.95,
+   5: 0
+   }
+
  
  
  
