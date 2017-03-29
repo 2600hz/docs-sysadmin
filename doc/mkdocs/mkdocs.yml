@@ -44,6 +44,8 @@ pages:
   - 'Security' :
     - 'IPTables' : 'doc/security/iptables.md'
 - 'Advanced Concepts':
+  - 'Shared Line Appearance':
+      - 'doc/operation/shared_line_appearance.md'
   - 'API Control':
     - 'Authentication' : 'doc/crossbar/authentication.md'
 #  - 'Extending Kazoo':
