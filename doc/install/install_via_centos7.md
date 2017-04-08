@@ -12,6 +12,12 @@ This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.c
 Please remember to replace 'ip.add.re.ss' with your server's actual IP address (not localhost either).
 
 ```bash
+# Install updates
+yum update
+
+# Install required packages
+yum install -y yum-utils
+
 # Hostname setup
 hostnamectl set-hostname aio.kazoo.com
 
@@ -26,13 +32,20 @@ sed -i 's/ONBOOT=no/ONBOOT=yes/' /etc/sysconfig/network-scripts/ifcfg-eth0
 systemctl restart network
 
 # Add 2600Hz RPM server
-# You can find the latest 4.0 RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
+# You can find the latest 4.0 RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/4.0/
 export RPMFILE=2600hz-release-4.0-2.el7.centos.noarch.rpm
-RPMPATH=centos/7/stable/2600hz-release/; \
+RPMPATH=centos/7/stable/2600hz-release/4.0/; \
 RPMSITE=https://packages.2600hz.com; \
 curl -o $RPMFILE -k $RPMSITE/$RPMPATH/$RPMFILE
 yum install $RPMFILE
+
+# Set to stable branch (is recommended)
+yum-config-manager --disable 2600hz-experimental
+yum-config-manager --enable 2600hz-stable
+
+# Clear yum cache
 yum clean all
+
 
 # Setup NTPd
 yum install -y ntp
