@@ -221,7 +221,8 @@ sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
 # If you need to import other languages (optional)
 # sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/fr/ca fr-ca
 
-# Create the admin account
+# Create the admin account, remember to replace the branced fields
+# Example: To create an account with the username root, replace {ADMIN_USER} with root
 sup crossbar_maintenance create_account \
 {ACCOUNT_NAME} \
 {ACCOUNT_REALM} \
