@@ -1,12 +1,6 @@
-
-<a id="org728b8e7"></a>
-
 # Configuring Kazoo
 
 This guide assumes you've installed Kazoo via one of the supported methods and are now ready to create devices, users, carriers, etc.
-
-
-<a id="orge01008e"></a>
 
 ## API Basics
 
@@ -29,13 +23,7 @@ export ACCOUNT_ID="{ACCOUNT_ID}"
 
 Now your shell will have an auth token and account id to use (please export the real values and not the {&#x2026;} placeholders.
 
-
-<a id="org34cfaaa"></a>
-
 ## Create a device
-
-
-<a id="orgf05a11c"></a>
 
 ### Via API
 
@@ -56,20 +44,11 @@ curl -X PATCH -H "X-Auth-Token: $AUTH_TOKEN" \
 
 Using the realm of the account, you should now be able to register a phone using the credentials created.
 
-
-<a id="org685c0b6"></a>
-
 ### Via MonsterUI
 
 Use SmartPBX - Screenshots welcomed
 
-
-<a id="orgcd0f6f9"></a>
-
 ## Create a callflow for the device
-
-
-<a id="orgee602db"></a>
 
 ### Via API
 
@@ -82,9 +61,6 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 ```
 
 You should now be able to create a second device and call 1001 to ring the first device
-
-
-<a id="org93a7a98"></a>
 
 ## Create an outbound carrier
 
@@ -110,42 +86,40 @@ curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
 
 If you use the regex above, any number 5 digits or more will route to your carrier.
 
-
-<a id="org6d191a6"></a>
-
 ## Route numbers to your setup
 
 Getting numbers to route in Kazoo requires a few steps. This guide will use the defaults in the system (read: mostly US-based numbers) to make this fast. Alternative documentation should be created for handling other areas of the world.
 
-1.  Add the carrier to the ACLs
 
-    ```bash
-    sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
-    ```
+### Add the carrier to the ACLs
 
-    You can set the IP as a raw IPv4 IP address or in [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation).
-2.  Add a number that you expect your carrier to route to you
+```bash
+sup ecallmgr_maintenance allow_carrier CarrierFoo 1.2.3.4/32
+```
 
-    ```bash
-    curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-         -d '{"data":{}}' \
-         "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
+You can set the IP as a raw IPv4 IP address or in [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation).
 
-    # Activate the number
-    curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-         -d '{"data":{}}' \
-         "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
-    ```
-3.  Create a callflow for that DID. You could also amend the callflow created for the first device, adding the number to its "numbers" array.
+### Add a number that you expect your carrier to route to you
 
-    ```bash
-    curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
-         -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
-         http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
-    ```
+```bash
+curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+    -d '{"data":{}}' \
+    "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567" | python -mjson.tool
 
+# Activate the number
+curl -v -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+    -d '{"data":{}}' \
+    "http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/phone_numbers/+15551234567/activate" | python -mjson.tool
+```
 
-<a id="org5c74911"></a>
+### Create a callflow for that DID
+
+You could also amend the callflow created for the first device, adding the number to its "numbers" array.
+```bash
+curl -X PUT -H "X-Auth-Token: $AUTH_TOKEN" \
+    -d "{\"data\":{\"name\":\"Main Callflow\",\"numbers\":[\"+15551234567\"],\"flow\":{\"module\":\"device\",\"data\":{\"id\":\"$DEVICE_ID\"}}}}" \
+    http://ip.add.re.ss:8000/v2/accounts/$ACCOUNT_ID/callflows | python -mjson.tool
+```
 
 ## Create a PBX
 

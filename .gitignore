@@ -1,3 +1,6 @@
 /doc/index.md
 /doc/mkdocs/mkdocs.local.yml
 /site
+/doc/mkdocs/docs/
+/doc/mkdocs/site/
+/doc/mkdocs/theme/
