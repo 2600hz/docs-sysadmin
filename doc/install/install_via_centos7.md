@@ -16,7 +16,7 @@ Please remember to replace 'ip.add.re.ss' with your server's actual IP address (
 yum update
 
 # Install required packages
-yum install -y yum-utils
+yum install -y yum-utils psmisc
 
 # Hostname setup
 hostnamectl set-hostname aio.kazoo.com
