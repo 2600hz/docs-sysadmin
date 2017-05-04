@@ -26,4 +26,4 @@ curl -v -X POST \
     -d '{"data":{"default":{...}}}'
 ```
 
-Check the schema linked above for the necessary fields to set in the `{...}` portion.
+Check the [JSON schema]((https://github.com/2600hz/kazoo/blob/master/applications/crossbar/priv/couchdb/schemas/system_config.stepswitch.cnam.json)) for the necessary fields to set in the `{...}` portion.
