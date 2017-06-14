@@ -39,13 +39,8 @@ RPMSITE=https://packages.2600hz.com; \
 curl -o $RPMFILE -k $RPMSITE/$RPMPATH/$RPMFILE
 yum install $RPMFILE
 
-# Set to stable branch (is recommended)
-yum-config-manager --disable 2600hz-experimental
-yum-config-manager --enable 2600hz-stable
-
 # Clear yum cache
 yum clean all
-
 
 # Setup NTPd
 yum install -y ntp
@@ -71,19 +66,17 @@ systemctl start kazoo-rabbitmq
 # Check that RabbitMQ is listening
 ss -lpn | grep "5672"
 
-# If you need to forward a port in an active SSH session
-# In this case, forward the management port of RabbitMQ
+# For testing purposes, it can be useful to disable iptables (optional)
+systemctl stop iptables
+
+# Check the RabbitMQ UI (optional)
+# First open an SSH tunnel to localhost:15672,
+# then vist http://localhost:15672 in your prefered browser
 ~C
 ssh> -L 15672:localhost:15672
 Forwarding port.
 
-# For testing purposes, it can be useful to disable iptables (optional)
-systemctl stop iptables
-
-# Check out the API (build monitoring tools around this)
-curl -i -u guest:guest \
-http://localhost:15672/api/overview
-
+# Check out the API (optional, build monitoring tools around this)
 curl -i -u guest:guest \
 http://localhost:15672/api/aliveness-test/%2F
 
@@ -108,21 +101,11 @@ sed -i 's/127\.0\.0\.1/ip.add.re.ss/g' /etc/kazoo/kamailio/local.cfg
 systemctl enable kazoo-kamailio
 systemctl restart kazoo-kamailio
 
-# Check that Kamailio is listening
+# Check that Kamailio is listening (optional)
 ss -ln | egrep "5060|7000"
-
-# Add FreeSWITCH to the dispatcher list (FreeSWITCH doesn't exist yet)
-echo ":1:sip\:ip.add.re.ss\:11000:0:0::aio-fs" \
->> /etc/kazoo/kamailio/dbtext/dispatcher
-
-# Reload the dispatcher
-kamctl fifo ds_reload
 
 # check the dispatcher status
 kazoo-kamailio status
-
-# Check stats for the kamailio
-kamctl stats
 ```
 
 
@@ -137,12 +120,9 @@ systemctl enable kazoo-freeswitch
 systemctl start kazoo-freeswitch
 
 # Check FreeSWITCH status
-fs_cli -x status
+kazoo-freeswitch status
 
-# Check mod_kazoo status
-fs_cli -x 'erlang status'
-
-# Get the sipify script for FreeSWITCH log parsing
+# Get the sipify script for FreeSWITCH log parsing (optional)
 curl -o /usr/bin/sipify.sh \
 https://raw.githubusercontent.com/2600hz/community-scripts/master/FreeSWITCH/sipify.sh
 chmod 755 /usr/bin/sipify.sh
@@ -163,21 +143,18 @@ yum install -y kazoo-bigcouch
 systemctl enable kazoo-bigcouch
 systemctl start kazoo-bigcouch
 
-# Check that BigCouch is listening
+# Check that BigCouch is listening (optional)
 ss -ln | egrep "5984|5986"
 
-# If you need to forward a port to access the API (optional)
+# Check the BigCouch UI (optional)
+# First open an SSH tunnel to localhost:5984,
+# then vist http://localhost:5984/_utils in your prefered browser
 ~C
 ssh> -L 5984:localhost:5984
+Forwarding port.
 
-# Check the API
-curl localhost:5984
-
-# Check the admin API
-curl localhost:5986
-
-# Check nodes involved in the cluster
-curl localhost:5984/_membership | python -mjson.tool
+# Check the status of bigcouch
+kazoo-bigcouch status
 ```
 
 
@@ -193,8 +170,8 @@ yum -y install kazoo-haproxy
 systemctl enable kazoo-haproxy
 systemctl start kazoo-haproxy
 
-# Test the API via HAProxy
-curl localhost:15984
+# Check the status of haproxy
+kazoo-haproxy status
 ```
 
 
@@ -202,7 +179,7 @@ curl localhost:15984
 
 ```bash
 # Install all the Kazoo applications
-yum install -y kazoo-applications kazoo-application-*
+yum install -y kazoo-applications
 
 # Start Kazoo Applications
 systemctl enable kazoo-applications
@@ -231,6 +208,9 @@ sup crossbar_maintenance create_account \
 
 # Use SUP to communicate with the running VM
 sup -h
+
+# Check the status of the Kazoo cluster
+kazoo-applications status
 ```
 
 
@@ -252,13 +232,10 @@ sup ecallmgr_maintenance allow_sbc kamailio1 ip.add.re.ss
 sup ecallmgr_maintenance sbc_acls
 
 # Check FreeSWITCH for ecallmgr connection info
-fs_cli -x "erlang status"
+kazoo-freeswitch status
 
 # Check the status of the VM
-kazoo-applications status
-
-# Check that Sofia is loaded
-fs_cli -x 'sofia status'
+kazoo-ecallmgr status
 
 # Check that Kamailio sees FreeSWITCH
 kazoo-kamailio status
