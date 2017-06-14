@@ -216,26 +216,28 @@ kazoo-applications status
 
 ## Setting up ecallmgr
 
-Traditionally ecallmgr ran in its own VM. This is no longer required and ecallmgr can run in the same VM as the rest of the Kazoo applications if you choose.
-
 ```bash
-# Start ecallmgr if needed
-sup kapps_controller start_app ecallmgr
+# Install Kazoo eCallMgr, it should install with kazoo-applications above but to be sure
+yum install -y kazoo-application-ecallmgr
+
+# Start Kazoo eCallMgr
+systemctl enable kazoo-ecallmgr
+systemctl start kazoo-ecallmgr
 
 # Add FreeSWITCH to ecallmgr
-sup ecallmgr_maintenance add_fs_node freeswitch@aio.kazoo.com
+sup -n ecallmgr ecallmgr_maintenance add_fs_node freeswitch@aio.kazoo.com
 
 # Add Kamailio to the SBC ACLs
-sup ecallmgr_maintenance allow_sbc kamailio1 ip.add.re.ss
+sup -n ecallmgr ecallmgr_maintenance allow_sbc kamailio1 ip.add.re.ss
 
 # List SBC ACLs
-sup ecallmgr_maintenance sbc_acls
-
-# Check FreeSWITCH for ecallmgr connection info
-kazoo-freeswitch status
+sup -n ecallmgr ecallmgr_maintenance sbc_acls
 
 # Check the status of the VM
 kazoo-ecallmgr status
+
+# Check FreeSWITCH for ecallmgr connection info
+kazoo-freeswitch status
 
 # Check that Kamailio sees FreeSWITCH
 kazoo-kamailio status
