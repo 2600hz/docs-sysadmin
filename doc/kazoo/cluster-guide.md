@@ -45,7 +45,7 @@ z=2
 Cluster together the bigcouch nodes from `bc1.z100` (in this example).
 
 ```curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com```  
-Returns
+Returns  
 {"_id":"bigcouch@bc1.z100.somedomain.com","_rev":"3-b13d076f367df4d0c52b236e654b836c"}  
 
 Now add the zone to this bigcouch server and cluster together the other servers.
