@@ -6,11 +6,11 @@ Description: *A guide for installing, configuring and managing your own dedicate
 
 Let's assume the following cluster of servers in 2 zones.  Each zone is in a different datacenter with full access the other zone.  All FQDNs are DNS resolvable.
 
-bc = Bigcouch 
-fs = Freeswitch 
-kz = Kazoo 
-mq = RabbitMQ 
-ka = Kamailio 
+bc = Bigcouch  
+fs = Freeswitch  
+kz = Kazoo  
+mq = RabbitMQ  
+ka = Kamailio  
 
 10.100 = zone 100 
 10.200 = zone 200 
