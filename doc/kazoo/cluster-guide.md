@@ -1,4 +1,4 @@
-## Key Dedicated
+## Cluster Guide
 
 Name: **Kazoo Dedicated Cluster Guide**
 
