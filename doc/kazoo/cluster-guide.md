@@ -34,13 +34,13 @@ ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.40.1 |
 If not using zones leave out the `zone=` config
 
 On each Bigcouch node configure `/etc/kazoo/bigcouch/local.ini` as follows:
-
+```
 [cluster]
 q=3  
 r=2  
 w=2  
 n=3  
-z=2  
+z=2```  
 
 Cluster together the bigcouch nodes from `bc1.z100` (in this example).
 
