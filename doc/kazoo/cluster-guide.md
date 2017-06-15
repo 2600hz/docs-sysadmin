@@ -20,9 +20,9 @@ ka = Kamailio
 10.x00.40.x = Kazoo  
 10.x00.50.x = Kamailio  
 
-| ### ZONE 1 | ### ZONE 2 |
+| ZONE 1 | ZONE 2 |
 | ---------- | ---------- |
-bc1.z100.somedomain.com  10.100.10.1  
+|bc1.z100.somedomain.com  10.100.10.1  | bc1.z200.somedomain.com  10.200.10.1 |
 bc2.z100.somedomain.com  10.100.10.2  
 bc3.z100.somedomain.com  10.100.10.3  
 fs1.z100.somedomain.com  10.100.20.1  
@@ -35,7 +35,7 @@ ka1.z100.somedomain.com  10.100.50.1
 
 
 
-bc1.z200.somedomain.com  10.200.10.1  
+  
 bc2.z200.somedomain.com  10.200.10.2  
 bc3.z200.somedomain.com  10.200.10.3  
 fs1.z200.somedomain.com  10.200.20.1  
