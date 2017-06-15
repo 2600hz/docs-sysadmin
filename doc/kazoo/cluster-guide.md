@@ -32,7 +32,7 @@ bc3.z100.somedomain.com  10.100.10.3   | bc3.z200.somedomain.com  10.200.10.3 |
 fs1.z100.somedomain.com  10.100.20.1   | fs1.z200.somedomain.com  10.200.20.1 | 
 mq1.z100.somedomain.com  10.100.30.1   | mq1.z200.somedomain.com  10.200.30.1 |
 kz1.z100.somedomain.com  10.100.40.1   | kz1.z200.somedomain.com  10.200.40.1 |
-ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.40.1 |
+ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.50.1 |
 
 ### Cluster Bigcouch
 This needs to be done before installing kazoo.
