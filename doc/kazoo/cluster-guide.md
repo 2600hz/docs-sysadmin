@@ -74,6 +74,16 @@ Should return:
 ```
 You can do that on each server to verify they all have the same configuration.
 
+To verify zone configuration on each document on each server.
+```
+curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com
+curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com
+...
+...
+```
+
+etc  
+
 Kazoo Cluster
 
 After installing kazoo in both zones edit `/etc/kazoo/core/config.ini` on both.  
