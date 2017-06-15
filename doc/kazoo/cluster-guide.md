@@ -8,7 +8,7 @@ Let's assume the following 7 server clusters in 2 zones.  Each zone is in a diff
 
 bc = Bigcouch  
 fs = Freeswitch    
-mq = RabbitMQ
+mq = RabbitMQ  
 kz = Kazoo  
 ka = Kamailio  
 
