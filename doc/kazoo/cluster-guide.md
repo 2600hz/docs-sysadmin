@@ -5,13 +5,14 @@ Name: **Kazoo Dedicated Cluster Guide**
 Description: *A guide for installing, configuring and managing your own dedicated Kazoo cluster.*
 
 Let's assume the following 7 server clusters in 2 zones.  Each zone is in a different datacenter with full access the other zone.  All FQDNs are DNS resolvable by all servers.
-
+### Abbreviation
 bc = Bigcouch  
 fs = Freeswitch    
 mq = RabbitMQ  
 kz = Kazoo  
 ka = Kamailio  
 
+### IP addressing scheme  
 10.100 = zone 100  
 10.200 = zone 200  
 10.x00.10.x = Bigcouch  
