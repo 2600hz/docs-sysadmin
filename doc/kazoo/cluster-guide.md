@@ -74,3 +74,57 @@ Should return:
 ```
 You can do that on each server to verify they all have the same configuration.
 
+Kazoo Cluster
+
+After installing kazoo, edit `/etc/kazoo/core/config.ini` on both.  
+
+; section are between [] = [section]
+; key = value
+; to comment add ";" in front of the line
+;[amqp]
+;uri = "amqp://guest:guest@127.0.0.1:5672"
+
+[zone]
+name = "z100"
+amqp_uri = "amqp://guest:guest@10.100.30.1"
+
+[zone]
+name = "z200"
+amqp_uri = "amqp://guest:guest@10.200.30.1"
+
+[bigcouch]
+compact_automatically = true
+cookie = change_me
+ip = "127.0.0.1"
+port = 15984
+; username = "kazoo"
+; password = "supermegaexcellenttelephonyplatform"
+admin_port = 15986
+
+[whistle_apps]
+cookie = change_me
+
+[kazoo_apps]
+cookie = change_me
+zone = "z100"
+host = "kz1.z100.somedomain.com"
+
+[kazoo_apps]
+cookie = change_me
+zone = "z200"
+host = "kz1.z200.somedomain.com"
+
+[ecallmgr]
+cookie = change_me
+zone = "z100"
+host = "kz1.z100.somedomain.com"
+
+[ecallmgr]
+cookie = change_me
+zone = "z200"
+host = "kz1.z200.somedomain.com"
+
+[log]
+syslog = info
+console = notice
+file = error
