@@ -22,7 +22,7 @@ ka = Kamailio
 10.x00.50.x = Kamailio  
 
 ### Server hostnames and IP addresses
-Using the abbreviation and IP addressing scheme in this example.
+Using the abbreviation and IP addressing scheme above.
 
 | ZONE 1 | ZONE 2 |
 | ---------- | ---------- |
