@@ -39,6 +39,7 @@ pages:
 #     - 'Configuration' : 'doc/config/limits/config.md'
 #     - 'Commands' : 'doc/config/limits/commands.md'
 - 'Cluster Operation':
+  - 'Guide': 'doc/kazoo/cluster-guide.md'
 #  - 'Monitoring' :
 #     - 'Things to Monitor' : 'doc/operation/monitoring.md'
   - 'Security' :

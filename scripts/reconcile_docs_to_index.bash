@@ -8,7 +8,7 @@ doc_count=0
 missing_count=0
 
 function check_index {
-    line=$(grep "$1" ./doc/mkdocs/mkdocs.yml)
+    line=$(grep "$1" ./doc/mkdocs/mkdocs.yml | grep -v "#")
 
     if [ -f "$1" ] && [ -z "$line" ]; then
         [[ 0 -eq $missing_count ]] && echo "Docs missing from the mkdocs.yml index:"
