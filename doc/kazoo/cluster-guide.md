@@ -51,9 +51,17 @@ Returns
 Now add the zone to this bigcouch server and cluster together the other servers.
 ```
 curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"_rev":3-b13d076f367df4d0c52b236e654b836c", "zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z100"}'
+curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com -d '{"zone":"z100"}'
+curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc3.z100.somedomain.com -d '{"zone":"z100"}'
 curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z200"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z200"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z200"}'
+curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com -d '{"zone":"z200"}'
+curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc3.z100.somedomain.com -d '{"zone":"z200"}'
+
+Verify cluster bigcouch servers:
+`curl http://bc1.z100.somedomain.com:5984/_membership`
+Should return:
+```
+{"all_nodes":["bigcouch@bc3.z200.somedomain.com","bigcouch@bc2.z200.somedomain.com","bigcouch@bc1.z200.somedomain.com","bigcouch@bc3.z100.somedomain.com","bigcouch@bc2.z100.somedomain.com","bigcouch@bc1.z100.somedomain.com"],"cluster_nodes":["bigcouch@bc3.z200.somedomain.com","bigcouch@bc2.z200.somedomain.com","bigcouch@bc1.z200.somedomain.com","bigcouch@bc3.z100.somedomain.com"","bigcouch@bc2.z100.somedomain.com","bigcouch@bc1.z100.somedomain.com"]}
+```
+
+
