@@ -84,7 +84,7 @@ curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com
 etc.  
 ### Kazoo Cluster
 
-After installing kazoo in both zones edit `/etc/kazoo/core/config.ini` on both.  
+After installing kazoo in both zones edit `/etc/kazoo/core/config.ini` which is exactly the same on both.  
 ```
 ; section are between [] = [section]
 ; key = value
