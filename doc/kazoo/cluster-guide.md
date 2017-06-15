@@ -7,9 +7,9 @@ Description: *A guide for installing, configuring and managing your own dedicate
 Let's assume the following 7 server clusters in 2 zones.  Each zone is in a different datacenter with full access the other zone.  All FQDNs are DNS resolvable by all servers.
 
 bc = Bigcouch  
-fs = Freeswitch  
-kz = Kazoo  
-mq = RabbitMQ  
+fs = Freeswitch    
+mq = RabbitMQ
+kz = Kazoo
 ka = Kamailio  
 
 10.100 = zone 100  
