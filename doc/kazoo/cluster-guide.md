@@ -4,7 +4,7 @@ Name: **Kazoo Dedicated Cluster Guide**
 
 Description: *A guide for installing, configuring and managing your own dedicated Kazoo cluster.*
 
-Let's assume the following 7 server clusters in 2 zones.  Each zone is in a different datacenter with full access the other zone.  All FQDNs are DNS resolvable by all servers.
+Let's assume the following 7 server clusters in 2 zones.
 ### Abbreviation
 bc = Bigcouch  
 fs = Freeswitch    
