@@ -21,6 +21,7 @@ ka = Kamailio
 10.x00.40.x = Kazoo  
 10.x00.50.x = Kamailio  
 
+### Server hostnames and IP addresses
 Which results in the following server DNS names and addresses.
 
 | ZONE 1 | ZONE 2 |
