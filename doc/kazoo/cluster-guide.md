@@ -79,7 +79,6 @@ To verify zone configuration on each document on each server.
 curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com
 curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com
 ...
-...
 ```
 
 etc  
