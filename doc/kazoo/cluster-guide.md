@@ -31,7 +31,7 @@ kz1.z100.somedomain.com  10.100.40.1   | kz1.z200.somedomain.com  10.200.40.1 |
 ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.40.1 |
 
 ### Cluster Bigcouch
-If not using zones leave out the `zone=` config
+If not using zones leave out the `zone=` and `z=` configurations.
 
 On each Bigcouch node configure z=2 on `/etc/kazoo/bigcouch/local.ini` as follows:
 ```
