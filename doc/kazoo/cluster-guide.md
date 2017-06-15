@@ -77,7 +77,7 @@ You can do that on each server to verify they all have the same configuration.
 Kazoo Cluster
 
 After installing kazoo, edit `/etc/kazoo/core/config.ini` on both.  
-
+```
 ; section are between [] = [section]
 ; key = value
 ; to comment add ";" in front of the line
@@ -128,3 +128,4 @@ host = "kz1.z200.somedomain.com"
 syslog = info
 console = notice
 file = error
+```
