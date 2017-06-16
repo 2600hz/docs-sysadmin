@@ -168,7 +168,7 @@ Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo serv
 
 ### Kamailio config
 
-Each Kamailio `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
+Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
 ```
 ## CHANGE "" TO YOUR SERVERS HOSTNAME
 #!substdef "!MY_HOSTNAME!ka1.z100.somedomain.com!g"
@@ -183,5 +183,11 @@ Each Kamailio `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's h
 ##     This should be the primary RabbitMQ server 
 ##     in the zone that this server will service.
 #!substdef "!MY_AMQP_URL!kazoo://guest:guest@10.100.30.1:5672!g"
+
+## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL for the other zone.
+##     This uses the existing MY_AMQP_SECONDARY_URL variable defined in default.cfg 
+##     Other variables can be assigned here.
+##     For example:
+##     modparam("kazoo", "amqp_connection", "MY_AMQP_Z200_URL")
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
