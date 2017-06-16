@@ -186,8 +186,7 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 
 ## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL for the other zone.
 ##     This uses the existing MY_AMQP_SECONDARY_URL variable defined in default.cfg 
-##     Other variables can be assigned here.
-##     For example:
+##     Other variables can be assigned here such as:
 ##     modparam("kazoo", "amqp_connection", "MY_AMQP_Z200_URL")
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
