@@ -196,6 +196,7 @@ A properly configured cluster and zone setup will appear as follows.
 
 ```
 # kazoo-applications status
+
 Node          : kazoo_apps@kz1.z100.somedomain.com
 md5           : jFoOSYRl8EM8hPzqzjSIEw
 Version       : 4.1.13 - 18
