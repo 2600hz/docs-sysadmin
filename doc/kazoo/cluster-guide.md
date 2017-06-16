@@ -155,7 +155,7 @@ Add the following to the root of the document.  So at the same level as `"defaul
        ]
    },
 ```
-Remove any other `"fs_nodes":` entries in that document.
+Remove any other `"fs_nodes":[...]` entries in that document.
 
 Refresh to get above changes  
 `sup kapps_maintenance refresh "system_config"`  
