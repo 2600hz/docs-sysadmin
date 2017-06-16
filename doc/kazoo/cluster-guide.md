@@ -255,4 +255,4 @@ WhApps        : kamailio(719529d20h34m29s
 Registrations : 1
 ```
   The above assumes ecallmgr is running as an app on the kazoo server.
-If the ecallmgr apps are configured to start separately, with systemd or init, on the kazoo server or on their own servers, they will appear as their own node.
+If the ecallmgr apps are configured to start separately, with systemd or init, on the kazoo server or on their own servers, they will appear as their own node in the above.
