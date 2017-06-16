@@ -240,7 +240,7 @@ Version       : 4.1.13 - 18
 Memory Usage  : 87.64MB
 Processes     : 1951
 Ports         : 34
-Zone          : ny
+Zone          : z200
 Broker        : amqp://10.200.30.1
 Globals       : remote (1)
 Node Info     : kz_amqp_pool: 150/0/0 (ready)
@@ -258,7 +258,7 @@ Version       : 5.0.1
 Memory Usage  : 16.30MB
 Processes     : 0
 Ports         : 0
-Zone          : van (local)
+Zone          : z100 (local)
 Broker        : amqp://10.100.30.1
 WhApps        : kamailio(719528d17s)
 Registrations : 1
@@ -268,7 +268,7 @@ Version       : 5.0.1
 Memory Usage  : 16.34MB
 Processes     : 0
 Ports         : 0
-Zone          : ny
+Zone          : z200
 Broker        : amqp://10.200.30.1
 WhApps        : kamailio(719529d20h34m29s
 Registrations : 1
