@@ -189,7 +189,7 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     Note the addition of the "zone=" part in the middle 
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
-To view the entire cluster and zone setup enter the following on either kazoo server.
+To view the entire cluster and zone setup enter the following on either kazoo server.  
 `kazoo-applications status`
 
 A properly configured cluster and zone setup will appear as follows.  This assumes ecallmgr running as an app on the kazoo server.
