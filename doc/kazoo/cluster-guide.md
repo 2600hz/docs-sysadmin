@@ -192,8 +192,7 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 To view the entire cluster and zone setup enter the following on either kazoo server.  
 ```kazoo-applications status```
 
-A properly configured cluster and zone setup will appear as follows.  This assumes ecallmgr running as an app on the kazoo server.
-If the ecallmgr servers are configured to start separately, with systemd or init, on the kazoo server or on their own servers, they will appear as their own node.
+A properly configured cluster and zone setup will appear as follows.
 
 ```
 # kazoo-applications status
@@ -255,3 +254,5 @@ Broker        : amqp://10.200.30.1
 WhApps        : kamailio(719529d20h34m29s
 Registrations : 1
 ```
+  The above assumes ecallmgr is running as an app on the kazoo server.
+If the ecallmgr apps are configured to start separately, with systemd or init, on the kazoo server or on their own servers, they will appear as their own node.
