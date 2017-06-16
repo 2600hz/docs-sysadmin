@@ -37,7 +37,7 @@ ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.50.1 |
 ### Cluster Bigcouch
 This needs to be done before installing kazoo.
 
-On each Bigcouch node configure `z=2` on `/etc/kazoo/bigcouch/local.ini` as follows:
+On each Bigcouch node configure `z=2` in `/etc/kazoo/bigcouch/local.ini` as follows:
 ```
 [cluster]  
 q=3  
