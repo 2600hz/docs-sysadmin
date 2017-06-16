@@ -199,10 +199,10 @@ VALUES ('1', 'SIP:10.100.20.1:11000', '0', '0', '', 'zone 100')"
 sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, attrs, description) \
 VALUES ('2', 'SIP:10.200.20.1:11000', '0', '0', '', 'zone 200')"
 ```
-Load the changes
+Load the changes  
 `kamcmd dispatcher.reload`
 
-Verify
+Verify  
 `kamcmd dispatcher.list`
 
 ### Post Install
