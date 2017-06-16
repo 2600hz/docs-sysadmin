@@ -137,3 +137,21 @@ syslog = info
 console = notice
 file = error
 ```
+
+### Assign Freeswitch to Ecallmgr zones
+Edit the database using Futon or Fauxton by browsing to the following link.  
+http://bc1.z100.somedomain.com:5984/_utils/document.html?system_config/ecallmgr
+
+Add the following to the root of the document.  So at the same level as `"default":`
+```
+"z100": {
+       "fs_nodes": [
+           "freeswitch@fs1.z100.somedomain.com"
+       ]
+},
+"z200": {
+       "fs_nodes": [
+           "freeswitch@fs1.z200.somedomain.com"
+       ]
+   },
+```
