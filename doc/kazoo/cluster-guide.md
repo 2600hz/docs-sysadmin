@@ -193,13 +193,13 @@ To view the entire cluster and zone setup enter the following on either kazoo se
 ```kazoo-applications status```
 
 ### Kamailio Dispatcher
-Add all freeswitch servers to each kamailio dispatcher.  Local zone freeswitch is given setid value of 1, all other zones are given setid value of 2.
+Add all Freeswitch servers to the dispatcher configuration on each Kamailio server.  The following example is run on `ka1.z100` kamailio server.  Local zone freeswitch is given setid value of 1, Freeswitch servers in other zones are given setid value of 2.
 ```
-sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, description) \
-VALUES ('1', 'SIP:10.100.20.1:11000', '0', '0', 'zone 100')"
+sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, attrs, description) \
+VALUES ('1', 'SIP:10.100.20.1:11000', '0', '0', '', 'zone 100')"
 
-sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, description) \
-VALUES ('2', 'SIP:10.200.20.1:11000', '0', '0', 'zone 200')"
+sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, attrs, description) \
+VALUES ('2', 'SIP:10.200.20.1:11000', '0', '0', '', 'zone 200')"
 ```
 
 ### Post Install
