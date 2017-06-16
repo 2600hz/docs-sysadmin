@@ -163,5 +163,5 @@ Refresh to get above changes
 Verify on kazoo in each zone that only freeswitch for that zone is visible.    
 `sup ecallmgr_maintenance list_fs_nodes`
 
-Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately with systemd or init on the kazoo server or on its own server, the command would be:  
+Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately, with systemd or init, on the kazoo server or on its own server, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
