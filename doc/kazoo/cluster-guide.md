@@ -216,7 +216,7 @@ Channels      : 0
 Registrations : 1
 Media Servers : freeswitch@fs1.z100.somedomain.com (2d20h47m33s)
 
-Node          : kazoo_apps@ka1.z200.somedomain.com
+Node          : kazoo_apps@kz1.z200.somedomain.com
 md5           : b3hEn9mtqfCgJnRJrOX_aA
 Version       : 4.1.13 - 18
 Memory Usage  : 87.64MB
