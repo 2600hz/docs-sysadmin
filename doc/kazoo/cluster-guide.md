@@ -189,3 +189,69 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     Note the addition of the "zone=" part in the middle 
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
+To view the entire cluster and zone setup enter the following on either kazoo server.
+`kazoo-applications status`
+
+A properly configured cluster and zone setup will appear as follows.  This assumes ecallmgr running as an app on the kazoo server.
+If the ecallmgr servers are configured to start separately, with systemd or init, on the kazoo server or on their own servers, they will appear as their own node.
+
+```
+# kazoo-applications status
+Node          : kazoo_apps@kz1.z100.somedomain.com
+md5           : jFoOSYRl8EM8hPzqzjSIEw
+Version       : 4.1.13 - 18
+Memory Usage  : 175.15MB
+Processes     : 1951
+Ports         : 33
+Zone          : z100 (local)
+Broker        : amqp://10.100.30.1
+Globals       : local (1)
+Node Info     : kz_amqp_pool: 150/0/0 (ready)
+WhApps        : blackhole(2d20h48m47s)   callflow(2d20h48m46s)    cdr(2d20h48m46s)         conference(2d20h48m46s)
+                crossbar(2d20h48m46s)    ecallmgr(2d20h48m47s)    fax(2d20h48m41s)         hangups(2d20h48m21s)
+                media_mgr(2d20h48m21s)   milliwatt(2d20h48m21s)   omnipresence(2d20h48m21s)pivot(2d20h48m21s)
+                registrar(2d20h48m21s)   reorder(2d20h48m21s)     stepswitch(2d20h48m21s)  sysconf(2d20h48m48s)
+                teletype(2d20h48m21s)    trunkstore(2d20h48m15s)  webhooks(2d20h48m15s)
+Channels      : 0
+Registrations : 1
+Media Servers : freeswitch@fs1.z100.somedomain.com (2d20h47m33s)
+
+Node          : kazoo_apps@ka1.z200.somedomain.com
+md5           : b3hEn9mtqfCgJnRJrOX_aA
+Version       : 4.1.13 - 18
+Memory Usage  : 87.64MB
+Processes     : 1951
+Ports         : 34
+Zone          : ny
+Broker        : amqp://10.200.30.1
+Globals       : remote (1)
+Node Info     : kz_amqp_pool: 150/0/0 (ready)
+WhApps        : blackhole(2d22h43m58s)   callflow(2d22h43m58s)    cdr(2d22h43m58s)         conference(2d22h43m58s)
+                crossbar(2d22h43m57s)    ecallmgr(2d22h43m59s)    fax(2d22h43m40s)         hangups(2d22h43m30s)
+                media_mgr(2d22h43m30s)   milliwatt(2d22h43m30s)   omnipresence(2d22h43m30s)pivot(2d22h43m30s)
+                registrar(2d22h43m30s)   reorder(2d22h43m30s)     stepswitch(2d22h43m30s)  sysconf(2d22h44m)
+                teletype(2d22h43m30s)    trunkstore(2d22h43m7s)   webhooks(2d22h43m7s)
+Channels      : 0
+Registrations : 1
+Media Servers : freeswitch@fs1.z200.somedomain.com (2d22h43m52s)
+
+Node          : kamailio@ka1.z100.somedomain.com
+Version       : 5.0.1
+Memory Usage  : 16.30MB
+Processes     : 0
+Ports         : 0
+Zone          : van (local)
+Broker        : amqp://10.100.30.1
+WhApps        : kamailio(719528d17s)
+Registrations : 1
+
+Node          : kamailio@ka1.z200.somedomain.com
+Version       : 5.0.1
+Memory Usage  : 16.34MB
+Processes     : 0
+Ports         : 0
+Zone          : ny
+Broker        : amqp://10.200.30.1
+WhApps        : kamailio(719529d20h34m29s
+Registrations : 1
+```
