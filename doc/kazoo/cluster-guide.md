@@ -189,8 +189,6 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     Note the addition of the "zone=" part in the middle 
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
-To view the entire cluster and zone setup enter the following on either kazoo server.  
-```kazoo-applications status```
 
 ### Kamailio Dispatcher
 Add all Freeswitch servers to the dispatcher configuration on each Kamailio server.  The following example is run on `ka1.z100` kamailio server.  Local zone freeswitch is given setid value of 1, Freeswitch servers in other zones are given setid value of 2.
@@ -208,6 +206,10 @@ Verify
 `kamcmd dispatcher.list`
 
 ### Post Install
+
+To view the entire cluster and zone setup enter the following on either kazoo server.  
+```kazoo-applications status```  
+
 A properly configured cluster and zone setup will appear as follows.
 
 ```
