@@ -165,3 +165,23 @@ Verify on kazoo in each zone that only freeswitch for that zone is visible.
 
 Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately, with systemd or init, on the kazoo server or on its own server, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
+
+### Kamailio config
+
+Each Kamailio `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
+```
+## CHANGE "" TO YOUR SERVERS HOSTNAME
+#!substdef "!MY_HOSTNAME!ka1.z100.somedomain.com!g"
+
+## CHANGE "127.0.0.1" TO YOUR SERVERS IP ADDRESS
+##     Usually your public IP.  If you need
+##     to listen on addtional ports or IPs
+##     add them in "BINDINGS" at the bottom.
+#!substdef "!MY_IP_ADDRESS!10.100.50.1!g"
+
+## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL
+##     This should be the primary RabbitMQ server 
+##     in the zone that this server will service.
+#!substdef "!MY_AMQP_URL!kazoo://guest:guest@10.100.30.1:5672!g"
+#!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
+```
