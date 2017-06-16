@@ -166,7 +166,7 @@ Verify on kazoo in each zone that only freeswitch for that zone is visible.
 Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately, with systemd or init, on the kazoo server or on its own server, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
 
-### Kamailio config
+### Kamailio Config
 
 Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
 ```
@@ -192,6 +192,17 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 To view the entire cluster and zone setup enter the following on either kazoo server.  
 ```kazoo-applications status```
 
+### Kamailio Dispatcher
+Add all freeswitch servers to each kamailio dispatcher.  Local zone freeswitch is given setid value of 1, all other zones are given setid value of 2.
+```
+sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, description) \
+VALUES ('1', 'SIP:10.100.20.1:11000', '0', '0', 'zone 100')"
+
+sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, description) \
+VALUES ('2', 'SIP:10.200.20.1:11000', '0', '0', 'zone 200')"
+```
+
+### Post Install
 A properly configured cluster and zone setup will appear as follows.
 
 ```
