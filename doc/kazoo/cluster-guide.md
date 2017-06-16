@@ -155,11 +155,13 @@ Add the following to the root of the document.  So at the same level as `"defaul
        ]
    },
 ```
+Remove any other `"fs_nodes":` entries in that document.
+
 Refresh to get above changes  
 `sup kapps_maintenance refresh "system_config"`  
 
 Verify on kazoo in each zone that only freeswitch for that zone is visible.    
 `sup ecallmgr_maintenance list_fs_nodes`
 
-Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately with systemd or init, the command would be:  
+Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately with systemd or init on the kazoo server or on its own server, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
