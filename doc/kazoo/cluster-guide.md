@@ -155,3 +155,7 @@ Add the following to the root of the document.  So at the same level as `"defaul
        ]
    },
 ```
+Refresh to get changes
+`sup kapps_maintenance refresh "system_config"`
+Verify on each zone that only freeswitch for that zone is visible.  
+`sup ecallmgr_maintenance list_fs_nodes`
