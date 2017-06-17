@@ -169,7 +169,7 @@ Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo serv
 ### HAProxy config
 
 Edit /etc/kazoo/haproxy/haproxy.cfg on zone 100 Kazoo and Freeswitch server as follows.
-
+```
 global
         log /dev/log local0 info
         maxconn 4096
@@ -214,7 +214,7 @@ listen bigcouch-mgr 127.0.0.1:15986
 listen haproxy-stats 127.0.0.1:22002
   mode http
   stats uri /
-
+```
 ### Kamailio Config
 
 Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
