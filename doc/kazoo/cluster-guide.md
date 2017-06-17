@@ -166,6 +166,55 @@ Verify on kazoo in each zone that only freeswitch for that zone is visible.
 Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately, with systemd or init, on the kazoo server or on its own server, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
 
+### HAProxy config
+
+Edit /etc/kazoo/haproxy/haproxy.cfg on zone 100 Kazoo and Freeswitch server as follows.
+
+global
+        log /dev/log local0 info
+        maxconn 4096
+        user haproxy
+        group daemon
+        stats socket    /var/run/haproxy/haproxy.sock mode 777
+
+defaults
+        log global
+        mode http
+        option httplog
+        option dontlognull
+	option log-health-checks
+        option redispatch
+        option httpchk GET /
+        option allbackups
+        option http-server-close
+        maxconn 2000
+        retries 3
+        timeout connect 6000ms
+        timeout client 12000ms
+        timeout server 12000ms
+        
+listen bigcouch-data 127.0.0.1:15984
+  balance roundrobin
+    server bc1.z100.somedomain.com 10.100.10.1:5984 check
+    server bc2.z100.somedomain.com 10.100.10.1:5984 check
+    server bc3.z100.somedomain.com 10.100.10.1:5984 check
+    server bc1.z200.somedomain.com 10.100.10.1:5984 check backup
+    server bc2.z200.somedomain.com 10.100.10.1:5984 check backup
+    server bc3.z200.somedomain.com 10.100.10.1:5984 check backup
+
+listen bigcouch-mgr 127.0.0.1:15986
+  balance roundrobin
+    server bc1.z100.somedomain.com 10.100.10.1:5986 check
+    server bc2.z100.somedomain.com 10.100.10.1:5986 check
+    server bc3.z100.somedomain.com 10.100.10.1:5986 check
+    server bc1.z200.somedomain.com 10.100.10.1:5986 check backup
+    server bc2.z200.somedomain.com 10.100.10.1:5986 check backup
+    server bc3.z200.somedomain.com 10.100.10.1:5986 check backup
+
+listen haproxy-stats 127.0.0.1:22002
+  mode http
+  stats uri /
+
 ### Kamailio Config
 
 Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
