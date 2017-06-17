@@ -168,7 +168,7 @@ Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo serv
 
 ### HAProxy config
 
-Edit /etc/kazoo/haproxy/haproxy.cfg on zone 100 Kazoo and Freeswitch server as follows.
+Edit `/etc/kazoo/haproxy/haproxy.cfg` on zone 100 Kazoo and Freeswitch server as follows.
 ```
 global
         log /dev/log local0 info
