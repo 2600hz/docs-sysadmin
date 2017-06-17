@@ -196,20 +196,20 @@ defaults
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
     server bc1.z100.somedomain.com 10.100.10.1:5984 check
-    server bc2.z100.somedomain.com 10.100.10.1:5984 check
-    server bc3.z100.somedomain.com 10.100.10.1:5984 check
-    server bc1.z200.somedomain.com 10.100.10.1:5984 check backup
-    server bc2.z200.somedomain.com 10.100.10.1:5984 check backup
-    server bc3.z200.somedomain.com 10.100.10.1:5984 check backup
+    server bc2.z100.somedomain.com 10.100.10.2:5984 check
+    server bc3.z100.somedomain.com 10.100.10.3:5984 check
+    server bc1.z200.somedomain.com 10.200.10.1:5984 check backup
+    server bc2.z200.somedomain.com 10.200.10.2:5984 check backup
+    server bc3.z200.somedomain.com 10.200.10.3:5984 check backup
 
 listen bigcouch-mgr 127.0.0.1:15986
   balance roundrobin
     server bc1.z100.somedomain.com 10.100.10.1:5986 check
-    server bc2.z100.somedomain.com 10.100.10.1:5986 check
-    server bc3.z100.somedomain.com 10.100.10.1:5986 check
-    server bc1.z200.somedomain.com 10.100.10.1:5986 check backup
-    server bc2.z200.somedomain.com 10.100.10.1:5986 check backup
-    server bc3.z200.somedomain.com 10.100.10.1:5986 check backup
+    server bc2.z100.somedomain.com 10.100.10.2:5986 check
+    server bc3.z100.somedomain.com 10.100.10.3:5986 check
+    server bc1.z200.somedomain.com 10.200.10.1:5986 check backup
+    server bc2.z200.somedomain.com 10.200.10.2:5986 check backup
+    server bc3.z200.somedomain.com 10.200.10.3:5986 check backup
 
 listen haproxy-stats 127.0.0.1:22002
   mode http
