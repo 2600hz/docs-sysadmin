@@ -256,7 +256,7 @@ Verify
 
 ### Post Install
 
-To view the entire cluster and zone setup enter the following on either kazoo server.  
+To view the entire cluster and zone setup, enter the following on either kazoo server.  
 ```kazoo-applications status```  
 
 A properly configured cluster and zone setup will appear as follows.
