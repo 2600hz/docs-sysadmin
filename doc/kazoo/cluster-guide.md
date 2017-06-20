@@ -149,10 +149,10 @@ Refresh to get above changes loaded from bigcouch
 `sup kapps_maintenance refresh "system_config"`  
 
 Verify on Kazoo in each zone that only freeswitch for that zone is visible  
-`sup ecallmgr_maintenance list_fs_nodes`
+`sup ecallmgr_maintenance get_fs_nodes`
 
 If ecallmgr is started separately, with systemd or init, the command would be:  
-`sup -necallmgr ecallmgr_maintenance list_fs_nodes`
+`sup -necallmgr ecallmgr_maintenance get_fs_nodes`
 
 ### HAProxy config
 
