@@ -232,6 +232,13 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     Note the addition of the "zone=" part in the middle 
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
+### Verify Dispatcher
+
+After adding Freeswitch servers to CouchDB and completing Kamailio configuration above and restarting Kamailio, Kamailio should automatically populate /etc/kazoo/kamailio/db/kazoo.db with all Freeswitch servers.  Verify that all Freeswitch servers are there and that local zone Freeswitch servers have `ID: 1` and non-local zone servers have `ID: 2`.
+```
+kamcmd dispatcher.list
+```
+
 ### Post Install
 
 To view the entire cluster and zone setup, enter the following on either kazoo server.  
