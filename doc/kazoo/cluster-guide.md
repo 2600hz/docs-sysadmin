@@ -148,7 +148,7 @@ If starting ecallmgr on it's own via systemd or init the command would be:
 Refresh to get above changes loaded from bigcouch  
 `sup kapps_maintenance refresh "system_config"`  
 
-Verify on Kazoo in each zone that only freeswitch for that zone is visible  
+Verify on Kazoo in each zone that only freeswitch for that zone is configured  
 `sup ecallmgr_maintenance get_fs_nodes`
 
 If ecallmgr is started separately, with systemd or init, the command would be:  
