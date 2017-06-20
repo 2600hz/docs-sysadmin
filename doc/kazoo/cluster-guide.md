@@ -234,7 +234,7 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ```
 ### Verify Dispatcher
 
-After adding Freeswitch servers to CouchDB and completing Kamailio configuration above and restarting Kamailio, Kamailio should automatically populate /etc/kazoo/kamailio/db/kazoo.db with all Freeswitch servers.  Verify that all Freeswitch servers are there and that local zone Freeswitch servers have `ID: 1` and non-local zone servers have `ID: 2`.
+After adding the Freeswitch servers to CouchDB and completing Kamailio configuration above and restarting Kamailio, Kamailio should automatically populate dispatcher table in sqlite database `/etc/kazoo/kamailio/db/kazoo.db`.  Verify that all Freeswitch servers are there and that local zone Freeswitch servers have `ID: 1` and non-local zone servers have `ID: 2`.
 ```
 kamcmd dispatcher.list
 ```
