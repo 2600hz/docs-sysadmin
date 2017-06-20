@@ -211,7 +211,7 @@ listen haproxy-stats 127.0.0.1:22002
 ```
 ### Kamailio Config
 
-Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
+Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `kamailio1.z100` server.
 ```
 ## CHANGE "" TO YOUR SERVERS HOSTNAME
 #!substdef "!MY_HOSTNAME!kamailio1.z100.somedomain.com!g"
@@ -234,7 +234,7 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ```
 
 ### Kamailio Dispatcher
-Add all Freeswitch servers to the dispatcher configuration on each Kamailio server.  The following example is run on `ka1.z100` kamailio server.  Local zone Freeswitch is given setid value of 1. Freeswitch servers in other zones are given setid value of 2.
+Add all Freeswitch servers to the dispatcher configuration on each Kamailio server.  The following example is run on `kamailio1.z100`.  Local zone Freeswitch is given setid value of 1. Freeswitch servers in other zones are given setid value of 2.
 ```
 sqlite3 /etc/kazoo/kamailio/db/kazoo.db "INSERT INTO dispatcher (setid, destination, flags, priority, attrs, description) \
 VALUES ('1', 'SIP:10.100.20.1:11000', '0', '0', '', 'zone 100')"
