@@ -16,7 +16,7 @@ Let's assume the following 7 server clusters in 2 zones.
 10.x00.50.x = Kamailio  
 
 ### Server hostnames and IP addresses
-Using the abbreviation and IP addressing scheme above.
+Using IP addressing scheme above.
 
 | ZONE 1 | ZONE 2 |
 | ---------- | ---------- |
