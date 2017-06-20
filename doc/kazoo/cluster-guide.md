@@ -5,17 +5,11 @@ Name: **Kazoo Dedicated Cluster Guide**
 Description: *A guide for installing, configuring and managing your own dedicated Kazoo cluster.*
 
 Let's assume the following 7 server clusters in 2 zones.
-### Abbreviation
-bc = Bigcouch  
-fs = Freeswitch    
-mq = RabbitMQ  
-kz = Kazoo  
-ka = Kamailio  
 
 ### IP addressing scheme  
 10.100 = zone 100  
 10.200 = zone 200  
-10.x00.10.x = Bigcouch  
+10.x00.10.x = CouchDB  
 10.x00.20.x = Freeswitch  
 10.x00.30.x = RabbitMQ  
 10.x00.40.x = Kazoo  
@@ -26,13 +20,13 @@ Using the abbreviation and IP addressing scheme above.
 
 | ZONE 1 | ZONE 2 |
 | ---------- | ---------- |
-|bc1.z100.somedomain.com  10.100.10.1  | bc1.z200.somedomain.com  10.200.10.1 |
-bc2.z100.somedomain.com  10.100.10.2   | bc2.z200.somedomain.com  10.200.10.2 |
-bc3.z100.somedomain.com  10.100.10.3   | bc3.z200.somedomain.com  10.200.10.3 |
-fs1.z100.somedomain.com  10.100.20.1   | fs1.z200.somedomain.com  10.200.20.1 | 
-mq1.z100.somedomain.com  10.100.30.1   | mq1.z200.somedomain.com  10.200.30.1 |
-kz1.z100.somedomain.com  10.100.40.1   | kz1.z200.somedomain.com  10.200.40.1 |
-ka1.z100.somedomain.com  10.100.50.1   | ka1.z200.somedomain.com  10.200.50.1 |
+|couch1.z100.somedomain.com  10.100.10.1  | couch1.z200.somedomain.com  10.200.10.1 |
+couch2.z100.somedomain.com  10.100.10.2   | couch2.z200.somedomain.com  10.200.10.2 |
+couch3.z100.somedomain.com  10.100.10.3   | couch3.z200.somedomain.com  10.200.10.3 |
+freeeswitch1.z100.somedomain.com  10.100.20.1   | freeswitch1.z200.somedomain.com  10.200.20.1 | 
+rabbit1.z100.somedomain.com  10.100.30.1   | rabbit1.z200.somedomain.com  10.200.30.1 |
+kazoo1.z100.somedomain.com  10.100.40.1   | kazoo1.z200.somedomain.com  10.200.40.1 |
+kamailio1.z100.somedomain.com  10.100.50.1   | kamailio1.z200.somedomain.com  10.200.50.1 |
 
 ### Cluster Bigcouch
 This needs to be done before installing kazoo.
@@ -47,37 +41,37 @@ n=3
 z=2  
 ```
 
-Cluster together the bigcouch nodes from `bc1.z100` (in this example).
+Cluster together the bigcouch nodes from `couch1.z100` (in this example).
 
-```curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com```  
+```curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com```  
 Returns  
-```{"_id":"bigcouch@bc1.z100.somedomain.com","_rev":"3-b13d076f367df4d0c52b236e654b836c"}```  
+```{"_id":"bigcouch@couch1.z100.somedomain.com","_rev":"3-b13d076f367df4d0c52b236e654b836c"}```  
 
 Now add the zone to this bigcouch server and cluster together the other servers.
 ```
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"_rev":3-b13d076f367df4d0c52b236e654b836c", "zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com -d '{"zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc3.z100.somedomain.com -d '{"zone":"z100"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com -d '{"zone":"z200"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com -d '{"zone":"z200"}'
-curl -X PUT bc1.z100.somedomain.com:5986/nodes/bigcouch@bc3.z100.somedomain.com -d '{"zone":"z200"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com -d '{"_rev":3-b13d076f367df4d0c52b236e654b836c", "zone":"z100"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z100.somedomain.com -d '{"zone":"z100"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch3.z100.somedomain.com -d '{"zone":"z100"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com -d '{"zone":"z200"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z100.somedomain.com -d '{"zone":"z200"}'
+curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch3.z100.somedomain.com -d '{"zone":"z200"}'
 ```
 Verify cluster:  
-`curl http://bc1.z100.somedomain.com:5984/_membership`  
+`curl http://couch1.z100.somedomain.com:5984/_membership`  
 Should return:  
 ```
-{"all_nodes":["bigcouch@bc3.z200.somedomain.com","bigcouch@bc2.z200.somedomain.com","bigcouch@bc1.z200.somedomain.com",
-"bigcouch@bc3.z100.somedomain.com","bigcouch@bc2.z100.somedomain.com","bigcouch@bc1.z100.somedomain.com"],
+{"all_nodes":["bigcouch@couch3.z200.somedomain.com","bigcouch@couch2.z200.somedomain.com","bigcouch@couch1.z200.somedomain.com",
+"bigcouch@couch3.z100.somedomain.com","bigcouch@couch2.z100.somedomain.com","bigcouch@couch1.z100.somedomain.com"],
 
-"cluster_nodes":["bigcouch@bc3.z200.somedomain.com","bigcouch@bc2.z200.somedomain.com","bigcouch@bc1.z200.somedomain.com",
-"bigcouch@bc3.z100.somedomain.com"","bigcouch@bc2.z100.somedomain.com","bigcouch@bc1.z100.somedomain.com"]}
+"cluster_nodes":["bigcouch@couch3.z200.somedomain.com","bigcouch@couch2.z200.somedomain.com","bigcouch@couch1.z200.somedomain.com",
+"bigcouch@couch3.z100.somedomain.com"","bigcouch@couch2.z100.somedomain.com","bigcouch@couch1.z100.somedomain.com"]}
 ```
 You can do that on each server to verify they all have the same configuration.
 
 To verify zone configuration on each document on each server.
 ```
-curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc1.z100.somedomain.com
-curl http://bc1.z100.somedomain.com:5986/nodes/bigcouch@bc2.z100.somedomain.com
+curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com
+curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z100.somedomain.com
 ...
 ```
 
@@ -115,22 +109,22 @@ cookie = change_me
 [kazoo_apps]
 cookie = change_me
 zone = "z100"
-host = "kz1.z100.somedomain.com"
+host = "kazoo1.z100.somedomain.com"
 
 [kazoo_apps]
 cookie = change_me
 zone = "z200"
-host = "kz1.z200.somedomain.com"
+host = "kazoo1.z200.somedomain.com"
 
 [ecallmgr]
 cookie = change_me
 zone = "z100"
-host = "kz1.z100.somedomain.com"
+host = "kazoo1.z100.somedomain.com"
 
 [ecallmgr]
 cookie = change_me
 zone = "z200"
-host = "kz1.z200.somedomain.com"
+host = "kazoo1.z200.somedomain.com"
 
 [log]
 syslog = info
@@ -146,12 +140,12 @@ Add the following to the root of the document.  So at the same level as `"defaul
 ```
 "z100": {
        "fs_nodes": [
-           "freeswitch@fs1.z100.somedomain.com"
+           "freeswitch@freeswitch1.z100.somedomain.com"
        ]
 },
 "z200": {
        "fs_nodes": [
-           "freeswitch@fs1.z200.somedomain.com"
+           "freeswitch@freeswitch1.z200.somedomain.com"
        ]
    },
 ```
@@ -195,21 +189,21 @@ defaults
         
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
-    server bc1.z100.somedomain.com 10.100.10.1:5984 check
-    server bc2.z100.somedomain.com 10.100.10.2:5984 check
-    server bc3.z100.somedomain.com 10.100.10.3:5984 check
-    server bc1.z200.somedomain.com 10.200.10.1:5984 check backup
-    server bc2.z200.somedomain.com 10.200.10.2:5984 check backup
-    server bc3.z200.somedomain.com 10.200.10.3:5984 check backup
+    server couch1.z100.somedomain.com 10.100.10.1:5984 check
+    server couch2.z100.somedomain.com 10.100.10.2:5984 check
+    server couch3.z100.somedomain.com 10.100.10.3:5984 check
+    server couch1.z200.somedomain.com 10.200.10.1:5984 check backup
+    server couch2.z200.somedomain.com 10.200.10.2:5984 check backup
+    server couch3.z200.somedomain.com 10.200.10.3:5984 check backup
 
 listen bigcouch-mgr 127.0.0.1:15986
   balance roundrobin
-    server bc1.z100.somedomain.com 10.100.10.1:5986 check
-    server bc2.z100.somedomain.com 10.100.10.2:5986 check
-    server bc3.z100.somedomain.com 10.100.10.3:5986 check
-    server bc1.z200.somedomain.com 10.200.10.1:5986 check backup
-    server bc2.z200.somedomain.com 10.200.10.2:5986 check backup
-    server bc3.z200.somedomain.com 10.200.10.3:5986 check backup
+    server couch1.z100.somedomain.com 10.100.10.1:5986 check
+    server couch2.z100.somedomain.com 10.100.10.2:5986 check
+    server couch3.z100.somedomain.com 10.100.10.3:5986 check
+    server couch1.z200.somedomain.com 10.200.10.1:5986 check backup
+    server couch2.z200.somedomain.com 10.200.10.2:5986 check backup
+    server couch3.z200.somedomain.com 10.200.10.3:5986 check backup
 
 listen haproxy-stats 127.0.0.1:22002
   mode http
@@ -220,7 +214,7 @@ listen haproxy-stats 127.0.0.1:22002
 Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `ka1.z100` server.
 ```
 ## CHANGE "" TO YOUR SERVERS HOSTNAME
-#!substdef "!MY_HOSTNAME!ka1.z100.somedomain.com!g"
+#!substdef "!MY_HOSTNAME!kamailio1.z100.somedomain.com!g"
 
 ## CHANGE "127.0.0.1" TO YOUR SERVERS IP ADDRESS
 ##     Usually your public IP.  If you need
@@ -264,7 +258,7 @@ A properly configured cluster and zone setup will appear as follows.
 ```
 # kazoo-applications status
 
-Node          : kazoo_apps@kz1.z100.somedomain.com
+Node          : kazoo_apps@kazoo1.z100.somedomain.com
 md5           : jFoOSYRl8EM8hPzqzjSIEw
 Version       : 4.1.13 - 18
 Memory Usage  : 175.15MB
@@ -281,9 +275,9 @@ WhApps        : blackhole(2d20h48m47s)   callflow(2d20h48m46s)    cdr(2d20h48m46
                 teletype(2d20h48m21s)    trunkstore(2d20h48m15s)  webhooks(2d20h48m15s)
 Channels      : 0
 Registrations : 1
-Media Servers : freeswitch@fs1.z100.somedomain.com (2d20h47m33s)
+Media Servers : freeswitch@freeswitch1.z100.somedomain.com (2d20h47m33s)
 
-Node          : kazoo_apps@kz1.z200.somedomain.com
+Node          : kazoo_apps@kazoo1.z200.somedomain.com
 md5           : b3hEn9mtqfCgJnRJrOX_aA
 Version       : 4.1.13 - 18
 Memory Usage  : 87.64MB
@@ -300,9 +294,9 @@ WhApps        : blackhole(2d22h43m58s)   callflow(2d22h43m58s)    cdr(2d22h43m58
                 teletype(2d22h43m30s)    trunkstore(2d22h43m7s)   webhooks(2d22h43m7s)
 Channels      : 0
 Registrations : 1
-Media Servers : freeswitch@fs1.z200.somedomain.com (2d22h43m52s)
+Media Servers : freeswitch@freeswitch1.z200.somedomain.com (2d22h43m52s)
 
-Node          : kamailio@ka1.z100.somedomain.com
+Node          : kamailio@kamailio1.z100.somedomain.com
 Version       : 5.0.1
 Memory Usage  : 16.30MB
 Processes     : 0
@@ -312,7 +306,7 @@ Broker        : amqp://10.100.30.1
 WhApps        : kamailio(719528d17s)
 Registrations : 1
 
-Node          : kamailio@ka1.z200.somedomain.com
+Node          : kamailio@kamailio1.z200.somedomain.com
 Version       : 5.0.1
 Memory Usage  : 16.34MB
 Processes     : 0
