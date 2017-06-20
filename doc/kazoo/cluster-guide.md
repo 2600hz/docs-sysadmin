@@ -151,7 +151,7 @@ Refresh to get above changes loaded from bigcouch
 Verify on Kazoo in each zone that only freeswitch for that zone is visible  
 `sup ecallmgr_maintenance get_fs_nodes`
 
-If started ecallmgr separately, with systemd or init, the command would be:  
+If ecallmgr is started separately, with systemd or init, the command would be:  
 `sup -necallmgr ecallmgr_maintenance get_fs_nodes`
 
 ### HAProxy config
