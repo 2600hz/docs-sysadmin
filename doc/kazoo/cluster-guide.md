@@ -133,31 +133,24 @@ file = error
 ```
 
 ### Assign Freeswitch to Ecallmgr zones
-Edit the database using Futon or Fauxton by browsing to the following link.  
-http://bc1.z100.somedomain.com:5984/_utils/document.html?system_config/ecallmgr
 
-Add the following to the root of the document.  So at the same level as `"default":`
-```
-"z100": {
-       "fs_nodes": [
-           "freeswitch@freeswitch1.z100.somedomain.com"
-       ]
-},
-"z200": {
-       "fs_nodes": [
-           "freeswitch@freeswitch1.z200.somedomain.com"
-       ]
-   },
-```
-Remove any other `"fs_nodes":[...]` entries in that document.
+Add the Freeswitch servers for local zone on each Kazoo server.  
 
-Refresh to get above changes  
+So on `kazoo1.z100.somedomain.com` run the following command.
+`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com LocalZone`
+and on `kazoo1.z200.somedomain.com` run the following command.
+`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com LocalZone`
+
+If starting ecallmgr on it's own via systemd or init the command would be:
+`sup -necallmgr ecallmgr_maintenance add_fs_node...`
+
+Refresh to get above changes loaded from bigcouch.  
 `sup kapps_maintenance refresh "system_config"`  
 
-Verify on kazoo in each zone that only freeswitch for that zone is visible.    
+Verify on Kazoo in each zone that only freeswitch for that zone is visible.    
 `sup ecallmgr_maintenance list_fs_nodes`
 
-Our example cluster assumes ecallmgr is started as a kazoo app on the kazoo server.  If it is started separately, with systemd or init, on the kazoo server or on its own server, the command would be:  
+If started ecallmgr separately, with systemd or init, the command would be:  
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
 
 ### HAProxy config
