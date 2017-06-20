@@ -137,7 +137,8 @@ file = error
 Add the Freeswitch servers for local zone on each Kazoo server.  
 
 So on `kazoo1.z100.somedomain.com` run the following command.  
-`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com LocalZone`  
+`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com LocalZone`
+
 and on `kazoo1.z200.somedomain.com` run the following command.  
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com LocalZone`
 
