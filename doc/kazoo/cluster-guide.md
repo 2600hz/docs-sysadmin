@@ -134,21 +134,21 @@ file = error
 
 ### Assign Freeswitch to Ecallmgr zones
 
-Add the Freeswitch servers for local zone on each Kazoo server.  
+Add local Freeswitch server(s) to local zone.  
 
-So on `kazoo1.z100.somedomain.com` run the following command.  
+So on `kazoo1.z100.somedomain.com` run:
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com LocalZone`
 
-and on `kazoo1.z200.somedomain.com` run the following command.  
+and on `kazoo1.z200.somedomain.com` run:
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com LocalZone`
 
-If starting ecallmgr on it's own via systemd or init the command would be:
+If starting ecallmgr on it's own via systemd or init the command would be:  
 `sup -necallmgr ecallmgr_maintenance add_fs_node...`
 
-Refresh to get above changes loaded from bigcouch.  
+Refresh to get above changes loaded from bigcouch  
 `sup kapps_maintenance refresh "system_config"`  
 
-Verify on Kazoo in each zone that only freeswitch for that zone is visible.    
+Verify on Kazoo in each zone that only freeswitch for that zone is visible  
 `sup ecallmgr_maintenance list_fs_nodes`
 
 If started ecallmgr separately, with systemd or init, the command would be:  
