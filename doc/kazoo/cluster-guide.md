@@ -66,7 +66,7 @@ Should return:
 "cluster_nodes":["bigcouch@couch3.z200.somedomain.com","bigcouch@couch2.z200.somedomain.com","bigcouch@couch1.z200.somedomain.com",
 "bigcouch@couch3.z100.somedomain.com"","bigcouch@couch2.z100.somedomain.com","bigcouch@couch1.z100.somedomain.com"]}
 ```
-You can do that on each server to verify they all have the same configuration.
+You can do that on each bigcouch server to verify they all have the same configuration.
 
 To verify zone configuration on each document on each server.
 ```
