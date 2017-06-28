@@ -39,7 +39,7 @@ Have a good understanding of **Linux**, including debugging firewall and network
 
 Have some understanding of databases and database clusters
 
-Helpful to have at least played with **BigCouch**, **Erlang**, **FreeSWITCH** and/or OpenSIPs a little
+Helpful to have at least played with **BigCouch**, **Erlang**, **FreeSWITCH** and/or **Kamailio** a little
 
 If you can genuinely meet all the requirements above, the sky is the limit on what you can build! Enjoy.
  
