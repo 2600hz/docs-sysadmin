@@ -6,14 +6,14 @@ Description: *A guide for installing, configuring and managing your own dedicate
 
 Let's assume the following 7 server clusters in 2 zones.
 
-### IP addressing scheme  
-10.100 = zone 100  
-10.200 = zone 200  
-10.x00.10.x = CouchDB  
-10.x00.20.x = Freeswitch  
-10.x00.30.x = RabbitMQ  
-10.x00.40.x = Kazoo  
-10.x00.50.x = Kamailio  
+### IP addressing scheme
+10.100 = zone 100
+10.200 = zone 200
+10.x00.10.x = CouchDB
+10.x00.20.x = FreeSWITCH
+10.x00.30.x = RabbitMQ
+10.x00.40.x = Kazoo
+10.x00.50.x = Kamailio
 
 ### Server hostnames and IP addresses
 Using IP addressing scheme above.
@@ -23,7 +23,7 @@ Using IP addressing scheme above.
 |couch1.z100.somedomain.com  10.100.10.1  | couch1.z200.somedomain.com  10.200.10.1 |
 couch2.z100.somedomain.com  10.100.10.2   | couch2.z200.somedomain.com  10.200.10.2 |
 couch3.z100.somedomain.com  10.100.10.3   | couch3.z200.somedomain.com  10.200.10.3 |
-freeeswitch1.z100.somedomain.com  10.100.20.1   | freeswitch1.z200.somedomain.com  10.200.20.1 | 
+freeeswitch1.z100.somedomain.com  10.100.20.1   | freeswitch1.z200.somedomain.com  10.200.20.1 |
 rabbit1.z100.somedomain.com  10.100.30.1   | rabbit1.z200.somedomain.com  10.200.30.1 |
 kazoo1.z100.somedomain.com  10.100.40.1   | kazoo1.z200.somedomain.com  10.200.40.1 |
 kamailio1.z100.somedomain.com  10.100.50.1   | kamailio1.z200.somedomain.com  10.200.50.1 |
@@ -33,21 +33,21 @@ This needs to be done before installing kazoo.
 
 On each Bigcouch node configure `z=2` in `/etc/kazoo/bigcouch/local.ini` as follows:
 ```
-[cluster]  
-q=3  
-r=2  
-w=2  
-n=3  
-z=2  
+[cluster]
+q=3
+r=2
+w=2
+n=3
+z=2
 ```
 
-Cluster together the bigcouch nodes from `couch1.z100` (in this example).
+Cluster together the Bigcouch nodes from `couch1.z100` (in this example).
 
-```curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com```  
-Returns  
-```{"_id":"bigcouch@couch1.z100.somedomain.com","_rev":"3-b13d076f367df4d0c52b236e654b836c"}```  
+```curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com```
+Returns
+```{"_id":"bigcouch@couch1.z100.somedomain.com","_rev":"3-b13d076f367df4d0c52b236e654b836c"}```
 
-Now add the zone to this bigcouch server and cluster together the other servers.
+Now add the zone to this Bigcouch server and cluster together the other servers.
 ```
 curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z100.somedomain.com -d '{"_rev":3-b13d076f367df4d0c52b236e654b836c", "zone":"z100"}'
 curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z100.somedomain.com -d '{"zone":"z100"}'
@@ -56,9 +56,9 @@ curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch1.z200.somedomai
 curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z200.somedomain.com -d '{"zone":"z200"}'
 curl -X PUT couch1.z100.somedomain.com:5986/nodes/bigcouch@couch3.z200.somedomain.com -d '{"zone":"z200"}'
 ```
-Verify cluster:  
-`curl http://couch1.z100.somedomain.com:5984/_membership`  
-Should return:  
+Verify cluster:
+`curl http://couch1.z100.somedomain.com:5984/_membership`
+Should return:
 ```
 {"all_nodes":["bigcouch@couch3.z200.somedomain.com","bigcouch@couch2.z200.somedomain.com","bigcouch@couch1.z200.somedomain.com",
 "bigcouch@couch3.z100.somedomain.com","bigcouch@couch2.z100.somedomain.com","bigcouch@couch1.z100.somedomain.com"],
@@ -66,7 +66,7 @@ Should return:
 "cluster_nodes":["bigcouch@couch3.z200.somedomain.com","bigcouch@couch2.z200.somedomain.com","bigcouch@couch1.z200.somedomain.com",
 "bigcouch@couch3.z100.somedomain.com"","bigcouch@couch2.z100.somedomain.com","bigcouch@couch1.z100.somedomain.com"]}
 ```
-You can do that on each bigcouch server to verify they all have the same configuration.
+You can do that on each Bigcouch server to verify they all have the same configuration.
 
 To verify zone configuration on each document on each server.
 ```
@@ -75,10 +75,10 @@ curl http://couch1.z100.somedomain.com:5986/nodes/bigcouch@couch2.z100.somedomai
 ...
 ```
 
-etc.  
+etc.
 ### Kazoo Config
 
-After installing kazoo in both zones edit `/etc/kazoo/core/config.ini`.  This is exactly the same on both.  
+After installing kazoo in both zones edit `/etc/kazoo/core/config.ini`.  This is exactly the same on both.
 ```
 ; section are between [] = [section]
 ; key = value
@@ -132,31 +132,31 @@ console = notice
 file = error
 ```
 
-### Assign Freeswitch to Ecallmgr zones
+### Assign FreeSWITCH to Ecallmgr zones
 
-Add local Freeswitch server(s) to local zone.  
+Add local FreeSWITCH server(s) to local zone.
 
-So on `kazoo1.z100` run:  
+So on `kazoo1.z100` run:
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com 'false'`
 
-and on `kazoo1.z200` run:  
+and on `kazoo1.z200` run:
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com 'false'`
 
-If starting ecallmgr on it's own via systemd or init the command would be:  
+If starting ecallmgr on it's own via systemd or init the command would be:
 `sup -necallmgr ecallmgr_maintenance add_fs_node...`
 
-Refresh to get above changes loaded from bigcouch  
-`sup kapps_maintenance refresh "system_config"`  
+Refresh to get above changes loaded from bigcouch
+`sup kapps_maintenance refresh "system_config"`
 
-Verify on Kazoo in each zone that only freeswitch for that zone is listed  
+Verify on Kazoo in each zone that only FreeSWITCH for that zone is listed
 `sup ecallmgr_maintenance list_fs_nodes`
 
-If ecallmgr is started separately, with systemd or init, the command would be:  
+If ecallmgr is started separately, with systemd or init, the command would be:
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
 
 ### HAProxy config
 
-Edit `/etc/kazoo/haproxy/haproxy.cfg` on zone 100 Kazoo and Freeswitch server as follows.
+Edit `/etc/kazoo/haproxy/haproxy.cfg` on zone 100 Kazoo and FreeSWITCH server as follows.
 ```
 global
         log /dev/log local0 info
@@ -180,7 +180,7 @@ defaults
         timeout connect 6000ms
         timeout client 12000ms
         timeout server 12000ms
-        
+
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
     server couch1.z100.somedomain.com 10.100.10.1:5984 check
@@ -212,25 +212,25 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 
 ## CHANGE "127.0.0.1" TO YOUR SERVERS IP ADDRESS
 ##     Usually your public IP.  If you need
-##     to listen on addtional ports or IPs
+##     to listen on additional ports or IPs
 ##     add them in "BINDINGS" at the bottom.
 #!substdef "!MY_IP_ADDRESS!10.100.50.1!g"
 
 ## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL
-##     This should be the primary RabbitMQ server 
+##     This should be the primary RabbitMQ server
 ##     in the zone that this server will service.
 #!substdef "!MY_AMQP_URL!kazoo://guest:guest@10.100.30.1:5672!g"
 
 ## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL for the other zone.
 ##     This uses the existing MY_AMQP_SECONDARY_URL variable defined in default.cfg
-##     Note the addition of the "zone=" part in the middle 
+##     Note the addition of the "zone=" part in the middle
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
 
 ### Post Install
 
-To view the entire cluster and zone setup, enter the following on either kazoo server.  
-```kazoo-applications status```  
+To view the entire cluster and zone setup, enter the following on either kazoo server.
+```kazoo-applications status```
 
 A properly configured cluster and zone setup will appear as follows.
 
@@ -291,7 +291,7 @@ Registrations : 1
 Node          : kamailio@kamailio1.z200.somedomain.com
 Version       : 5.0.2
 Memory Usage  : 16.34MB
-Zone          : z200 
+Zone          : z200
 Broker        : amqp://10.200.30.1
 Roles         : Dispatcher Presence Registrar
 Dispatcher 1  : sip:10.200.20.1:11000 (AP)
