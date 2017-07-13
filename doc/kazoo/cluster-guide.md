@@ -226,12 +226,6 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     Note the addition of the "zone=" part in the middle 
 #!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
 ```
-### Verify Dispatcher
-
-After adding the Freeswitch servers to CouchDB and completing Kamailio configuration above and restarting Kamailio, Kamailio should automatically populate dispatcher table in sqlite database `/etc/kazoo/kamailio/db/kazoo.db`.  Verify that all Freeswitch servers are there and that local zone Freeswitch servers have `ID: 1` and non-local zone servers have `ID: 2`.
-```
-kamcmd dispatcher.list
-```
 
 ### Post Install
 
@@ -245,7 +239,7 @@ A properly configured cluster and zone setup will appear as follows.
 
 Node          : kazoo_apps@kazoo1.z100.somedomain.com
 md5           : jFoOSYRl8EM8hPzqzjSIEw
-Version       : 4.1.13 - 18
+Version       : 4.1.20 - 18
 Memory Usage  : 175.15MB
 Processes     : 1951
 Ports         : 33
@@ -264,7 +258,7 @@ Media Servers : freeswitch@freeswitch1.z100.somedomain.com (2d20h47m33s)
 
 Node          : kazoo_apps@kazoo1.z200.somedomain.com
 md5           : b3hEn9mtqfCgJnRJrOX_aA
-Version       : 4.1.13 - 18
+Version       : 4.1.20 - 18
 Memory Usage  : 87.64MB
 Processes     : 1951
 Ports         : 34
@@ -282,23 +276,29 @@ Registrations : 1
 Media Servers : freeswitch@freeswitch1.z200.somedomain.com (2d22h43m52s)
 
 Node          : kamailio@kamailio1.z100.somedomain.com
-Version       : 5.0.1
+Version       : 5.0.2
 Memory Usage  : 16.30MB
-Processes     : 0
-Ports         : 0
 Zone          : z100 (local)
 Broker        : amqp://10.100.30.1
-WhApps        : kamailio(719528d17s)
+Roles         : Dispatcher Presence Registrar
+Dispatcher 1  : sip:10.100.20.1:11000 (AP)
+Dispatcher 2  : sip:10.200.20.1:11000 (AP)
+Subscribers   : dialog (1)
+Subscriptions : dialog (4)
+Presentities  : presence (0)  dialog (0)  message-summary (0)
 Registrations : 1
 
 Node          : kamailio@kamailio1.z200.somedomain.com
-Version       : 5.0.1
+Version       : 5.0.2
 Memory Usage  : 16.34MB
-Processes     : 0
-Ports         : 0
-Zone          : z200
+Zone          : z200 
 Broker        : amqp://10.200.30.1
-WhApps        : kamailio(719529d20h34m29s
+Roles         : Dispatcher Presence Registrar
+Dispatcher 1  : sip:10.200.20.1:11000 (AP)
+Dispatcher 2  : sip:10.100.20.1:11000 (AP)
+Subscribers   : dialog (1)
+Subscriptions : dialog (4)
+Presentities  : presence (0)  dialog (0)  message-summary (0)
 Registrations : 1
 ```
   The above assumes ecallmgr is running as an app on the kazoo server.
