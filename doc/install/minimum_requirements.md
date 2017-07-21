@@ -15,7 +15,7 @@ Setting up a **Rackspace**, **Amazon**, **Synapse Global**, or other hosted prov
  
 ## Operating System Recommendations
 
-It is strongly recommended that **Kazoo** be deployed on the **Linux** distribution **CentOS**, version 6.4 or 6.5.  Since **FreeSWITCH** is a large influence on **Kazoo**, and they recommend using **CentOS**; we have a similar recommendation. Also note that this is the OS of choice for **2600hz**'s production deployments. As time goes on, we will be testing other platforms with **Kazoo** and updating this page with recommendations. However, any operating system that **Erlang** or **FreeSWITCH** run on should suffice. 
+It is strongly recommended that **Kazoo** be deployed on the **Linux** distribution **Debian 8 (Jessie)**.  Since **FreeSWITCH** is a large influence on **Kazoo**, and they recommend using **Debian 8**; we have a similar recommendation. Also note that this is the OS of choice for **2600hz**'s production deployments. As time goes on, we will be testing other platforms with **Kazoo** and updating this page with recommendations. However, any operating system that **Erlang** or **FreeSWITCH** run on should suffice. A guide to building Kazoo on **Debian 8 (Jessie)** is available at: <https://docs.2600hz.com/dev/doc/installation/>
 
 
 ## Preparing Computational and Operating System Resources
