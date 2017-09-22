@@ -54,11 +54,18 @@ This needs to be done before installing kazoo.
 On each Bigcouch node configure `z=2` in `/etc/kazoo/bigcouch/local.ini` as follows:
 ```
 [cluster]
+# q = number of shards for a new database
 q=3
+# r = number of copies required for a read quorum
 r=2
+# w = number of copies required for a write quorum
 w=2
+# n = number of copies of each shard
 n=3
+# z = number of zones
 z=2
+# make sure you have enough copies in each zone to support a quorum if you lose a zone
+placement = z100:2,z200:2
 ```
 
 Cluster together the Bigcouch nodes from `couch1.z100` (in this example).
