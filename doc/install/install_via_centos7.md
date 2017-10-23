@@ -33,7 +33,7 @@ systemctl restart network
 
 # Add 2600Hz RPM server
 # You can find the latest 4.0 RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/4.0/
-export RPMFILE=2600hz-release-4.0-2.el7.centos.noarch.rpm
+export RPMFILE=2600hz-release-4.0-3.el7.centos.noarch.rpm
 RPMPATH=centos/7/stable/2600hz-release/4.0/; \
 RPMSITE=https://packages.2600hz.com; \
 curl -o $RPMFILE -k $RPMSITE/$RPMPATH/$RPMFILE
