@@ -103,9 +103,6 @@ port = 15984
 ; password = "supermegaexcellenttelephonyplatform"
 admin_port = 15986
 
-[whistle_apps]
-cookie = change_me
-
 [kazoo_apps]
 cookie = change_me
 zone = "z100"
