@@ -119,7 +119,7 @@ yum install -y kazoo-freeswitch
 systemctl enable kazoo-freeswitch
 systemctl start kazoo-freeswitch
 
-# Check FreeSWITCH status
+# Check FreeSWITCH status (you will not see any connected erlang modules)
 kazoo-freeswitch status
 
 # Get the sipify script for FreeSWITCH log parsing (optional)
