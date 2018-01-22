@@ -120,7 +120,7 @@ systemctl enable kazoo-freeswitch
 systemctl start kazoo-freeswitch
 
 # Check FreeSWITCH status
-kazoo-freeswitch status
+kazoo-freeswitch status(you will not see any connected erlang modules)
 
 # Get the sipify script for FreeSWITCH log parsing (optional)
 curl -o /usr/bin/sipify.sh \
