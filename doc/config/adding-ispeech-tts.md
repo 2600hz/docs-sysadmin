@@ -17,7 +17,7 @@ Adding **iSpeech** TTS to **Kazoo** provides a nice TTS engine for turning your 
 ```
 {
 "_id" : "speech",
-     default: {
+     "default": {
        "tts_url": "http://api.ispeech.org/api/json",
        "tts_api_key": "YOUR_ISPEECH_KEY",
        "tts_frequency": "16000",
