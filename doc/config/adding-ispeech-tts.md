@@ -15,7 +15,8 @@ Adding **iSpeech** TTS to **Kazoo** provides a nice TTS engine for turning your 
 
 3. Edit the speech document:
 ```
- { _id : speech ,
+{
+"_id" : "speech",
      default: {
        "tts_url": "http://api.ispeech.org/api/json",
        "tts_api_key": "YOUR_ISPEECH_KEY",
@@ -29,6 +30,7 @@ Adding **iSpeech** TTS to **Kazoo** provides a nice TTS engine for turning your 
        "tts_language": "en-US",
        "tts_default_voice": "female/en-US",
        "tts_url_ispeech": "http://api.ispeech.org/api/json"
+       }
 }
 ```
 
