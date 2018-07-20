@@ -15,12 +15,30 @@ We need your help to keep this up to date by:
 
 ## Setup the server
 
-This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
+This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
 !!! note
-    Please remember to replace 'ip.add.re.ss' with your server's actual IP address (not localhost either). A simple `sed -i 's/ip.add.re.ss/A.B.C.D/g` on this file should do it (or whatever string-replace functionality you have available)
+    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). `export`-ing the custom variables or including them in your file should suffice.
 
 ```bash
+
+# pre-configure custom defaults:
+IP_ADDR=172.16.17.18
+_HOSTNAME=aio.kazoo.com
+# see /usr/share/zoneinfo, specify filename relative to that dir:
+ZONEINFO_TZ=UTC
+# 1 or more
+NTP_SERVERS=( 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org )
+
+# You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
+# Currently, 4.2 is considered 'stable' so:
+# https://packages.2600hz.com/centos/7/stable/2600hz-release/4.2/2600hz-release-4.2-0.el7.centos.noarch.rpm
+
+RELEASE_BASE=https://packages.2600hz.com/centos/7/stable/2600hz-release
+RELEASE_VER=4.2
+META_PKG=2600hz-release-${RELEASE_VER}-0.el7.centos.noarch.rpm
+LATEST_RELEASE=${RELEASE_BASE}/${RELEASE_VER}/${META_PKG}
+
 # Install updates
 yum update
 
@@ -28,24 +46,20 @@ yum update
 yum install -y yum-utils psmisc
 
 # Hostname setup
-hostnamectl set-hostname aio.kazoo.com
+hostnamectl set-hostname ${_HOSTNAME}
 
-echo "ip.add.re.ss aio.kazoo.com aio" >> /etc/hosts
-echo "127.0.0.1 aio.kazoo.com aio" >> /etc/hosts
+echo "${IP_ADDR} ${_HOSTNAME} `hostname -s`" >> /etc/hosts
+echo "127.0.0.1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 
 # System time to UTC
-ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+ln -fs /usr/share/zoneinfo/${ZONEINFO_TZ} /etc/localtime
 
 # Setup networking to auto-start (if necessary)
 sed -i 's/ONBOOT=no/ONBOOT=yes/' /etc/sysconfig/network-scripts/ifcfg-eth0
 systemctl restart network
 
 # Add 2600Hz RPM server
-# You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
-# Currently, 4.2 is considered 'stable' so:
-# https://packages.2600hz.com/centos/7/stable/2600hz-release/4.2/2600hz-release-4.2-0.el7.centos.noarch.rpm
-
-yum install -y https://packages.2600hz.com/centos/7/stable/2600hz-release/4.2/2600hz-release-4.2-0.el7.centos.noarch.rpm
+yum install -y ${LATEST_RELEASE}
 
 # Clear yum cache
 yum clean all
@@ -54,9 +68,17 @@ yum clean all
 yum install -y ntp
 systemctl stop ntpd
 
-# Feel free to use other NTP servers
-echo "server ntp.2600hz.com" > /etc/ntp.conf
+# Feel free to use other NTP servers and set in NTP_SERVERS
+:> /etc/ntp.conf
+for ntpsrv in ${NTP_SERVERS[@]}
+do
+	echo "server ${ntpsrv}" >> /etc/ntp.conf
+done
+
+# phone home
 ntpdate ntp.2600hz.com
+
+systemctl enable ntpd
 systemctl start ntpd
 ```
 
@@ -80,22 +102,22 @@ systemctl start kazoo-rabbitmq
 ss -lpn | grep "5672"
 tcp    LISTEN     0      128       *:25672                 *:*                   users:(("beam.smp",pid=10826,fd=8))
 
-# For testing purposes, it can be useful to disable iptables (optional)
-systemctl stop iptables
+# For testing purposes (optional), it can be useful to disable iptables
+systemctl stop firewalld
 
 # Check the RabbitMQ UI (optional)
-# http://ip.add.re.ss:15672/
+# http://${IP_ADDR}:15672/
 # Use 'guest' as username and password
 
 # Check out the API (optional, build monitoring tools around this)
 curl -i -u guest:guest http://localhost:15672/api/aliveness-test/%2F
-> HTTP/1.1 200 OK
-server: Cowboy
-date: Fri, 11 May 2018 22:55:25 GMT
-content-length: 15
-content-type: application/json
-vary: accept, accept-encoding, origin
-cache-control: no-cache
+
+HTTP/1.1 200 OK
+Server: MochiWeb/1.1 WebMachine/1.10.0 (never breaks eye contact)
+Date: {{ current date and time }}
+Content-Type: application/json
+Content-Length: 15
+Cache-Control: no-cache
 
 {"status":"ok"}
 
@@ -111,10 +133,10 @@ kazoo-rabbitmq status
 yum install -y kazoo-kamailio
 
 # Update the hostname in the config
-sed -i 's/kamailio\.2600hz\.com/aio.kazoo.com/g' /etc/kazoo/kamailio/local.cfg
+sed -i "s/kamailio\.2600hz\.com/${_HOSTNAME}/g" /etc/kazoo/kamailio/local.cfg
 
 # Update the IP addresses
-sed -i 's/127\.0\.0\.1/ip.add.re.ss/g' /etc/kazoo/kamailio/local.cfg
+sed -i "s/127\.0\.0\.1/${IP_ADDR}/g" /etc/kazoo/kamailio/local.cfg
 
 # Start Kamailio
 systemctl enable kazoo-kamailio
@@ -145,7 +167,7 @@ yum install -y kazoo-freeswitch
 systemctl enable kazoo-freeswitch
 systemctl start kazoo-freeswitch
 
-# Check FreeSWITCH status (you will not see any connected erlang modules)
+# Check FreeSWITCH status (you will not see any connected Erlang modules)
 kazoo-freeswitch status
 UP 0 years, 0 days, 0 hours, 0 minutes, 0 seconds, 192 milliseconds, 384 microseconds
 FreeSWITCH (Version 1.6.20  64bit) is ready
@@ -206,7 +228,8 @@ yum -y install kazoo-haproxy
 
 # Edit /etc/kazoo/haproxy/haproxy.cfg to setup the backend server to point to BigCouch
 # For AiO installs, it should look something like:
-cat /etc/kazoo/haproxy/haproxy.cfg
+
+cat >> /etc/kazoo/haproxy/haproxy.cfg << EOF
 global
         log /dev/log local0 info
         maxconn 4096
@@ -232,15 +255,17 @@ defaults
 
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
-    server aio.kazoo.com 127.0.0.1:5984 check
+    server ${_HOSTNAME} 127.0.0.1:5984 check
 
 listen bigcouch-mgr 127.0.0.1:15986
   balance roundrobin
-    server aio.kazoo.com 127.0.0.1:5986 check
+    server ${_HOSTNAME} 127.0.0.1:5986 check
 
 listen haproxy-stats 127.0.0.1:22002
   mode http
   stats uri /
+
+EOF
 
 # Enable and start HAProxy
 systemctl enable kazoo-haproxy
@@ -294,13 +319,13 @@ sup kapps_maintenance refresh
 <10016.9661.0> (22/22) refreshing database 'system_config'
 ...
 
-# Create the admin account, remember to replace the braced fields
+# Create the admin account for the Monster UI, remember to replace the braced fields
 # Example: To create an account with the username root, replace {ADMIN_USER} with root
 sup crossbar_maintenance create_account \
-{ACCOUNT_NAME} \
-{ACCOUNT_REALM} \
-{ADMIN_USER} \
-{ADMIN_PASS}
+	{ACCOUNT_NAME} \
+	{ACCOUNT_REALM} \
+	{ADMIN_USER} \
+	{ADMIN_PASS}
 View updated for account%2Fed%2F1f%2F03d6cf3b8135fe3b008847d92c65!
 created new account 'ed1f03d6cf3b8135fe3b008847d92c65' in db 'account%2Fed%2F1f%2F03d6cf3b8135fe3b008847d92c65'
 created new account admin user '002bc4e8687292f9e4085a590fa61eab'
@@ -377,7 +402,7 @@ Media Servers : freeswitch@aio.kazoo.com (1m34s)
 sup -n ecallmgr ecallmgr_maintenance add_fs_node freeswitch@aio.kazoo.com
 
 # Add Kamailio to the SBC ACLs
-sup -n ecallmgr ecallmgr_maintenance allow_sbc kam1 ip.add.re.ss
+sup -n ecallmgr ecallmgr_maintenance allow_sbc kam1 ${IP_ADDR}
 updating authoritative ACLs kam1(ip.add.re.ss/32) to allow traffic
 issued reload ACLs to freeswitch@aio.kazoo.com
 
@@ -386,7 +411,7 @@ sup -n ecallmgr ecallmgr_maintenance sbc_acls
 +--------------------------------+--------------------+---------------+-------+------------------+----------------------------------+
 | Name                           | CIDR               | List          | Type  | Authorizing Type | ID                               |
 +================================+====================+===============+=======+==================+==================================+
-| kam1                           | ip.add.re.ss/32    | authoritative | allow | system_config    |                                  |
+| kam1                           | ${IP_ADDR}/32    | authoritative | allow | system_config    |                                  |
 +--------------------------------+--------------------+---------------+-------+------------------+----------------------------------+
 
 # Check FreeSWITCH for ecallmgr connection info
@@ -396,7 +421,7 @@ Running mod_kazoo v1.4.0-1
 Listening for new Erlang connections on 0.0.0.0:8031 with cookie change_me
 Registered as Erlang node freeswitch@aio.kazoo.com, visible as freeswitch
 Connected to:
-  ecallmgr@aio.kazoo.com (ip.add.re.ss:8031) up 0 years, 0 days, 0 hours, 7 minutes, 38 seconds
+  ecallmgr@${_HOSTNAME} (${IP_ADDR}:8031) up 0 years, 0 days, 0 hours, 7 minutes, 38 seconds
 
 # Check that Kamailio sees FreeSWITCH
 kazoo-kamailio status
@@ -407,7 +432,7 @@ kazoo-kamailio status
 			ID: 1
 			TARGETS: {
 				DEST: {
-					URI: sip:ip.add.re.ss:11000
+					URI: sip:${IP_ADDR}:11000
 					FLAGS: AP
 					PRIORITY: 0
 				}
@@ -424,12 +449,12 @@ kazoo-kamailio status
 yum -y install monster-ui* httpd
 
 # Update Monster's config for Crossbar's URL
-sed -i 's/localhost/ip.add.re.ss/' /var/www/html/monster-ui/js/config.js
+sed -i "s/localhost/${IP_ADDR}/" /var/www/html/monster-ui/js/config.js
 
 # Initialize Monster Apps
 sup crossbar_maintenance init_apps \
-/var/www/html/monster-ui/apps \
-http://ip.add.re.ss:8000/v2
+	/var/www/html/monster-ui/apps \
+	http://${IP_ADDR}:8000/v2
 trying to init app from /var/www/html/monster-ui/apps/numbers
  saved app numbers as doc 94d5eadd9a0531fff63dd886882fe5a1
    saved NumberManager_app.png to 94d5eadd9a0531fff63dd886882fe5a1
@@ -483,21 +508,21 @@ systemctl start httpd
 # Create the virtual host
 echo "<VirtualHost *:80>
   DocumentRoot \"/var/www/html/monster-ui\"
-  ServerName aio.kazoo.com
+  ServerName ${_HOSTNAME}
 </VirtualHost>
-" > /etc/httpd/conf.d/aio.kazoo.com.conf
+" > /etc/httpd/conf.d/${_HOSTNAME}.conf
 
 # Reload Apache
 systemctl reload httpd
 
 # Check that Crossbar (the API server) is accessible (responding to requests)
-curl http://ip.add.re.ss:8000/v2
+curl http://${IP_ADDR}:8000/v2
 {"data":{"message":"invalid credentials"},"error":"401","message":"invalid_credentials","status":"error","timestamp":"2018-05-16T19:08:00","version":"4.2.28","node":"o4fNOLAQ3LJSAzliaNiT1A","request_id":"aeceb6ad9c4f754f92ff8f34e2e8b605","auth_token":"undefined"}
 
-curl http://ip.add.re.ss:8000/v2/webhooks
+curl http://${IP_ADDR}:8000/v2/webhooks
 {"page_size":6,"data":[...],"revision":"19d2d48e5fcc9a7dd0769c2314506eda","timestamp":"2018-05-16T19:08:28","version":"4.2.28","node":"o4fNOLAQ3LJSAzliaNiT1A","request_id":"3f49acd2586eb0ecc4e82a9d397611b0","status":"success"}
 
-# You can now load MonsterUI in your browser at http://ip.add.re.ss
+# You can now load MonsterUI in your browser at http://${IP_ADDR}
 # Use the credentials from the create_account step to log in
 ```
 
