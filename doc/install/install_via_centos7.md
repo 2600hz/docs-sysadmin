@@ -18,7 +18,7 @@ We need your help to keep this up to date by:
 This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
 !!! note
-    Please remember to replace 'ip.add.re.ss' with your server's actual IP address (not localhost either). A simple `sed -i 's/ip.add.re.ss/A.B.C.D/g` on this file should do it (or whatever string-replace functionality you have available)
+    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). `export`ing the custom variables or including them in your file shoudld suffice.
 
 ```bash
 
