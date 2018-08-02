@@ -21,4 +21,4 @@ E911
 save/1
 delete/1
 ```
-Each function takes the `#number{}` record and must return a `#number{}` record back to the caller on success. If a failure occurs, an exception is thrown using the `wnm_number` error functions.
+Each function takes the `#number{}` record and must return a `#number{}` record back to the caller on success. If a failure occurs, an exception is thrown using the `knm_number` error functions.

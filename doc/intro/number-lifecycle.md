@@ -43,7 +43,7 @@ This document describes the lifecycle of direct inward dialing (DID) numbers.
 
 2. Does not participate in number hunts. Any account can transition an `available` number to `reserved`.
 
-3. Any account can transition an `available` number to `in_service` if it is not of type `wnm_local`.
+3. Any account can transition an `available` number to `in_service` if it is not of type `knm_local`.
 
 4. There are no public fields for available numbers, but they can be created during a transition.
   
@@ -79,7 +79,7 @@ This document describes the lifecycle of direct inward dialing (DID) numbers.
 
   d. When a number is reserved the new assignment is added to the history of assignments.
 
-7. A flagged account can create a reserved number of type `wnm_local`. These numbers can only be acquired and managed by the creating account or a descendant.
+7. A flagged account can create a reserved number of type `knm_local`. These numbers can only be acquired and managed by the creating account or a descendant.
 
 8. E911 assignments will be maintained, if present.
 
@@ -109,7 +109,7 @@ If a `reserved` number is released:
 
 With an assignment history it remains `reserved` but is re-assigned to the previously assigned account.
 
-Without an assignment history and is of type `wnm_local` it transitions to disconnected.
+Without an assignment history and is of type `knm_local` it transitions to disconnected.
 
 Any other type completes the transition to released.
 
@@ -117,7 +117,7 @@ If an `in_service` number is released:
 
 With an assignment history it becomes `reserved`and is re-assigned to the previously assigned account
 
-Without an assigment history and is of type `wnm_local` it transitions to `disconnected`
+Without an assignment history and is of type `knm_local` it transitions to `disconnected`
 
 Any other type completes the transition to `released`
 

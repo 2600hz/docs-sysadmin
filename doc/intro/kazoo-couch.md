@@ -11,7 +11,7 @@ We had a bunch of simple requirements based on our past experiences:
 1. We need to be able to upgrade the database schema without taking down the database. This directly relates to our goal: phones can never go down - not for maintenance, configuration changes or upgrades.
 2. We need to be able to scale to large numbers of endpoints. This most likely would happen over distributed systems, so automatic sharding (segmenting) was a must, with re-balancing near after.
 3. We need to be able to query data in changing ways - reports, CDRs, configurations will likely need to be retrieved and displayed in varying manners as we grow.
-4. We need to fit on small and large equipment comfortably (from memory to diskspace)
+4. We need to fit on small and large equipment comfortably (from memory to disk space)
 5. We need an easy way for people to access the raw data to look for errors or make direct modifications
 6. We need something that's easy to install and get up and running
 7. We need something that's resilient in the event of a failure (both in terms of software and hardware)

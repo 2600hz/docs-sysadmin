@@ -9,14 +9,14 @@ The number document is the only document used to route inbound calls that origin
 
 ## Database
 
-Number documents are stored in a database based on the prefix of the number after E.164 converters have been applied.  All number databases start with "numbers/" followed by the first five digits of the number.  For example, 4158867900 would be stored in a database called "numbers/+1415" (url encoded as "numbers%2F%2B415").
+Number documents are stored in a database based on the prefix of the number after E.164 converters have been applied.  All number databases start with "numbers/" followed by the first five digits of the number.  For example, 4158867900 would be stored in a database called "numbers/+1415" (URL encoded as "numbers%2F%2B415").
 
 
 ## Base Parameters
 
 `PROVIDER_PROPERTIES` - These are provider specific properties that are added to enable some feature (via a provider module). See below for sub-parameters:
 
-`pvt_module_name` - This property sets carrier module that is responsible for the number. For example if this is set to `wnm_some_carrier` then the API module for "Some Carrier" would be used to provision the number or disconnect it.
+`pvt_module_name` - This property sets carrier module that is responsible for the number. For example if this is set to `knm_some_carrier` then the API module for "Some Carrier" would be used to provision the number or disconnect it.
 
 `pvt_module_data` - This property is opaque metadata needed by the carrier module to maintain the number. This property should never be manipulated or used by anything other than the carrier module.
 
@@ -26,7 +26,7 @@ Number documents are stored in a database based on the prefix of the number afte
 
 `pvt_assigned_to` - This is the most important property of a number. It is the account id that the number should route to and will only be set on a number that is `in_service` or reserved.
 
-`pvt_previously_assigned_to` - When an account deletes a number maintained by a carrier module other than wnm_local it will transition to the `released_state` (as set in the configuration). When this happens the `pvt_assigned_to` will be cleared and this property will be populated with the account id that it was assigned to.
+`pvt_previously_assigned_to` - When an account deletes a number maintained by a carrier module other than knm_local it will transition to the `released_state` (as set in the configuration). When this happens the `pvt_assigned_to` will be cleared and this property will be populated with the account id that it was assigned to.
  
 `pvt_features` - This property is used to track what features (as supported by provider modules) are active on the number. When a provider is triggered by adding the appropriate properties it will automatically add or remove the associated feature to this list. The primary use of this is for the billing/services module. This parameter is maintained by the number manager and should not be changed directly.
 
@@ -34,11 +34,11 @@ Number documents are stored in a database based on the prefix of the number afte
  
 `pvt_ported_in` - This property is used to track numbers that where created as a port in request.
 
-`pvt_created` - This is the timestamp that the number was created on, in gregorian seconds.
+`pvt_created` - This is the timestamp that the number was created on, in Gregorian seconds.
 
-`pvt_modified` - This is the timestamp that the number was lasted modified on, in gregorian seconds.
+`pvt_modified` - This is the timestamp that the number was lasted modified on, in Gregorian seconds.
  
-`pvt_db_name` - This is the url encoded database name that the number document is stored in.
+`pvt_db_name` - This is the URL encoded database name that the number document is stored in.
  
  
 ## Sub-Parameters

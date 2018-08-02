@@ -24,7 +24,7 @@ This is what **Crossbar** and other modules within **Kazoo** would use to search
  
 acquire_number/1
 ```
-This function is responsible for actually provisioning a number from the carrier and having the carrier route the DID to the **Kazoo** installation. It takes as input the #number{} record and expects the modified record back. Typically all that is modified is the `module_data` portion, which is generally appended with any order information the carrier may return. If an error occurs when provisioning the number, use the `wnm_number:error_*` functions to throw an appropriate exception. Some carriers will allow you to dynamically add the IP(s) to use when routing the DID to the **Kazoo** cluster. These are typically stored in the `system_config` database in a document for the carrier settings (something like `number_manager.carrier_name`).
+This function is responsible for actually provisioning a number from the carrier and having the carrier route the DID to the **Kazoo** installation. It takes as input the #number{} record and expects the modified record back. Typically all that is modified is the `module_data` portion, which is generally appended with any order information the carrier may return. If an error occurs when provisioning the number, use the `knm_number:error_*` functions to throw an appropriate exception. Some carriers will allow you to dynamically add the IP(s) to use when routing the DID to the **Kazoo** cluster. These are typically stored in the `system_config` database in a document for the carrier settings (something like `number_manager.carrier_name`).
 
 Each `acquire_number` function should also have a dry run capability:
 
@@ -34,4 +34,4 @@ This allow to bypass the work and not actually buy the number but the rest of th
  
 `disconnect_number/1`
 
-This function is responsible to releasing the DID from the carrier. Similar to `acquire_number/1`, this function will only return the `#number{}` record on success; otherwise use the `wnm_number` error functions to throw exceptions when this function should fail.
+This function is responsible to releasing the DID from the carrier. Similar to `acquire_number/1`, this function will only return the `#number{}` record on success; otherwise use the `knm_number` error functions to throw exceptions when this function should fail.

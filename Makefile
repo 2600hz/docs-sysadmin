@@ -1,6 +1,8 @@
 ROOT = $(shell readlink -f .)
 DOCS_ROOT=$(ROOT)/doc/mkdocs
 
+include make/splchk.mk
+
 docs: docs-report docs-setup docs-build
 
 docs-report:

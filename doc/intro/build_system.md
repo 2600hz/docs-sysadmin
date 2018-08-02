@@ -38,7 +38,7 @@ Bundle everything in the RPM, including all libraries, wherever possible
 2. The build process should generate all needed beams and other derivatives
 3. The source code does not assume any directory paths, and all the installation paths are defined during the installation (currently, for example: `utils/sup/src/sup.erl` contains "`/opt/kazoo`" hardcoded)
 4. Desirable: strict separation of source directory, installation directory, and configuration directory. This is difficult to achieve within rebar paradigm, as it does not offer installing the application into a target path.
-5. Installed scripts contains direct links to external binaries, such as full path to the erlang interpreter. This will allow multiple erlang versions exist on the same server (currently: "erl" from current PATH is used).
+5. Installed scripts contains direct links to external binaries, such as full path to the Erlang interpreter. This will allow multiple Erlang versions exist on the same server (currently: "erl" from current PATH is used).
 
 
 ## New Proposed Methods:

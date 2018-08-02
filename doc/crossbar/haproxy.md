@@ -1,10 +1,10 @@
-## HAPROXY
+## HAProxy
 
 
 
-*Use haproxy 1.5 to create an SSL reverse proxy*
+*Use HAProxy 1.5 to create an SSL reverse proxy*
 
-If you're working from an existing install, you will likely need to remove haproxy 1.4 before continuing.  Be sure to take a backup of `/etc/haproxy/haproxy.cfg`!
+If you're working from an existing install, you will likely need to remove HAProxy 1.4 before continuing.  Be sure to take a backup of `/etc/haproxy/haproxy.cfg`!
 
 `yum erase haproxy`
 

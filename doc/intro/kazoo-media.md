@@ -24,7 +24,7 @@ Will each server realistically be able to store all media across the system?
 
 ## To The Cloud Stateless Switch
 
-If a switch or subset of switches are responsible for storing a client's voicemail files, we have a point of failure with respect to that client. With the single switch setup, it is an obvious point of failure. As you increase the number of switches storing media, the operational costs begin to increase (while the likelyhood of losing those files decreases). However, the client is still limited in which switch they are able to hit and retrieve their media.
+If a switch or subset of switches are responsible for storing a client's voicemail files, we have a point of failure with respect to that client. With the single switch setup, it is an obvious point of failure. As you increase the number of switches storing media, the operational costs begin to increase (while the likelihood of losing those files decreases). However, the client is still limited in which switch they are able to hit and retrieve their media.
 
 A guiding decision we've made in **Whistle** is that the underlying switching servers should be as "dumb" as possible with respect to the decision making process. Included in this decision is the storage of client media. As seen above, the job of synchronizing media across the cluster is difficult in the switching layer. Whistle instead pushes the responsibility of handling media up to the **WhApp** layer. As long as a switch is managed by **Whistle**, and Whistle is connected via messaging bus to a **WhApp** that handles media distribution, all switches have access to the same media.
 

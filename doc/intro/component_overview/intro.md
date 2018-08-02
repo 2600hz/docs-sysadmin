@@ -24,7 +24,7 @@ to the Message Bus...
 ######**RabbitMQ**
 
 We primarily start and conduct conversations between servers using a standard protocol named AMQP, which is implemented via a program named **RabbitMQ**. While we've had discussions about 
-fastersystems like **ZeroMQ** (theoretically anyway), **RabbitMQ** allows us to keep everything in native Erlang data types, pass things around our software quickly, and cluster **Kazoo** and **WhApp** servers easily. It also implements all the brokers we need out-of-the-box.
+faster systems like **ZeroMQ** (theoretically anyway), **RabbitMQ** allows us to keep everything in native Erlang data types, pass things around our software quickly, and cluster **Kazoo** and **WhApp** servers easily. It also implements all the brokers we need out-of-the-box.
 
 to the Logic...
 

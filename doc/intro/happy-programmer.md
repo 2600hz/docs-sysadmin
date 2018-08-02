@@ -2,7 +2,7 @@
 
 
 
-Summarized thusly: 
+Summarized thus: 
 
 *Only program the happy case, what the specification says the task is supposed to do ~ Joe Armstrong*
 

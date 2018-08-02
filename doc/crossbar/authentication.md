@@ -2,7 +2,7 @@
 
 Only turn authentication on and/or authorization off on a non-public server. Servers with no authentication can be easily compromised.
  
-**Kazoo** comes with two modules that allow you to bypass the authentication and authorization mechanisms, but has them turned off by default. Enabling them is relatively easy. These instructions assume the **Crossbar** application is running in the **WhApps** container and is listening on port 8000, the default.
+**Kazoo** comes with two modules that allow you to bypass the authentication and authorization mechanisms, but has them turned off by default. Enabling them is relatively easy. These instructions assume the **Crossbar** application is running in the **kazoo_apps** container and is listening on port 8000, the default.
 
 ## Steps to Turn Off Auth
 ```

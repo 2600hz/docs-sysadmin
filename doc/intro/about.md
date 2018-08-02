@@ -87,7 +87,7 @@ CNAM is a database used for storing and retrieving the names of callers associat
 
 **700 and 500 Numbers**
 
-700 and 500 numbers belong to an interexchange carrier and are locally routed by that carrier only. Thus, 700-555-4141 on ATT and 700-555-4141 on Sprint are actually two completely different numbers and can be routed to completely different services. The intent of these numbers was to allow phone companies to control and roll out services on an exchange that would be available only to their own customers and would allow for faster roll-outs to their customers. These numbers were largely unsuccessful and are rarely supported by VoIP providers.
+700 and 500 numbers belong to an inter-exchange carrier and are locally routed by that carrier only. Thus, 700-555-4141 on ATT and 700-555-4141 on Sprint are actually two completely different numbers and can be routed to completely different services. The intent of these numbers was to allow phone companies to control and roll out services on an exchange that would be available only to their own customers and would allow for faster roll-outs to their customers. These numbers were largely unsuccessful and are rarely supported by VoIP providers.
 
 
 **International Calling**
@@ -107,5 +107,5 @@ Toll free numbers, like inbound circuits, still require a physical connection to
 
 **SMS**
 
-SMS outbound always costs money, usually from $0.01 to $0.02 per text message, with some wholesales going as low as $0.005 for volume. These fees are charged to cover the costs of maintaining databases of phone numbers with SMS capabilities and their responsible carriers and for providing the infrastructure to transmit and receive messages reliably across the SMS network. There are also tariffs and access charges from various telcos for interoperating with SMS messages.
+SMS outbound always costs money, usually from $0.01 to $0.02 per text message, with some wholesales going as low as $0.005 for volume. These fees are charged to cover the costs of maintaining databases of phone numbers with SMS capabilities and their responsible carriers and for providing the infrastructure to transmit and receive messages reliably across the SMS network. There are also tariffs and access charges from various telcos for inter-operating with SMS messages.
  

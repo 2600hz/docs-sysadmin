@@ -21,11 +21,11 @@ See below for sub-parameters:
 
 `pvt_vsn` - This is the version of the document and indicates which format you will find the data in. Currently these documents are at the first version: `pvt_vsn : "1"`
 
-`pvt_created` - This is the timestamp that the number was created on, in gregorian seconds: `pvt_created : 63494331491`
+`pvt_created` - This is the timestamp that the number was created on, in Gregorian seconds: `pvt_created : 63494331491`
 
-`pvt_modified` - This is the timestamp that the number was lasted modified on, in gregorian seconds: `pvt_modified : 63494331491`
+`pvt_modified` - This is the timestamp that the number was lasted modified on, in Gregorian seconds: `pvt_modified : 63494331491`
 
-`pvt_account_db` - This is the url encoded database of the account: `pvt_account_db : account%2F43%2F57%2F9fc0a3aa11e29e960800200c9a66`
+`pvt_account_db` - This is the URL encoded database of the account: `pvt_account_db : account%2F43%2F57%2F9fc0a3aa11e29e960800200c9a66`
 
 `pvt_account_id` - This is the id of the account: `pvt_account_db : 43579fc0a3aa11e29e960800200c9a66`
 ```

@@ -10,7 +10,7 @@ Click 'Create' and select 'Blank' Page to create your first page. New pages are 
 ## Add to your page
 
 Click 'Edit' to enter the **Confluence** editor and use the page layouts feature to structure your content using sections and columns. Use headings to format your text and drag and drop images into your page to provide visual interest. Click 'Insert' and select 'Other 
-Macros'to add macros for navigation, special formatting and other media:
+Macros' to add macros for navigation, special formatting and other media:
 
 1. Create a page
 

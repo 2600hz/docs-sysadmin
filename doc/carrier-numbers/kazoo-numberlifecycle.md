@@ -7,7 +7,7 @@
 This document describes the lifecycle of direct inward dialing (DID) numbers.
 
  
-## NumberStates
+## Number States
 
 
 ## Discovery 
@@ -54,9 +54,9 @@ Does not participate in number hunts.
 
 Any account can transition an `available` number to `reserved`.
 
-Any account can transition an `available` number to `in_service` if it is not of type `wnm_local`.
+Any account can transition an `available` number to `in_service` if it is not of type `knm_local`.
 
-There are no public fields for `availabl` numbers, but they can be created during a transition.
+There are no public fields for `available` numbers, but they can be created during a transition.
 
 
 ## Reserved
@@ -89,7 +89,7 @@ The new account assignment is a descendant of the current assignment.
 
 When a number is reserved the new assignment is added to the history of assignments.
 
-A flagged account can create a `reserved` number of type `wnm_local`.  These numbers can only be acquired and managed by the creating 
+A flagged account can create a `reserved` number of type `knm_local`.  These numbers can only be acquired and managed by the creating 
 account or a descendant.
 
 E911 assignments will be maintained, if present.
@@ -120,7 +120,7 @@ Does not participate in number hunts.
 
 With an assignment history it remains `reserved` but is re-assigned to the previously assigned account.
 
-Without an assignment history and is of type `wnm_local` it transitions to `disconnected`.
+Without an assignment history and is of type `knm_local` it transitions to `disconnected`.
 
 Any other type completes the transition to "released".
 
@@ -128,7 +128,7 @@ Any other type completes the transition to "released".
 
 With an assignment history it becomes `reserved` and is re-assigned to the previously assigned account.
 
-Without an assigment history and is of type `wnm_local` it transitions to `disconnected`.
+Without an assignment history and is of type `knm_local` it transitions to `disconnected`.
 
 Any other type completes the transition to `released`.
 
