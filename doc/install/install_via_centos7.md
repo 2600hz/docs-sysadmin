@@ -25,8 +25,6 @@ This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.c
 # pre-configure custom defaults:
 IP_ADDR=172.16.17.18
 _HOSTNAME=aio.kazoo.com
-# see /usr/share/zoneinfo, specify filename relative to that dir:
-ZONEINFO_TZ=UTC
 # 1 or more
 NTP_SERVERS=( 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org )
 
@@ -51,8 +49,8 @@ hostnamectl set-hostname ${_HOSTNAME}
 echo "${IP_ADDR} ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 echo "127.0.0.1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 
-# System time to UTC
-ln -fs /usr/share/zoneinfo/${ZONEINFO_TZ} /etc/localtime
+# System time to UTC: required by kazoo
+ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 
 # Setup networking to auto-start (if necessary)
 sed -i 's/ONBOOT=no/ONBOOT=yes/' /etc/sysconfig/network-scripts/ifcfg-eth0
