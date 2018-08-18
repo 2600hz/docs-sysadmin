@@ -527,6 +527,9 @@ curl http://${IP_ADDR}:8000/v2/webhooks
 # Troubleshooting
 
 ## Kamailio
+as of 2018-08-17, the blow would not work   but as a work around to force a working version:
+yum install librabbitmq-0.5.2-1.el7
+
 There was an issue with librabbitmq versions when installing/updating kazoo-kamailio. If you see something like:
 
 ```bash
