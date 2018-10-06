@@ -41,7 +41,7 @@ LATEST_RELEASE=${RELEASE_BASE}/${RELEASE_VER}/${META_PKG}
 yum update
 
 # Install required packages
-yum install -y yum-utils psmisc
+yum install -y yum-utils psmisc socat
 
 # Hostname setup
 hostnamectl set-hostname ${_HOSTNAME}
