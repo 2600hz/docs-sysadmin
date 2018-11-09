@@ -222,7 +222,7 @@ BigCouch (pid 21325) is running...
 
 ```bash
 # Install the Kazoo-wrapped HAProxy
-yum -y install kazoo-haproxy
+yum -y install kazoo-haproxy socat
 
 # Edit /etc/kazoo/haproxy/haproxy.cfg to setup the backend server to point to BigCouch
 # For AiO installs, it should look something like:
