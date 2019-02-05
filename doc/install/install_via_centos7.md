@@ -25,8 +25,6 @@ This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.c
 # pre-configure custom defaults:
 IP_ADDR=172.16.17.18
 _HOSTNAME=aio.kazoo.com
-# 1 or more
-NTP_SERVERS=( 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org )
 
 # You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
 # Currently, 4.2 is considered 'stable' so:
@@ -64,20 +62,8 @@ yum clean all
 
 # Setup NTPd
 yum install -y ntp
-systemctl stop ntpd
-
-# Feel free to use other NTP servers and set in NTP_SERVERS
-:> /etc/ntp.conf
-for ntpsrv in ${NTP_SERVERS[@]}
-do
-	echo "server ${ntpsrv}" >> /etc/ntp.conf
-done
-
-# phone home
-ntpdate ntp.2600hz.com
-
 systemctl enable ntpd
-systemctl start ntpd
+systemctl restart ntpd
 ```
 
 ## Setting up RabbitMQ
