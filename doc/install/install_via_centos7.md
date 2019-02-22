@@ -397,7 +397,7 @@ Media Servers : freeswitch@aio.kazoo.com (1m34s)
 
 # If you don't see the "Media Servers" line:
 # you can explicitly add FreeSWITCH servers to ecallmgr
-sup -n ecallmgr ecallmgr_maintenance add_fs_node freeswitch@aio.kazoo.com
+sup -n ecallmgr ecallmgr_maintenance add_fs_node freeswitch@${_HOSTNAME}
 
 # Add Kamailio to the SBC ACLs
 sup -n ecallmgr ecallmgr_maintenance allow_sbc kam1 ${IP_ADDR}
