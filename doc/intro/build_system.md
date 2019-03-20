@@ -15,7 +15,7 @@ We may be revising the build system to meet the demands of additional use cases.
 
 1. Internet Telephony Service Providers
 2. Fire, Police and Military and Secure Installations With Disparate Sites
-3. Health Care Industries with HIPPA compliance concerns
+3. Health Care Industries with HIPAA compliance concerns
 4. Installations who intend to be 100% self-sufficient and run everything on a private WAN for security
 5. Installations where the logic and database servers are on non-public IPs and do not allow public internet access
  
