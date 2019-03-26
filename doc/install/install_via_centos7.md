@@ -46,6 +46,7 @@ hostnamectl set-hostname ${_HOSTNAME}
 
 echo "${IP_ADDR} ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 echo "127.0.0.1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
+echo "::1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 
 # System time to UTC: required by kazoo
 ln -fs /usr/share/zoneinfo/UTC /etc/localtime
@@ -122,6 +123,9 @@ sed -i "s/kamailio\.2600hz\.com/${_HOSTNAME}/g" /etc/kazoo/kamailio/local.cfg
 # Update the IP addresses
 sed -i "s/127\.0\.0\.1/${IP_ADDR}/g" /etc/kazoo/kamailio/local.cfg
 
+# Disable Kamailio bundled systemctl script
+systemctl disable kamailio
+
 # Start Kamailio
 systemctl enable kazoo-kamailio
 systemctl restart kazoo-kamailio
@@ -146,6 +150,9 @@ error: 500 - No Destination Sets
 ```bash
 # Install Kazoo-wrapped FreeSWITCH
 yum install -y kazoo-freeswitch
+
+# Disable freeswitch bundled systemctl script
+systemctl disable freeswitch
 
 # Enable and start FreeSWITCH
 systemctl enable kazoo-freeswitch
