@@ -18,7 +18,7 @@ We need your help to keep this up to date by:
 This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
 !!! note
-    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). Please rember to replace 'aio.kazoo.com' with your actual Host Name(FQDN).
+    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). Please remember to replace 'aio.kazoo.com' with your actual Host Name(FQDN).
 
 ```bash
 
@@ -35,7 +35,7 @@ export RELEASE_VER=4.3
 export META_PKG=2600hz-release-${RELEASE_VER}-0.el7.centos.noarch.rpm
 export LATEST_RELEASE=${RELEASE_BASE}/${RELEASE_VER}/${META_PKG}
 
-# Install updates
+# Install all system updates
 yum update -y
 
 # Install Extra Packages for Enterprise Linux
@@ -51,6 +51,18 @@ echo "${IP_ADDR} ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 echo "127.0.0.1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 echo "::1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 
+# /etc/hosts setup
+If you are running a multi-server environment, define the private IPs for your CouchDB servers and public IPs for your other Kazoo-apps/Kamailio/FreeSWITCH/RabbitMQ servers. An example would be:
+
+127.0.0.1       app001.domain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1             app001.domain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
+10.1.1.1        bc001.domain.com
+10.1.1.2        bc002.domain.com
+10.1.1.3        bc003.domain.com
+38.222.222.222  fs001.domain.com
+38.222.222.223  kam001.domain.com
+38.222.222.225  rab001.domain.com
+
 # System time to UTC: required by kazoo
 ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 
@@ -60,6 +72,7 @@ systemctl restart network
 
 # Add 2600Hz RPM server
 yum install -y ${LATEST_RELEASE}
+Example:  yum install -y https://packages.2600hz.com/centos/7/stable/2600hz-release/4.3/2600hz-release-4.3-0.el7.centos.noarch.rpm
 
 # Clear yum cache
 yum clean all
@@ -74,7 +87,18 @@ systemctl restart ntpd
 
 ```bash
 # Install the Kazoo-wrapped RabbitMQ
+# This installs an older (perfectly fine) version 3.3.5
 yum install -y kazoo-rabbitmq
+
+## If you want to run newer versions follow these steps:
+## yum remove erlang erlang-* -y
+## wget https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.8.15/erlang-20.3.8.15-1.el7.centos.x86_64.rpm
+## yum install erlang-20.3.8.15-1.el7.centos.x86_64.rpm
+## curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+## yum install rabbitmq-server-3.7.8-1.el7.noarch kazoo-rabbitmq-4.2-4.el7.centos.noarch -y
+## sed -i s/',{loopback_users, \[\]}'/',{loopback_users, \[\]}\n,{channel_max, 0}'/g /etc/kazoo/rabbitmq/rabbitmq.config
+## systemctl daemon-reload
+## systemctl start kazoo-rabbitmq
 
 # Enable and start
 systemctl enable kazoo-rabbitmq
@@ -122,6 +146,9 @@ sed -i "s/127\.0\.0\.1/${IP_ADDR}/g" /etc/kazoo/kamailio/local.cfg
 
 # Disable Kamailio bundled systemctl script
 systemctl disable kamailio
+
+# Note: If RabbitMQ is running on a separate server, update the local.cfg file (above):
+# #!substdef "!MY_AMQP_URL!amqp://guest:guest@${RABBITMQ_IP_ADDR}:5672!g"
 
 # Start Kamailio
 systemctl enable kazoo-kamailio
@@ -254,6 +281,39 @@ listen haproxy-stats 127.0.0.1:22002
   stats uri /
 
 EOF
+
+# Depending on the kazoo apps you intend on running, this file may need to be edited to include:
+# frontend kazoo-smtp
+#    bind ${IP_ADDR}:2525
+#    mode tcp
+#    default_backend kazoo-smtp-backend
+#
+# backend kazoo-smtp-backend
+#    balance source
+#    mode tcp
+#    option smtpchk HELO
+#    server ${HOSTNAME} ${IP_ADDR}:19025 check
+#
+# frontend kazoo-websocket
+#    bind *:5000
+#    bind *:5443 ssl crt /etc/kazoo/certs/combined.pem  // file path for combined SSL certificate
+#    default_backend kazoo-websocket-backend
+#
+# backend kazoo-websocket-backend
+#    balance source
+#    option tcp-check
+#    server ${HOSTNAME} ${IP_ADDR}:5555 check
+# frontend kazoo-api
+#    bind *:8000
+#    bind *:8443 ssl crt /etc/kazoo/certs/combined.pem  // file path for combined SSL certificate
+#    default_backend kazoo-api-backend
+#
+#backend kazoo-api-backend
+#    balance source
+#    http-send-name-header Host
+#    option httplog
+#    option forwardfor except 127.0.0.1/8
+#    server ${HOSTNAME} ${IP_ADDR}:16000 check
 
 # Enable and start HAProxy
 systemctl enable kazoo-haproxy
