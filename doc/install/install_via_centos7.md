@@ -46,18 +46,7 @@ hostnamectl set-hostname ${_HOSTNAME}
 
 echo "${IP_ADDR} ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 echo "127.0.0.1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
-
-# /etc/hosts setup
-If you are running a multi-server environment, define the private IPs for your CouchDB servers and public IPs for your other Kazoo-apps/Kamailio/FreeSWITCH/RabbitMQ servers. An example would be:
-
-127.0.0.1       app001.domain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1             app001.domain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
-10.1.1.1        bc001.domain.com
-10.1.1.2        bc002.domain.com
-10.1.1.3        bc003.domain.com
-38.222.222.222  fs001.domain.com
-38.222.222.223  kam001.domain.com
-38.222.222.225  rab001.domain.com
+echo "::1 ${_HOSTNAME} `hostname -s`" >> /etc/hosts
 
 # System time to UTC: required by kazoo
 ln -fs /usr/share/zoneinfo/UTC /etc/localtime
@@ -140,8 +129,8 @@ sed -i "s/kamailio\.2600hz\.com/${_HOSTNAME}/g" /etc/kazoo/kamailio/local.cfg
 # Update the IP addresses
 sed -i "s/127\.0\.0\.1/${IP_ADDR}/g" /etc/kazoo/kamailio/local.cfg
 
-# Note: If RabbitMQ is running on a separate server, update the local.cfg file (above):
-# #!substdef "!MY_AMQP_URL!kazoo://guest:guest@${RABBITMQ_IP_ADDR}:5672!g"
+# Disable Kamailio bundled systemctl script
+systemctl disable kamailio
 
 # Start Kamailio
 systemctl enable kazoo-kamailio
@@ -167,6 +156,9 @@ error: 500 - No Destination Sets
 ```bash
 # Install Kazoo-wrapped FreeSWITCH
 yum install -y kazoo-freeswitch
+
+# Disable freeswitch bundled systemctl script
+systemctl disable freeswitch
 
 # Enable and start FreeSWITCH
 systemctl enable kazoo-freeswitch
@@ -229,7 +221,7 @@ BigCouch (pid 21325) is running...
 
 ```bash
 # Install the Kazoo-wrapped HAProxy
-yum -y install kazoo-haproxy
+yum -y install kazoo-haproxy socat
 
 # Edit /etc/kazoo/haproxy/haproxy.cfg to setup the backend server to point to BigCouch
 # For AiO installs, it should look something like:
