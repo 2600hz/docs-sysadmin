@@ -23,10 +23,30 @@ Using IP addressing scheme above.
 |couch1.z100.somedomain.com  10.100.10.1  | couch1.z200.somedomain.com  10.200.10.1 |
 couch2.z100.somedomain.com  10.100.10.2   | couch2.z200.somedomain.com  10.200.10.2 |
 couch3.z100.somedomain.com  10.100.10.3   | couch3.z200.somedomain.com  10.200.10.3 |
-freeeswitch1.z100.somedomain.com  10.100.20.1   | freeswitch1.z200.somedomain.com  10.200.20.1 |
+freeswitch1.z100.somedomain.com  10.100.20.1   | freeswitch1.z200.somedomain.com  10.200.20.1 |
 rabbit1.z100.somedomain.com  10.100.30.1   | rabbit1.z200.somedomain.com  10.200.30.1 |
 kazoo1.z100.somedomain.com  10.100.40.1   | kazoo1.z200.somedomain.com  10.200.40.1 |
 kamailio1.z100.somedomain.com  10.100.50.1   | kamailio1.z200.somedomain.com  10.200.50.1 |
+
+### /etc/hosts setup
+Define the private IPs for your CouchDB servers and public IPs for your other Kazoo-apps/Kamailio/FreeSWITCH/RabbitMQ servers. An important thing to note is that if you don't have public DNS for your hostnames, Kazoo will have issues connecting to RabbitMQ.
+As an example for kazoo1.z100.somedomain.com:
+```
+127.0.0.1          kazoo1.z100.somedomain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1                kazoo1.z100.somedomain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
+10.100.10.1        couch1.z100.somedomain.com
+10.100.10.2        couch2.z100.somedomain.com
+10.100.10.3        couch3.z100.somedomain.com
+10.200.10.1        couch1.z200.somedomain.com
+10.200.10.2        couch2.z200.somedomain.com
+10.200.10.3        couch3.z200.somedomain.com
+38.100.20.1     freeswitch1.z100.somedomain.com  // Public IP
+38.200.20.1     freeswitch1.z200.somedomain.com  // Public IP
+38.100.30.1     rabbit1.z100.somedomain.com  // Public IP
+38.200.30.1     rabbit1.z200.somedomain.com  // Public IP
+38.100.50.1     kamailio1.z100.somedomain.com  // Public IP
+38.200.50.1     kamailio1.z200.somedomain.com  // Public IP
+```
 
 ### Cluster Bigcouch
 This needs to be done before installing kazoo.
@@ -139,7 +159,7 @@ So on `kazoo1.z100` run:
 and on `kazoo1.z200` run:
 `sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com 'false'`
 
-If starting ecallmgr on it's own via systemd or init the command would be:
+If starting ecallmgr on its own via systemd or init the command would be:
 `sup -necallmgr ecallmgr_maintenance add_fs_node...`
 
 Refresh to get above changes loaded from bigcouch
@@ -202,7 +222,7 @@ listen haproxy-stats 127.0.0.1:22002
 ```
 ### Kamailio Config
 
-Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with it's hostname, IP address, and all RabbitMQ servers.  The following config would be for the `kamailio1.z100` server.
+Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be configured with its hostname, IP address, and all RabbitMQ servers.  The following config would be for the `kamailio1.z100` server.
 ```
 ## CHANGE "" TO YOUR SERVERS HOSTNAME
 #!substdef "!MY_HOSTNAME!kamailio1.z100.somedomain.com!g"
