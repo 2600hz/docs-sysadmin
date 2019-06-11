@@ -18,25 +18,28 @@ We need your help to keep this up to date by:
 This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
 !!! note
-    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). `export`-ing the custom variables or including them in your file should suffice.
+    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). Please rember to replace 'aio.kazoo.com' with your actual Host Name(FQDN).
 
 ```bash
 
 # pre-configure custom defaults:
-IP_ADDR=172.16.17.18
-_HOSTNAME=aio.kazoo.com
+export IP_ADDR=172.16.17.18
+export _HOSTNAME=aio.kazoo.com
 
 # You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
-# Currently, 4.2 is considered 'stable' so:
-# https://packages.2600hz.com/centos/7/stable/2600hz-release/4.2/2600hz-release-4.2-0.el7.centos.noarch.rpm
+# Currently, 4.3 is considered 'stable' so:
+# https://packages.2600hz.com/centos/7/stable/2600hz-release/4.3/2600hz-release-4.3-0.el7.centos.noarch.rpm
 
-RELEASE_BASE=https://packages.2600hz.com/centos/7/stable/2600hz-release
-RELEASE_VER=4.2
-META_PKG=2600hz-release-${RELEASE_VER}-0.el7.centos.noarch.rpm
-LATEST_RELEASE=${RELEASE_BASE}/${RELEASE_VER}/${META_PKG}
+export RELEASE_BASE=https://packages.2600hz.com/centos/7/stable/2600hz-release
+export RELEASE_VER=4.3
+export META_PKG=2600hz-release-${RELEASE_VER}-0.el7.centos.noarch.rpm
+export LATEST_RELEASE=${RELEASE_BASE}/${RELEASE_VER}/${META_PKG}
 
 # Install updates
-yum update
+yum update -y
+
+# Install Extra Packages for Enterprise Linux
+yum install -y epel-release
 
 # Install required packages
 yum install -y yum-utils psmisc
@@ -72,12 +75,6 @@ systemctl restart ntpd
 ```bash
 # Install the Kazoo-wrapped RabbitMQ
 yum install -y kazoo-rabbitmq
-
-## This installs an older (perfectly fine) version 3.3.5
-## If you want to run newer versions
-## 1. import the signing key: rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-## 2. choose the RPM you want from https://www.rabbitmq.com/releases/rabbitmq-server/
-##    yum install https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el6.noarch.rpm
 
 # Enable and start
 systemctl enable kazoo-rabbitmq
@@ -283,7 +280,7 @@ curl localhost:15984/_all_dbs
 At this point, we're ready to install Kazoo as all the infrastructure that Kazoo relies on is in place and ready to be taken control of. The first thing to do is install the Kazoo applications.
 
 ```bash
-# Install all the Kazoo applications (at this time, 4.2.28 for most of the kazoo-application-* packages)
+# Install all the Kazoo applications (at this time, 4.3.36 for most of the kazoo-application-* packages)
 yum install -y kazoo-applications
 
 # Start Kazoo Applications
@@ -297,7 +294,7 @@ curl localhost:15984/_all_dbs
 
 # You should have > 20 DBs
 curl localhost:15984/_all_dbs | python -mjson.tool | wc -l
-24
+26
 
 # Import System Media prompts (takes a while)
 sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
@@ -307,7 +304,7 @@ sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
 
 # It can be a good idea to run a refresh over the installed databases - there are sporadic reports of partial installations hanging at this point
 sup kapps_maintenance refresh
-<10016.9661.0> (22/22) refreshing database 'system_config'
+<10016.9661.0> (24/24) refreshing database 'system_config'
 ...
 
 # Create the admin account for the Monster UI, remember to replace the braced fields
@@ -324,46 +321,48 @@ promoting account ed1f03d6cf3b8135fe3b008847d92c65 to reseller status, updating 
 updated master account id in system_config.accounts
 ok
 
-# Use SUP to communicate with the running VM
+# Use SUP command to communicate with the running VM
 
 
 # Check the status of the Kazoo cluster
 kazoo-applications status
 Node          : kazoo_apps@aio.kazoo.com
 md5           : o4fNOLAQ3LJSAzliaNiT1A
-Version       : 4.2.28 - 19
-Memory Usage  : 76.42MB
-Processes     : 1716
-Ports         : 23
+Version       : 4.3.36 - 19
+Memory Usage  : 71.24MB
+Processes     : 1787
+Ports         : 20
 Zone          : local
 Broker        : amqp://127.0.0.1:5672
 Globals       : local (4)
 Node Info     : kz_amqp_pool: 150/0/0 (ready)
-WhApps        : blackhole(1d2h16m23s)    callflow(1d2h16m22s)     conference(1d2h16m21s)   crossbar(1d2h16m21s)
-                fax(1d2h16m18s)          hangups(1d2h15m58s)      media_mgr(1d2h15m58s)    milliwatt(1d2h15m57s)
-                omnipresence(1d2h15m57s) pivot(1d2h15m57s)        registrar(1d2h15m57s)    reorder(1d2h15m57s)
-                stepswitch(1d2h15m56s)   sysconf(1d2h16m24s)      tasks(1d2h15m56s)        teletype(1d2h14m54s)
-                trunkstore(1d2h14m31s)   webhooks(1d2h14m31s)
+                amqp://guest:guest@127.0.0.1:5672: {"channel_count":210}
+WhApps        : blackhole(5m15s)         callflow(5m15s)          cdr(5m14s)               conference(5m14s)
+                crossbar(5m14s)          fax(5m12s)               hangups(4m52s)           media_mgr(4m52s)
+                milliwatt(4m52s)         omnipresence(4m52s)      pivot(4m52s)             registrar(4m52s)
+                reorder(4m52s)           stepswitch(4m52s)        sysconf(5m16s)           tasks(4m52s)
+                teletype(3m51s)          trunkstore(3m46s)        webhooks(3m46s)
 
-Node          : kamailio@aio.kazoo.com
-Version       : 5.0.4
-Memory Usage  : 15.26MB
+Node          : kamailio@kazoo2.lan.com
+Version       : 5.1.8-rc2
+Memory Usage  : 16.24MB
 Zone          : local
 Broker        : amqp://127.0.0.1:5672
-WhApps        : kamailio(4d18h50m7s)
+WhApps        : kamailio(13m53s)
 Roles         : Dispatcher Presence Proxy Registrar
-Subscribers   :
-Subscriptions :
-Presentities  : presence (0)  dialog (0)  message-summary (0)
+Presentities  : presence (0)  message-summary (0)  dialog (0)
+Subscribers   : presence (0)  message-summary (0)  dialog (0)
+Subscriptions : presence (1)  message-summary (1)  dialog (1)
+Listening on  : 192.168.1.190 tcp (5060 7000) udp (5060 7000)
 Registrations : 0
+
+ok
 ```
 
 
 ## Setting up ecallmgr
 
 ```bash
-# Install Kazoo eCallMgr, it should install with kazoo-applications above but to be sure
-yum install -y kazoo-application-ecallmgr
 
 # Start Kazoo eCallMgr
 systemctl enable kazoo-ecallmgr
@@ -374,14 +373,15 @@ kazoo-applications status
 ...
 Node          : ecallmgr@aio.kazoo.com
 md5           : H5AnAyj8ESMlFPfqhmSAqw
-Version       : 4.2.28 - 19
+Version       : 4.3.36 - 19
 Memory Usage  : 46.11MB
 Processes     : 1168
-Ports         : 35
+Ports         : 14
 Zone          : local
 Broker        : amqp://127.0.0.1:5672
 Globals       : total (0)
 Node Info     : kz_amqp_pool: 150/0/0 (ready)
+                amqp://guest:guest@127.0.0.1:5672: {"channel_count":162}
 WhApps        : ecallmgr(1m41s)
 Channels      : 0
 Conferences   : 0
