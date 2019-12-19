@@ -213,15 +213,15 @@ Each Kamailio configuration at `/etc/kazoo/kamailio/local.cfg` needs to be confi
 ##     add them in "BINDINGS" at the bottom.
 #!substdef "!MY_IP_ADDRESS!10.100.50.1!g"
 
-## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL
+## CHANGE "amqp://guest:guest@127.0.0.1:5672" TO THE AMQP URL
 ##     This should be the primary RabbitMQ server
 ##     in the zone that this server will service.
-#!substdef "!MY_AMQP_URL!kazoo://guest:guest@10.100.30.1:5672!g"
+#!substdef "!MY_AMQP_URL!amqp://guest:guest@10.100.30.1:5672!g"
 
-## CHANGE "kazoo://guest:guest@127.0.0.1:5672" TO THE AMQP URL for the other zone.
+## CHANGE "amqp://guest:guest@127.0.0.1:5672" TO THE AMQP URL for the other zone.
 ##     This uses the existing MY_AMQP_SECONDARY_URL variable defined in default.cfg
 ##     Note the addition of the "zone=" part in the middle
-#!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;kazoo://guest:guest@10.200.30.1:5672!g"
+#!substdef "!MY_AMQP_SECONDARY_URL!zone=z200;amqp://guest:guest@10.200.30.1:5672!g"
 ```
 
 ### Post Install
