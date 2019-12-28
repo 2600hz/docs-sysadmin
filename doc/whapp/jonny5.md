@@ -48,7 +48,7 @@
    
 `percentage`: 10 - a percentage discount off the rate of EVERY per_minute call
  
-`pvt_enabeld`: true,  should limits be enforced for this account, IF FALSE THE ACCOUNT IS UNRESTRICTED
+`pvt_enabled`: true,  should limits be enforced for this account, IF FALSE THE ACCOUNT IS UNRESTRICTED
 
 
 
