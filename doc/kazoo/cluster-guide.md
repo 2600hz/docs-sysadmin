@@ -32,8 +32,8 @@ kamailio1.z100.somedomain.com  10.100.50.1   | kamailio1.z200.somedomain.com  10
 Define the private IPs for your CouchDB servers and public IPs for your other Kazoo-apps/Kamailio/FreeSWITCH/RabbitMQ servers. An important thing to note is that if you don't have public DNS for your hostnames, Kazoo will have issues connecting to RabbitMQ.
 As an example for kazoo1.z100.somedomain.com:
 ```
-127.0.0.1          kazoo1.z100.somedomain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1                kazoo1.z100.somedomain.com localhost localhost.localdomain localhost4 localhost4.localdomain4
+127.0.0.1          kazoo1.z100.somedomain.com kazoo1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1                kazoo1.z100.somedomain.com kazoo1 localhost localhost.localdomain localhost4 localhost4.localdomain4
 10.100.10.1        couch1.z100.somedomain.com
 10.100.10.2        couch2.z100.somedomain.com
 10.100.10.3        couch3.z100.somedomain.com
