@@ -86,7 +86,7 @@ nav:
 #     - 'Kazoo-CSS' : 'doc/config/css-custom.md'
     - 'Kazoo Call-Rating' : 'doc/kazoo/call-rating.md'
     - 'Kazoo Carrier' : 'doc/carrier-numbers/kazoo-carrier.md'
-    - 'Kazoo Provider' : 'doc/carrier-numbers/kazoo-provider.md'a
+    - 'Kazoo Provider' : 'doc/carrier-numbers/kazoo-provider.md'
     - 'Kazoo-CarrierModules' : 'doc/config/carrier-modules.md'
 #     - 'Kazoo-ClusterGuide' : 'doc/kazoo/cluster-guide.md'
 #     - 'Kazoo-Config' : 'doc/config/kazoo-config.md'
