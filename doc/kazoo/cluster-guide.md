@@ -161,10 +161,10 @@ file = error
 Add local FreeSWITCH server(s) to local zone.
 
 So on `kazoo1.z100` run:
-`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com 'false'`
+`sup -necallmgr ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z100.somedomain.com 'false'`
 
 and on `kazoo1.z200` run:
-`sup ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com 'false'`
+`sup -necallmgr ecallmgr_maintenance add_fs_node freeswitch@freeswitch1.z200.somedomain.com 'false'`
 
 If starting ecallmgr on its own via systemd or init the command would be:
 `sup -necallmgr ecallmgr_maintenance add_fs_node...`
@@ -173,7 +173,7 @@ Refresh to get above changes loaded from bigcouch
 `sup kapps_maintenance refresh "system_config"`
 
 Verify on Kazoo in each zone that only FreeSWITCH for that zone is listed
-`sup ecallmgr_maintenance list_fs_nodes`
+`sup -necallmgr ecallmgr_maintenance list_fs_nodes`
 
 If ecallmgr is started separately, with systemd or init, the command would be:
 `sup -necallmgr ecallmgr_maintenance list_fs_nodes`
