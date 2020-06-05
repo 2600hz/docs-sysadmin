@@ -500,7 +500,7 @@ kazoo-kamailio status
 yum -y install monster-ui* httpd
 
 # Update Monster's config for Crossbar's URL
-sed -i "s/localhost/${IP_ADDR}/" /var/www/html/monster-ui/js/config.js
+sed -i "/define({/a \ \ \ \ api: { 'default': '${IP_ADDR}:8000/v2/' }," /var/www/html/monster-ui/js/config.js
 
 # Initialize Monster Apps
 sup crossbar_maintenance init_apps \
