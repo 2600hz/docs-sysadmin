@@ -7,13 +7,13 @@ Description: *A guide for installing, configuring and managing your own dedicate
 Let's assume the following 7 server clusters in 2 zones.
 
 ### IP addressing scheme
-10.100 = zone 100
-10.200 = zone 200
-10.x00.10.x = CouchDB
-10.x00.20.x = FreeSWITCH
-10.x00.30.x = RabbitMQ
-10.x00.40.x = Kazoo
-10.x00.50.x = Kamailio
+10.100 = zone 100</br>
+10.200 = zone 200</br>
+10.x00.10.x = CouchDB</br>
+10.x00.20.x = FreeSWITCH</br>
+10.x00.30.x = RabbitMQ</br>
+10.x00.40.x = Kazoo</br>
+10.x00.50.x = Kamailio</br>
 
 ### Server hostnames and IP addresses
 Using IP addressing scheme above.
