@@ -7,6 +7,7 @@ Description: *A guide for installing, configuring and managing your own dedicate
 Let's assume the following 7 server clusters in 2 zones.
 
 ### IP addressing scheme
+```
 10.100 = zone 100
 10.200 = zone 200
 10.x00.10.x = CouchDB
@@ -14,7 +15,7 @@ Let's assume the following 7 server clusters in 2 zones.
 10.x00.30.x = RabbitMQ
 10.x00.40.x = Kazoo
 10.x00.50.x = Kamailio
-
+```
 ### Server hostnames and IP addresses
 Using IP addressing scheme above.
 
