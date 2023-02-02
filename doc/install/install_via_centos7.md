@@ -13,18 +13,28 @@ We need your help to keep this up to date by:
 1. Reporting on the [forum](https://forums.2600hz.com/forums/) about where in the guide things broke down, or that you didn't understand.
 2. Using the [edit link](https://github.com/2600hz/sysadmin/edit/master/doc/install/install_via_centos7.md) to edit this document and issue a pull request.
 
+## Gain access to the FreeSWITCH repositories
+
+SignalWire Personal Access Tokens (PAT)s are required to access FreeSWITCH install packages. Follow the [guide on FreeSWITCH's site](https://developer.signalwire.com/freeswitch/FreeSWITCH-Explained/Installation/HOWTO-Create-a-SignalWire-Personal-Access-Token_67240087/#attachments) to generate a token.
+
 ## Setup the server
 
 This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
-!!! note
-    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either). Please remember to replace 'aio.kazoo.com' with your actual Host Name(FQDN).
+> **Warning**
+> 
+> Please remember to replace
+> * '172.16.17.18' with your server's actual IP address (not localhost either). 
+> * 'aio.kazoo.com' with your actual Host Name (FQDN). 
+> * TOKEN with your SignalWire token.
+    
 
 ```bash
 
 # pre-configure custom defaults:
 export IP_ADDR=172.16.17.18
 export _HOSTNAME=aio.kazoo.com
+export TOKEN=SIGNALWIRE_TOKEN
 
 # You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
 # Currently, 4.3 is considered 'stable' so:
@@ -43,6 +53,12 @@ yum install -y epel-release
 
 # Install required packages
 yum install -y yum-utils psmisc
+
+# Download and install updated FreeSWITCH repository
+echo "signalwire" > /etc/yum/vars/signalwireusername
+echo ${TOKEN} > /etc/yum/vars/signalwiretoken
+wget https://$(< /etc/yum/vars/signalwireusername):$(< /etc/yum/vars/signalwiretoken)@freeswitch.signalwire.com/repo/yum/centos-release/freeswitch-release-repo-0-1.noarch.rpm
+rpm -i --replacefiles freeswitch-release-repo-0-1.noarch.rpm
 
 # Hostname setup
 hostnamectl set-hostname ${_HOSTNAME}
