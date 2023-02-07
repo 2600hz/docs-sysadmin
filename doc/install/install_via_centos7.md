@@ -21,13 +21,8 @@ SignalWire Personal Access Tokens (PAT)s are required to access FreeSWITCH insta
 
 This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso). Once you have that installed on a server (or virtual machine), it is time to setup the host. Some of the commands below are optional (and noted as such) - check whether you need to run them first.
 
-> **Warning**
-> 
-> Please remember to replace
-> * '172.16.17.18' with your server's actual IP address (not localhost either). 
-> * 'aio.kazoo.com' with your actual Host Name (FQDN). 
-> * TOKEN with your SignalWire token.
-    
+!!! note
+    Please remember to replace '172.16.17.18' with your server's actual IP address (not localhost either), 'aio.kazoo.com' with your actual Host Name (FQDN) and TOKEN with your SignalWire token.
 
 ```bash
 
