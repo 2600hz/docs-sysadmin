@@ -27,9 +27,9 @@ This guide builds a server using the [CentOS 7 Minimal ISO](http://isoredirect.c
 ```bash
 
 # pre-configure custom defaults:
-export IP_ADDR=172.16.17.18
-export _HOSTNAME=aio.kazoo.com
-export TOKEN=SIGNALWIRE_TOKEN
+export IP_ADDR=192.168.1.150
+export _HOSTNAME=pbx.kenttec.co.uk
+export TOKEN=pat_GWdZ1TtNqEAXtgy3FjEfsxMi
 
 # You can find the latest Release RPM here: https://packages.2600hz.com/centos/7/stable/2600hz-release/
 # Currently, 4.3 is considered 'stable' so:
