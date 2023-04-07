@@ -98,12 +98,35 @@ Standard accounts are accounts which live underneath a reseller. By default, the
 
 **Service Plan Minimums**
 
-**Assigning Service Plans**
+**List Available Service Plans**
+```bash
+curl -v -X GET     -H "X-Auth-Token: $AUTH_TOKEN"     "http://localhost:8000/v2/accounts/$ACCOUNT_ID/services/available" | jq
+```
+**Retrive currently assigned service plan**
+```
+curl -v -X GET  -H "X-Auth-Token: $AUTH_TOKEN"     "http://localhost:8000/v2/accounts/$ACCOUNT_ID/services" | jq
+```
+**Service Plan Summary** 
+```
+curl -v -X GET -H "X-Auth-Token: $AUTH_TOKEN"     "http://localhost:8000/v2/accounts/$ACCOUNT_ID/services/summary" | jq
+```
+**Assigning Service Plan to an Account**
+```
+curl -v -X POST     -H "X-Auth-Token: $AUTH_TOKEN"  "http://localhost:8000/v2/accounts/$ACCOUNT_ID/services/$PLAN_ID" | jq
+```
+**Remove Service Plan from Account**
+```
+curl -v -X DELETE     -H "X-Auth-Token: $AUTH_TOKEN"  "http://localhost:8000/v2/accounts/$ACCOUNT_ID/services/$PLAN_ID" | jq
+```
 
-**Assigning Plans to Customers**
-
-**Promoting Accounts to Reseller Status**
-
+**Promoting Account to Reseller Status**
+```
+curl -s -X PUT -H "X-Auth-Token: {AUTH_TOKEN}" http://localhost:8000/v2/accounts/{ACCOUNT_ID}/reseller
+```
+**Demote Account from Reseller Status**
+```
+curl -s -X DELETE -H "X-Auth-Token: {AUTH_TOKEN}" http://localhost:8000/v2/accounts/{ACCOUNT_ID}/reseller
+```
 **Setting the default / global service plan**
 
 **Checking if someone is properly setup as a reseller?**
@@ -113,6 +136,11 @@ Standard accounts are accounts which live underneath a reseller. By default, the
 **What does default_service_plan do?**
 
 **How to check that a bookkeeper is loaded/running?**
+To check if braintree app is running
+```
+sup kapps_controller list_apps
+```
+Braintree app should be in this list.
 
 **What happens if a bookkeeper is not working/loaded/running?**
 
