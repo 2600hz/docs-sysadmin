@@ -211,7 +211,7 @@ No erlang nodes connected
 
 # Get the sipify script for FreeSWITCH log parsing (optional)
 curl -o /usr/bin/sipify.sh \
-https://raw.githubusercontent.com/2600hz/community-scripts/master/FreeSWITCH/sipify.sh
+https://raw.githubusercontent.com/2600hz/community-scripts/5c7dd7ac7ca2af22c0f4746008473315c9b7dcbb/FreeSWITCH/sipify.sh
 chmod 755 /usr/bin/sipify.sh
 ```
 
